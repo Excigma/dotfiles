@@ -10,11 +10,11 @@ swipe:
       interval: 0.5
   4:
     left:
-      command: "xdotool key alt+Tab" # Switch to next workspace
+      command: "xdotool key alt+`" # Switch to next workspace
       threshold: 0.1
       interval: 0.75
     right:
-      command: "xdotool key alt+shift+Tab" # Switch to previous workspace
+      command: "xdotool key alt+shift+`" # Switch to previous workspace
       threshold: 0.05
       interval: 0.75
 # pinch:

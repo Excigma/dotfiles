@@ -1,24 +1,38 @@
+### Super + Alt + Key: Hotkeys for text
+super + shift + {@d, @s}
+	~/scripts/hotkeys.sh {date_time, zero_width}
+
+# Map Ctrl + Shift + arrow keys to changing tabs, because it's easier to press for me
+# Doesn't work (yet?)
+# ctrl + shift + {Left, Right}
+# 	~/scripts/tab_switch.sh {prev, next}
+
+# Isn't this opinionated enough already?
+
+### Super + Key: Start some application
+
+# Open Rofi - Application launcher
+super + space
+	rofi -show drun
+
 # Open browser
 super + b
 	brave-browser
 
-# Start Visual Studio Code
+# Open Visual Studio Code
 super + c
 	code
 
-# you can use playerctl -a pause to pause everything
+# Open terminal
+super + Return
+	alacritty
 
 # Start Discord
 # super + d
 # 	brave-browser --profile-directory=Default --app="https://canary.discord.com/channels/@me"
 
-# Screen color grabber
-ctrl + shift + Print
-	xcolor | tr -d '\n' | xsel -ib
-
-# Clipboard history 
-super + v
-	CM_LAUNCHER=rofi clipmenu && xdotool key shift+Insert
+### From my ShareX hotkeys
+# A sprinkle of Windows hotkey here.. a sprinkle there...
 
 # Screenshot region with flameshot
 Print
@@ -28,11 +42,14 @@ Print
 Pause
 	flameshot full -c
 
-# Record region with peek
+# Screen color grabber
+ctrl + shift + Print
+	xcolor | tr -d '\n' | xsel -ib
+
+# Open Peek to record a region
 alt + Print
 	peek
-
-# Multimedia / Brightness
+Brightness
 
 # Rebind mute to play/pause
 XF86AudioMute
@@ -50,22 +67,14 @@ XF86MonBrightnessDown
 XF86MonBrightnessUp
 	~/scripts/brightness.sh up
 
-# Open terminal
-super + Return
-	alacritty
-
-# Rofi - Application launcher
-super + @space
-	rofi -show drun
-
 # Make sxhkd reload its config
 super + Escape
 	pkill -USR1 -x sxhkd
 
-# bspwm hotkeys
+### bspwm related hotkeys
 
 # Quit / restart bspwm
-super + alt + {q,r}
+ctrl + super + {q,r}
 	bspc {quit,wm -r}		
 
 # Close or kill focussed window
@@ -84,31 +93,15 @@ super + m
 super + g
 	bspc node -s biggest.local.window.!hidden
 
-#
-# state/flags
-#
-
 # set the window state
 super + {t,f}
 	bspc node -t {tiled,floating}
 
-#
-# focus/swap
-#
-
-# focus the node in the given direction
-# super + {_,shift + }{h,j,k,l}
-# 	bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
-# super + {p,b,comma,period}
-# 	bspc node -f @{parent,brother,first,second}
-
-# focus the next/previous node in the current desktop
+# Focus the next/previous node in the current desktop
 alt + {_,shift +} grave
 	bspc node -f {next,prev}.local.window.!hidden
 
-# focus the last focused node in the current desktop
+# Focus the last focused node in the current desktop
 alt + Tab
 	bspc node -f last.local.window.!hidden
 
@@ -116,9 +109,6 @@ alt + Tab
 super + Tab
 	bspc desktop -f last
 
-# Swap the current node and the biggest node
-super + g
-	bspc node -s biggest.local.window.!hidden
 
 # Focus given desktop or
 # Send window to given desktop or
