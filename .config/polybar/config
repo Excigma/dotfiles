@@ -1,0 +1,214 @@
+[colors]
+background = #1e222a
+hover = #272b33
+green = #06c26d
+orange = #ff7043
+blue = #3498db
+dark-blue = #315396
+red = #f71616
+white = #ffffff
+dark-light = #272A2B 
+active-light = #313435
+
+[bar/bar]
+height = 29
+width = 100%
+bottom = false
+
+background = ${colors.background}
+
+font-0=Fira Code:size=12
+font-1=FiraCode Nerd Font Mono:size=14
+font-2=Twemoji:size=12
+font-3=Ubuntu:size=12
+
+module-margin = 1
+modules-left = bspwm polywins 
+modules-center = time
+modules-right = xkeyboard network temperature cpu memory pulseaudio media
+
+wm-restack = bspwm
+override-redirect = false
+
+tray-position = right
+tray-padding = 10
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = ⏻
+label-open-foreground = ${colors.red}
+label-close = r cancel
+label-close-foreground = ${colors.blue}
+label-separator = |
+label-separator-foreground = ${colors.red}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[module/xkeyboard]
+type = internal/xkeyboard
+format = <label-indicator> 
+
+format-foreground = ${colors.red}
+label-indicator-on-capslock =  %name%
+
+
+[module/polywins]
+type = custom/script
+format = <label>
+exec = ~/.config/polybar/scripts/polywins.sh 2>/dev/null
+label-foreground = ${colors.blue}
+
+label = %output%
+tail = true
+
+[module/bspwm] 
+type = internal/bspwm
+format = <label-state> <label-mode> 
+format-background = ${colors.background} 
+
+label-focused = 
+label-focused-padding = 1
+label-focused-foreground = ${colors.white}
+label-focused-underline = ${colors.dark-blue}
+label-focused-background = ${colors.hover}
+
+label-occupied = 
+label-occupied-padding = 1
+label-occupied-foreground = #b8b8b8
+
+label-empty = 
+label-empty-padding = 1
+label-empty-foreground = #41454b
+
+label-urgent = 
+label-urgent-padding = 1
+label-urgent-foreground = ${colors.red}
+
+[module/temperature]
+type = internal/temperature
+interval = 2
+
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+
+base-temperature = 40
+warn-temperature = 80
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+
+ramp-0-foreground = ${colors.green}
+ramp-1-foreground = ${colors.blue}
+ramp-2-foreground = ${colors.orange}
+ramp-3-foreground = ${colors.red}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+
+format = <ramp-load> <label>
+label = %percentage:02%%
+
+ramp-load-0 = ""
+ramp-load-1 = ""
+ramp-load-2 = ""
+
+ramp-load-0-foreground = ${colors.blue}
+ramp-load-1-foreground = ${colors.orange}
+ramp-load-2-foreground = ${colors.red}
+
+[module/memory]
+type = internal/memory
+interval = 2
+
+format = <ramp-used> <label>
+format-warn = <ramp> <label-warn>
+
+label = %gb_used%
+label-warn = %gb_used%
+
+ramp-used-0 = ""
+ramp-used-1 = ""
+ramp-used-2 = ""
+ramp-used-3 = ""
+
+ramp-used-0-foreground = ${colors.green}
+ramp-used-1-foreground = ${colors.blue}
+ramp-used-2-foreground = ${colors.orange}
+ramp-used-3-foreground = ${colors.red}
+
+[module/network]
+type = internal/network
+interval = 2
+
+interface = wlp1s0
+
+format-connected = 直 <label-connected>
+format-connected-foreground = ${colors.green}
+format-disconnected = 睊 <label-disconnected>
+format-disconnected-foreground = ${colors.red}
+
+label-connected = %downspeed%
+label-disconnected = Disconnected
+
+[module/time]
+type = internal/date
+
+format-prefix-foreground = ${colors.blue}
+format-prefix = " "
+label-font = 4
+label = %date%, %time%
+date = %a %d %B
+time = %H:%M:%S
+
+[module/media]
+type = custom/script
+tail = true
+
+click-left = playerctl next
+
+format = <label>
+format-foreground = ${colors.blue}
+
+format-prefix-foreground = ${colors.blue}
+format-prefix = " "
+
+exec = ~/.config/polybar/scripts/media.sh
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+clight-left = ~/scripts/volume.sh up
+click-right = pavucontrol
+
+format-volume = <ramp-volume> <label-volume>
+format-muted = <label-muted>
+label-muted-foreground = ${colors.red}
+
+label-muted = ﱝ Muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+ramp-volume-0-foreground = ${colors.blue}
+ramp-volume-1-foreground = ${colors.orange}
+ramp-volume-2-foreground = ${colors.red}

@@ -1,0 +1,149 @@
+# Open browser
+super + b
+	brave-browser
+
+# Start Visual Studio Code
+super + c
+	code
+
+# you can use playerctl -a pause to pause everything
+
+# Start Discord
+# super + d
+# 	brave-browser --profile-directory=Default --app="https://canary.discord.com/channels/@me"
+
+# Screen color grabber
+ctrl + shift + Print
+	xcolor | tr -d '\n' | xsel -ib
+
+# Clipboard history 
+super + v
+	CM_LAUNCHER=rofi clipmenu && xdotool key shift+Insert
+
+# Screenshot region with flameshot
+Print
+	flameshot gui
+	
+# Screenshot entire screen with flameshot and copy to clipboard
+Pause
+	flameshot full -c
+
+# Record region with peek
+alt + Print
+	peek
+
+# Multimedia / Brightness
+
+# Rebind mute to play/pause
+XF86AudioMute
+	playerctl play-pause
+
+XF86AudioLowerVolume
+	~/scripts/volume.sh down
+
+XF86AudioRaiseVolume
+	~/scripts/volume.sh up
+
+XF86MonBrightnessDown
+	~/scripts/brightness.sh down
+
+XF86MonBrightnessUp
+	~/scripts/brightness.sh up
+
+# Open terminal
+super + Return
+	alacritty
+
+# Rofi - Application launcher
+super + @space
+	rofi -show drun
+
+# Make sxhkd reload its config
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# bspwm hotkeys
+
+# Quit / restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}		
+
+# Close or kill focussed window
+super + {_,shift + }w
+	bspc node -{c,k}
+
+# Alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+# super + y
+# 	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest.local.window.!hidden
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,f}
+	bspc node -t {tiled,floating}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+# super + {_,shift + }{h,j,k,l}
+# 	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+alt + {_,shift +} grave
+	bspc node -f {next,prev}.local.window.!hidden
+
+# focus the last focused node in the current desktop
+alt + Tab
+	bspc node -f last.local.window.!hidden
+
+# Focus the last focused desktop
+super + Tab
+	bspc desktop -f last
+
+# Swap the current node and the biggest node
+super + g
+	bspc node -s biggest.local.window.!hidden
+
+# Focus given desktop or
+# Send window to given desktop or
+# Swap desktop with current desktop
+super + {_,shift + ,ctrl + }{1-9,0}
+	bspc {desktop -f,node -d, desktop -s} '^{1-9,10}'
+
+# Windows style virtual desktop switching
+ctrl + super + {Left, Right}
+	bspc desktop -f {prev, next}
+
+#
+# move/resize
+#
+
+# I'm just gonna use mod + drag instead
+
+# # expand a window by moving one of its side outward
+# super + alt + {h,j,k,l}
+# 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# # contract a window by moving one of its side inward
+# super + alt + shift + {h,j,k,l}
+# 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-10 0,0 10,0 -10,10 0}
