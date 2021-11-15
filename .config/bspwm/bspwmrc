@@ -28,7 +28,6 @@ bspc config gapless_monocle true
 
 bspc config focus_follows_pointer true
 
-
 # Enable mouse for floating windows
 # Left click drag to resize
 bspc config pointer_action3 move
