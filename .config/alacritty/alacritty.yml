@@ -1,0 +1,44 @@
+colors:
+  primary:
+    background: "#1e222a"
+    foreground: "#eff0eb"
+  cursor:
+    text: CellBackground
+    cursor: "#eff0eb"
+  normal:
+    black: "#282a36"
+    red: "#ff5c57"
+    green: "#5af78e"
+    yellow: "#f3f99d"
+    blue: "#4d78cc"
+    magenta: "#ff6ac1"
+    cyan: "#9aedfe"
+    white: "#f1f1f0"
+
+  bright:
+    black: "#686868"
+    red: "#ff2121"
+    green: "#12f45b"
+    yellow: "#f3f99d"
+    blue: "#57c7ff"
+    magenta: "#FF55FF"
+    cyan: "#9aedfe"
+    white: "#eff0eb"
+
+font:
+  normal:
+    family: FiraCode Nerd Font Mono
+    style: Regular
+
+  size: 15
+
+window:
+  padding:
+    x: 8
+    y: 8
+
+cursor:
+  unfocused_hollow: true
+
+shell:
+  program: /usr/bin/zsh
