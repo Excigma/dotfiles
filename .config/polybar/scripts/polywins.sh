@@ -22,7 +22,7 @@ resize_increment=16
 wm_border_width=1 # setting this might be required for accurate resize position
 
 # --- }}}
-
+``
 
 main() {
 	# If no argument passed...

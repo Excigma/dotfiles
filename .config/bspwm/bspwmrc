@@ -7,8 +7,8 @@ hsetroot -solid '#21252b' &
 ~/.config/polybar/launch.sh &
 # Start Simple X hotkey daemon
 pgrep -x sxhkd > /dev/null || sxhkd &
-# Start fusuma (Trackpad gestures)
-pgrep -x fusuma > /dev/null || fusuma &
+# Start touchegg (Trackpad gestures)
+pgrep -x touchegg > /dev/null || touchegg &
 # Start the applet thing for network
 nm-applet --indicator &
 
