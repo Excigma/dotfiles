@@ -46,10 +46,13 @@ Pause
 ctrl + shift + Print
 	xcolor | tr -d '\n' | xsel -ib
 
-# Open Peek to record a region
+# Open peek 
 alt + Print
 	peek
-Brightness
+
+# Open simplescreenrecorder 
+alt + shift + Print
+	simplescreenrecorder
 
 # Rebind mute to play/pause
 XF86AudioMute
