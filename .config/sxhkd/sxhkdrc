@@ -48,7 +48,7 @@ ctrl + shift + Print
 
 # Open peek 
 alt + Print
-	peek
+	~/scripts/record.sh
 
 # Open simplescreenrecorder 
 alt + shift + Print
