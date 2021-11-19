@@ -46,13 +46,13 @@ Pause
 ctrl + shift + Print
 	xcolor | tr -d '\n' | xsel -ib
 
-# Open peek 
+# Open simplescreenrecorder
 alt + Print
-	~/scripts/record.sh
-
-# Open simplescreenrecorder 
-alt + shift + Print
 	simplescreenrecorder
+
+# Open  
+alt + shift + Print
+	peek
 
 # Rebind mute to play/pause
 XF86AudioMute
