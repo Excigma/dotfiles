@@ -1,6 +1,6 @@
 colors:
   primary:
-    background: "#1e222a"
+    background: "#21252b"
     foreground: "#eff0eb"
   cursor:
     text: CellBackground
