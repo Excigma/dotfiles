@@ -1,54 +1,70 @@
 #! /bin/sh
 
-xrdb merge ~/.Xresources &
+# xrdb merge ~/.Xresources &
 # Set the background color
 hsetroot -solid '#21252b' &
 # Start polybar
 ~/.config/polybar/launch.sh &
+
 # Start Simple X hotkey daemon
 pgrep -x sxhkd > /dev/null || sxhkd &
 # Start touchegg (Trackpad gestures)
-pgrep -x touchegg > /dev/null || touchegg &
-# Start the applet thing for network
-nm-applet --indicator &
+# pgrep -x touchegg > /dev/null || touchegg &
+touchegg &
+
+# Start XFCE's Clipboard Manager
+pgrep -x xfce4-clipman > /dev/null || xfce4-clipman &
+# Start XFCE's Notification daemon
+pgrep -x xfce4-notifyd > /dev/null || /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
+# Start XFCE's Power Manager
+pgrep -x xfce4-power-manager > /dev/null || xfce4-power-manager &
+# Start XFCE's Volume daemon
+pgrep -x xfce4-volumed > /dev/null || xfce4-volumed &
 
 bspc monitor -d 1 2 3 4 5 6
 
-bspc config border_width 2
-bspc config normal_border_color \#2e343f
-bspc config focused_border_color \#315396
+bspc config border_width 1
+bspc config normal_border_color \#32343d
+bspc config focused_border_color \#5294e2
 
 bspc config window_gap 0
 
 bspc config automatic_scheme longest_side
-
 bspc config single_monocle true
 bspc config borderless_monocle false
 bspc config gapless_monocle true
-
 bspc config focus_follows_pointer true
 
 # Enable mouse for floating windows
 # Left click drag to resize
-bspc config pointer_action3 move
-bspc config pointer_action1 resize_corner
+bspc config pointer_action1 move
+bspc config pointer_action3 resize_corner
 
-# bspc rule -a MultiMC5 state=floating layer=bottom
+bspc rule -a MultiMC5 state=floating
 bspc rule -a Pavucontrol state=floating rectangle=665x300+1250+28
-bspc rule -a SimpleScreenRecorder state=floating
+bspc rule -a SimpleScreenRecorder state=floating rectangle=600x750+1315+28 
 bspc rule -a Peek state=floating
 bspc rule -a zoom state=floating
 
-# Enable tap to click
-xinput set-prop "ELAN0511:00 04F3:3041 Touchpad" "libinput Tapping Enabled" 1 &
-# Enable natural scrolling for trackpad
-xinput set-prop "ELAN0511:00 04F3:3041 Touchpad" "libinput Natural Scrolling Enabled" 1 &
-# Enable touchpad whilst typing
-xinput set-prop "ELAN0511:00 04F3:3041 Touchpad" "libinput Disable While Typing Enabled" 0 &
-# Set trackpad accel to 0.1
-xinput set-prop "ELAN0511:00 04F3:3041 Touchpad" "libinput Accel Speed" 0.1 &
-# Set cursor to normal when not hovering any windows since I don't have a DE
+# Make X use nice left pointer
 xsetroot -cursor_name left_ptr &
 
 # Start picom
-picom -b &
+pgrep -x picom > /dev/null || picom -b &
+# Start light locker
+pgrep -x light-locker > /dev/null || light-locker &
+
+# Tray icons
+# Network/WiFi
+pgrep -x nm-applet > /dev/null || nm-applet --indicator &
+# Flameshot
+pgrep -x flameshot > /dev/null || flameshot &
+# KDE Connect
+pgrep -x kdeconnect-indi > /dev/null || kdeconnect-indicator &
+# Blueman (Bluetooth manager) applet
+pgrep -x blueman-applet > /dev/null || blueman-applet &
+
+# Fix java weird transprent window thing
+# I have No IDEA
+wmname LG3D
+export _JAVA_AWT_WM_NONREPARENTING=1
