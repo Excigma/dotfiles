@@ -11,10 +11,9 @@ super + shift + {@d, @s}
 
 ### Super + Key: Start some application
 
-# rofi -show drun
-# Open Findex - Application finder
+# Open ULauncher
 super + space
-	findex
+	ulauncher-toggle
 
 # Open browser
 super + b
