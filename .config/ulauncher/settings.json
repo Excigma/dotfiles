@@ -7,6 +7,6 @@
     "render-on-screen": "mouse-pointer-monitor",
     "show-indicator-icon": false,
     "show-recent-apps": "0",
-    "terminal-command": "",
-    "theme-name": "arc-dark"
+    "terminal-command": "alacritty",
+    "theme-name": "arc-darker"
 }

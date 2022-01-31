@@ -1,29 +1,25 @@
 [colors]
-background = #1e222a
-hover = #272b33
+background = #272931
+dark-grey = #32343d
+grey = #7c818c
 green = #06c26d
 orange = #ff7043
 blue = #5294e2
-dark-blue = #315396
 red = #f71616
 white = #ffffff
-dark-light = #272A2B 
-active-light = #313435
 
 [bar/bar]
-height = 29
+height = 28
 width = 100%
 bottom = false
 
 background = ${colors.background}
 
-font-0=Fira Code:size=12
-font-1=FiraCode Nerd Font Mono:size=14
-font-2=Twemoji:size=12
-font-3=Ubuntu:size=12
+font-0=JetbrainsMono Nerd Font Mono:size=11
+font-1=Twemoji:size=11
 
 module-margin = 1
-modules-left = bspwm polywins 
+modules-left = powermenu bspwm polywins
 modules-center = time
 modules-right = xkeyboard network temperature cpu memory pulseaudio media
 
@@ -33,32 +29,31 @@ override-redirect = false
 tray-position = right
 tray-padding = 10
 
+line-size = 2
+
 [module/powermenu]
 type = custom/menu
 
 format-spacing = 1
+format-prefix = " "
 
-label-open = ⏻
-label-open-foreground = ${colors.red}
-label-close = r cancel
+label-open = 
+label-open-foreground = ${colors.blue}
+label-close = 
 label-close-foreground = ${colors.blue}
 label-separator = |
-label-separator-foreground = ${colors.red}
+label-separator-foreground = ${colors.blue}
 
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+menu-0-0 = 
+menu-0-0-exec = systemctl poweroff
+menu-0-1 = 勒
+menu-0-1-exec = systemctl reboot
+menu-0-2 = 
+menu-0-2-exec = alacritty
+menu-0-3 = 爵
+menu-0-3-exec = xdg-open about:newtab
+menu-0-4 = 
+menu-0-4-exec = onboard
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -66,7 +61,7 @@ format = <label-indicator>
 
 format-foreground = ${colors.red}
 label-indicator-on-capslock =  %name%
-
+label-indicator-on-scrolllock = %name%
 
 [module/polywins]
 type = custom/script
@@ -79,22 +74,22 @@ tail = true
 
 [module/bspwm] 
 type = internal/bspwm
-format = <label-state> <label-mode> 
+format = <label-state> <label-mode>
 format-background = ${colors.background} 
 
 label-focused = 
 label-focused-padding = 1
-label-focused-foreground = ${colors.white}
-label-focused-underline = ${colors.dark-blue}
-label-focused-background = ${colors.hover}
+label-focused-foreground = ${colors.blue}
+label-focused-underline = ${colors.blue}
+label-focused-background = ${colors.dark-grey}
 
 label-occupied = 
 label-occupied-padding = 1
-label-occupied-foreground = #b8b8b8
+label-occupied-foreground = ${colors.white}
 
 label-empty = 
 label-empty-padding = 1
-label-empty-foreground = #41454b
+label-empty-foreground = ${colors.grey}
 
 label-urgent = 
 label-urgent-padding = 1
@@ -135,6 +130,16 @@ ramp-load-0-foreground = ${colors.blue}
 ramp-load-1-foreground = ${colors.orange}
 ramp-load-2-foreground = ${colors.red}
 
+[module/memory_acc]
+type = custom/script
+exec = ~/.config/polybar/scripts/mem.sh 2>/dev/null
+
+interval = 2
+
+format-prefix = " "
+format-prefix-foreground = ${colors.blue}
+format-foreground = ${colors.white}
+
 [module/memory]
 type = internal/memory
 interval = 2
@@ -143,7 +148,7 @@ format = <ramp-used> <label>
 format-warn = <ramp> <label-warn>
 
 label = %gb_used%
-label-warn = %gb_used%
+label-warn = %gb_used% (%percentage_used%%)
 
 ramp-used-0 = ""
 ramp-used-1 = ""
@@ -174,7 +179,6 @@ type = internal/date
 
 format-prefix-foreground = ${colors.blue}
 format-prefix = " "
-label-font = 4
 label = %date%, %time%
 date = %a %d %B
 time = %H:%M:%S

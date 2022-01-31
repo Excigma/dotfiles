@@ -1,8 +1,11 @@
 #! /bin/sh
 
 # xrdb merge ~/.Xresources &
+
 # Set the background color
-hsetroot -solid '#21252b' &
+hsetroot -solid '#1b1c22' &
+# Start picom
+pgrep -x picom > /dev/null || picom -b --experimental-backends &
 # Start polybar
 ~/.config/polybar/launch.sh &
 
@@ -11,15 +14,6 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # Start touchegg (Trackpad gestures)
 # pgrep -x touchegg > /dev/null || touchegg &
 touchegg &
-
-# Start XFCE's Clipboard Manager
-pgrep -x xfce4-clipman > /dev/null || xfce4-clipman &
-# Start XFCE's Notification daemon
-pgrep -x xfce4-notifyd > /dev/null || /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd &
-# Start XFCE's Power Manager
-pgrep -x xfce4-power-manager > /dev/null || xfce4-power-manager &
-# Start XFCE's Volume daemon
-pgrep -x xfce4-volumed > /dev/null || xfce4-volumed &
 
 bspc monitor -d 1 2 3 4 5 6
 
@@ -41,18 +35,21 @@ bspc config pointer_action1 move
 bspc config pointer_action3 resize_corner
 
 bspc rule -a MultiMC5 state=floating
+bspc rule -a android-studio state=floating
 bspc rule -a Pavucontrol state=floating rectangle=665x300+1250+28
 bspc rule -a SimpleScreenRecorder state=floating rectangle=600x750+1315+28 
 bspc rule -a Peek state=floating
 bspc rule -a zoom state=floating
 
-# Make X use nice left pointer
+# Make X use nice left pointer cursor
 xsetroot -cursor_name left_ptr &
 
-# Start picom
-pgrep -x picom > /dev/null || picom -b &
+# Automatically change the Window classes for floating windows so Picom can use them to decide whether to put a shadow
+pgrep -x bspwm_actions > /dev/null || ~/scripts/bspwm_actions.sh shadow_class &
 # Start light locker
-pgrep -x light-locker > /dev/null || light-locker &
+# pgrep -x light-locker > /dev/null || light-locker --no-lock-on-lid --lock-on-suspend &
+# Start Ulauncher in the background
+pgrep -x ulauncher > /dev/null || ulauncher --no-window-shadow --hide-window &
 
 # Tray icons
 # Network/WiFi
@@ -62,9 +59,8 @@ pgrep -x flameshot > /dev/null || flameshot &
 # KDE Connect
 pgrep -x kdeconnect-indi > /dev/null || kdeconnect-indicator &
 # Blueman (Bluetooth manager) applet
-pgrep -x blueman-applet > /dev/null || blueman-applet &
-
-# Fix java weird transprent window thing
-# I have No IDEA
-wmname LG3D
-export _JAVA_AWT_WM_NONREPARENTING=1
+# pgrep -x blueman-applet > /dev/null || blueman-applet &
+# Start Clipboard manager
+pgrep -x copyq > /dev/null || copyq &
+# Start Notification Daemon
+pgrep -x xfce4-notifyd > /dev/null || /usr/lib/xfce4/notifyd/xfce4-notifyd &
