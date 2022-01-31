@@ -17,7 +17,7 @@ super + space
 
 # Open browser
 super + b
-	microsoft-edge
+	microsoft-edge-stable
 
 # Open Visual Studio Code
 super + c
@@ -26,6 +26,9 @@ super + c
 # Open terminal
 super + Return
 	alacritty
+
+super + v
+	copyq menu
 
 # Open browser
 super + l
@@ -67,12 +70,11 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
 	~/scripts/volume.sh up
 
-# XFCE Power Manager does this for me
-# XF86MonBrightnessDown
-# 	~/scripts/brightness.sh down
+XF86MonBrightnessDown
+	~/scripts/brightness.sh down
 
-# XF86MonBrightnessUp
-# 	~/scripts/brightness.sh up
+XF86MonBrightnessUp
+	~/scripts/brightness.sh up
 
 # Make sxhkd reload its config
 super + Escape

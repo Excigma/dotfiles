@@ -26,7 +26,19 @@ resize() {
 
 }
 
+shadow_class() {
+	bspc subscribe node_state | while read -r _ _ _ node state status; do
+		if [[ "$state" == "floating" ]]; then
+			case "$status" in
+				on) xprop -id "$node" -f _BSPWM_FLOATING 32c -set _BSPWM_FLOATING 1;;
+				off) xprop -id "$node" -remove _BSPWM_FLOATING;;
+			esac
+		fi
+	done
+}
+
 case $1 in
 	resize) resize "$2" ;;
+	shadow_class) shadow_class ;;
 	*) exit 1 ;;
 esac

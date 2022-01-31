@@ -4,22 +4,21 @@
 # SETTINGS {{{ ---
 
 active_text_color="#5294e2"
-active_bg=
+active_bg="#32343d"
 active_underline="#5294e2"
 
-inactive_text_color="#888888"
+inactive_text_color="#7c818c"
 inactive_bg=
 inactive_underline=
 
 separator=""
-show="window_class" # options: window_title, window_class, window_classname
-forbidden_classes="Polybar Conky Gmrun"
+forbidden_classes="Polybar Conky Gmrun Ulauncher"
 empty_desktop_message="Desktop"
 
-char_limit=10
+char_limit=25
 max_windows=15
 char_case="normal" # normal, upper, lower
-add_spaces="true"
+add_spaces="false"
 resize_increment=16
 wm_border_width=1 # setting this might be required for accurate resize position
 
@@ -167,36 +166,28 @@ generate_window_list() {
 			window_count=$(( window_count + 1 ))
 			continue
 		fi
-		
-		# Show the user-selected window property
-		case "$show" in
-			"window_class") w_name="$cls" ;;
-			"window_classname") w_name="$cname" ;;
-			"window_title") w_name="$title" ;;
-		esac
-		
-					w_name="$cls"
-			
-			if [ "$cls" = "Microsoft-edge" ]; then
-				w_name="爵 Edge" 
-				
-				case "$title" in
-					"Discord - "*) w_name="ﭮ Discord" ;;
-					"Spotify - "*) w_name=" Spotify" ;;
-					*" at DuckDuckGo - Brave") w_name=" DuckDuckGo" ;;
-					*" - Stack Overflow - Brave") w_name=" Stack Overflow" ;;
-					"bonk.io - Official Site: Play Bonk Here! - Brave") w_name=" Bonk.io" ;;
-					"diep.io - Brave") w_name=" Diep.io" ;;
-				esac
-			else
-				case "$cls" in
-					"Code") w_name=" Code" ;;
-					"Alacritty") w_name=" Terminal" ;;
-					"1") w_name="Minecraft" ;;
-				esac
-			fi
 
-			w_name=" $w_name "
+		if [ "$cls" = "Microsoft-edge" ]; then
+			w_name="爵 Edge" 
+			
+			case "$title" in
+				"Discord - "*) w_name="ﭮ Discord" ;;
+				"Spotify - "*) w_name=" Spotify" ;;
+				*" at DuckDuckGo - Brave") w_name=" DuckDuckGo" ;;
+				*" - Stack Overflow - Brave") w_name=" Stack Overflow" ;;
+				"bonk.io - Official Site: Play Bonk Here! - Brave") w_name=" Bonk.io" ;;
+				"diep.io - Brave") w_name=" Diep.io" ;;
+			esac
+		else
+			case "$cls" in
+				"Code") w_name=" Code" ;;
+				"Alacritty") w_name=" Terminal" ;;
+				"gnome") w_name="Files" ;;
+				"1") w_name="Minecraft" ;;
+				*) w_name="$title" ;;
+			esac
+		fi
+
 
 		# Use user-selected character case
 		case "$char_case" in
@@ -213,10 +204,7 @@ generate_window_list() {
 			w_name="$(echo "$w_name" | cut -c1-$((char_limit-1)))…"
 		fi
 
-		# Apply add-spaces setting
-		if [ "$add_spaces" = "true" ]; then
-			w_name=" $w_name "
-		fi
+		w_name=" $w_name "
 
 		# Add left and right formatting to displayed name
 		if [ "$wid" = "$active_wid" ]; then
