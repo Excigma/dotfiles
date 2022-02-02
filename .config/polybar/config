@@ -21,7 +21,7 @@ font-1=Twemoji:size=11
 module-margin = 1
 modules-left = powermenu bspwm polywins
 modules-center = time
-modules-right = xkeyboard network temperature cpu memory pulseaudio media
+modules-right = xkeyboard network temperature cpu memory pulseaudio media do_not_disturb
 
 wm-restack = bspwm
 override-redirect = false
@@ -67,6 +67,15 @@ label-indicator-on-scrolllock = %name%
 type = custom/script
 format = <label>
 exec = ~/.config/polybar/scripts/polywins.sh 2>/dev/null
+
+label = %output%
+tail = true
+
+[module/do_not_disturb]
+type = custom/script
+format = <label>
+exec = ~/.config/polybar/scripts/notifications.sh watch 2>/dev/null
+click-left = ~/.config/polybar/scripts/notifications.sh toggle
 label-foreground = ${colors.blue}
 
 label = %output%
