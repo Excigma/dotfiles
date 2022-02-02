@@ -70,13 +70,13 @@ exec = ~/.config/polybar/scripts/polywins.sh 2>/dev/null
 
 label = %output%
 tail = true
+format-foreground = ${colors.blue}
 
 [module/do_not_disturb]
 type = custom/script
 format = <label>
 exec = ~/.config/polybar/scripts/notifications.sh watch 2>/dev/null
 click-left = ~/.config/polybar/scripts/notifications.sh toggle
-label-foreground = ${colors.blue}
 
 label = %output%
 tail = true
