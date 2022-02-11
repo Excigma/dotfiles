@@ -2,10 +2,10 @@
 
 notif () {
 	brightness=$(brightnessctl -m | cut -d, -f4 | tr -d %)
-	if [ "$brightness" -lt "51" ]; then
-		notify-send.py -i display-brightness-low-symbolic "Brightness:" --replaces-process "excigma-brightness-change" --hint int:value:"$brightness";
+	if [ "$brightness" -lt "51" ]; then 
+		notify-call -i display-brightness-low-symbolic "Brightness:" -R "excigma-brightness-change" --hint int:value:"$brightness";
 	else
-		notify-send.py -i display-brightness-high-symbolic "Brightness:" "joy" --replaces-process "excigma-brightness-change" --hint int:value:"$brightness";
+		notify-call -i display-brightness-high-symbolic "Brightness:" -R "excigma-brightness-change" --hint int:value:"$brightness";
 	fi
 }
 

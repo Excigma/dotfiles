@@ -12,16 +12,15 @@ white = #ffffff
 height = 28
 width = 100%
 bottom = false
-
 background = ${colors.background}
 
-font-0=JetbrainsMono Nerd Font Mono:size=11
-font-1=Twemoji:size=11
+font-0=JetbrainsMono Nerd Font Mono:size=11;2
+font-1=Twemoji:scale=7
 
 module-margin = 1
 modules-left = powermenu bspwm polywins
 modules-center = time
-modules-right = xkeyboard network temperature cpu memory pulseaudio media do_not_disturb
+modules-right = xkeyboard network temperature cpu memory pulseaudio do_not_disturb
 
 wm-restack = bspwm
 override-redirect = false
@@ -29,15 +28,15 @@ override-redirect = false
 tray-position = right
 tray-padding = 10
 
-line-size = 2
+line-size = 1
 
 [module/powermenu]
 type = custom/menu
 
 format-spacing = 1
-format-prefix = " "
+format-prefix = "  "
 
-label-open = 
+label-open = 漣
 label-open-foreground = ${colors.blue}
 label-close = 
 label-close-foreground = ${colors.blue}
@@ -62,6 +61,11 @@ format = <label-indicator>
 format-foreground = ${colors.red}
 label-indicator-on-capslock =  %name%
 label-indicator-on-scrolllock = %name%
+
+[module/info-eyestrain]
+type = custom/script
+exec = ~/.config/polybar/scripts/info-eyestrain.sh
+interval = 60
 
 [module/polywins]
 type = custom/script
@@ -159,10 +163,10 @@ format-warn = <ramp> <label-warn>
 label = %gb_used%
 label-warn = %gb_used% (%percentage_used%%)
 
-ramp-used-0 = ""
-ramp-used-1 = ""
-ramp-used-2 = ""
-ramp-used-3 = ""
+ramp-used-0 = ""
+ramp-used-1 = ""
+ramp-used-2 = ""
+ramp-used-3 = ""
 
 ramp-used-0-foreground = ${colors.green}
 ramp-used-1-foreground = ${colors.blue}
@@ -192,19 +196,19 @@ label = %date%, %time%
 date = %a %d %B
 time = %H:%M:%S
 
-[module/media]
+[module/spotify]
 type = custom/script
 tail = true
 
-click-left = playerctl next
+click-left = playerctl --player=spotify next
 
 format = <label>
 format-foreground = ${colors.blue}
 
 format-prefix-foreground = ${colors.blue}
-format-prefix = " "
+format-prefix = " "
 
-exec = ~/.config/polybar/scripts/media.sh
+exec = ~/.config/polybar/scripts/spotify.sh
 
 [module/pulseaudio]
 type = internal/pulseaudio
