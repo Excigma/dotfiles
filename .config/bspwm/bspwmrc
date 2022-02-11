@@ -47,7 +47,7 @@ xsetroot -cursor_name left_ptr &
 # Automatically change the Window classes for floating windows so Picom can use them to decide whether to put a shadow
 pgrep -x bspwm_actions > /dev/null || ~/scripts/bspwm_actions.sh shadow_class &
 # Start light locker
-# pgrep -x light-locker > /dev/null || light-locker --no-lock-on-lid --lock-on-suspend &
+pgrep -x light-locker > /dev/null || light-locker --no-lock-on-lid --lock-on-suspend &
 # Start Ulauncher in the background
 pgrep -x ulauncher > /dev/null || ulauncher --no-window-shadow --hide-window &
 
@@ -64,3 +64,7 @@ pgrep -x kdeconnect-indi > /dev/null || kdeconnect-indicator &
 pgrep -x copyq > /dev/null || copyq &
 # Start Notification Daemon
 pgrep -x xfce4-notifyd > /dev/null || /usr/lib/xfce4/notifyd/xfce4-notifyd &
+
+# Start keyring daemon
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK

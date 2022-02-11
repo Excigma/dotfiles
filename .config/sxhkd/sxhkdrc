@@ -17,7 +17,7 @@ super + space
 
 # Open browser
 super + b
-	microsoft-edge-stable
+	microsoft-edge-beta --enable-features=VaapiVideoDecoder,VaapiVideoEncoder
 
 # Open Visual Studio Code
 super + c

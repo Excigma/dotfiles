@@ -167,16 +167,16 @@ generate_window_list() {
 			continue
 		fi
 
-		if [ "$cls" = "Microsoft-edge" ]; then
+		if [ "$cls" = "Microsoft-edge-beta" ]; then
 			w_name="爵 Edge" 
 			
 			case "$title" in
 				"Discord - "*) w_name="ﭮ Discord" ;;
 				"Spotify - "*) w_name=" Spotify" ;;
-				*" at DuckDuckGo - Brave") w_name=" DuckDuckGo" ;;
-				*" - Stack Overflow - Brave") w_name=" Stack Overflow" ;;
-				"bonk.io - Official Site: Play Bonk Here! - Brave") w_name=" Bonk.io" ;;
-				"diep.io - Brave") w_name=" Diep.io" ;;
+				*" at DuckDuckGo - Personal - Microsoft​ Edge Beta") w_name=" DuckDuckGo" ;;
+				*" - Stack Overflow - Personal - Microsoft​ Edge Beta") w_name=" Stack Overflow" ;;
+				"bonk.io - Official Site: Play Bonk Here! - Personal - Microsoft​ Edge Beta") w_name=" Bonk.io" ;;
+				"diep.io - Personal - Microsoft​ Edge Beta") w_name=" Diep.io" ;;
 			esac
 		else
 			case "$cls" in

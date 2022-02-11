@@ -2,11 +2,12 @@
 
 notif () {
 	volume=$(pamixer --get-volume)
-	notify-send.py -i audio-volume-medium-symbolic "Volume: " --hint int:value:"$volume" --replaces-process "excigma-volume-change";
+	notify-call -i audio-volume-medium-symbolic "Volume:" -R "excigma-volume-change" --hint int:value:"$volume";
 }
 
 up() {
 	pactl set-sink-volume @DEFAULT_SINK@ +1%
+	notif
 	sleep 0.01
 	pactl set-sink-volume @DEFAULT_SINK@ +1%
 	notif
@@ -16,6 +17,7 @@ down() {
 	pactl set-sink-volume @DEFAULT_SINK@ -1%
 	sleep 0.01
 	pactl set-sink-volume @DEFAULT_SINK@ -1%
+	notif
 	sleep 0.01
 	pactl set-sink-volume @DEFAULT_SINK@ -1%
 	sleep 0.01
