@@ -185,14 +185,14 @@ format-disconnected = 睊 <label-disconnected>
 format-disconnected-foreground = ${colors.red}
 
 label-connected = %downspeed%
-label-disconnected = Disconnected
+label-disconnected = !
 
 [module/time]
 type = internal/date
 
 format-prefix-foreground = ${colors.blue}
-format-prefix = " "
-label = %date%, %time%
+format-prefix = ""
+label = %{A1:playerctl --player=spotify next:} %date%, %time% %{A}
 date = %a %d %B
 time = %H:%M:%S
 

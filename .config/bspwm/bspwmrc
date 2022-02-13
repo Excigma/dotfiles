@@ -65,6 +65,9 @@ pgrep -x copyq > /dev/null || copyq &
 # Start Notification Daemon
 pgrep -x xfce4-notifyd > /dev/null || /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
+# Reminder to stand up or smth lmao
+while sleep 1200; do notify-call "20 minutes is up" "It's time to take a break" -i media-playback-pause; done & 
+
 # Start keyring daemon
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
