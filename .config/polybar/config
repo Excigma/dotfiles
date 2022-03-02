@@ -18,9 +18,9 @@ font-0=JetbrainsMono Nerd Font Mono:size=11;2
 font-1=Twemoji:scale=7
 
 module-margin = 1
-modules-left = powermenu bspwm polywins
+modules-left = bspwm polywins
 modules-center = time
-modules-right = xkeyboard network temperature cpu memory pulseaudio do_not_disturb
+modules-right = xkeyboard network temperature cpu memory pulseaudio powermenu do_not_disturb
 
 wm-restack = bspwm
 override-redirect = false
@@ -34,12 +34,12 @@ line-size = 1
 type = custom/menu
 
 format-spacing = 1
-format-prefix = "  "
+expand-right = false
 
 label-open = 漣
-label-open-foreground = ${colors.blue}
+label-open-foreground = ${colors.white}
 label-close = 
-label-close-foreground = ${colors.blue}
+label-close-foreground = ${colors.red}
 label-separator = |
 label-separator-foreground = ${colors.blue}
 
@@ -81,6 +81,7 @@ type = custom/script
 format = <label>
 exec = ~/.config/polybar/scripts/notifications.sh watch 2>/dev/null
 click-left = ~/.config/polybar/scripts/notifications.sh toggle
+click-right = ~/.config/polybar/scripts/notifications.sh config
 
 label = %output%
 tail = true

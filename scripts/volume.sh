@@ -2,7 +2,7 @@
 
 notif () {
 	volume=$(pamixer --get-volume)
-	notify-call -i audio-volume-medium-symbolic "Volume:" -R "excigma-volume-change" --hint int:value:"$volume";
+	notify-call -i audio-volume-medium-symbolic "Volume:" -R "excigma-volume-change" --hint int:value:"$volume" --hint int:transient:1;
 }
 
 up() {

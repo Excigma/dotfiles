@@ -15,6 +15,9 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # pgrep -x touchegg > /dev/null || touchegg &
 touchegg &
 
+# Start the settings daemon that allows live reloading of GTK themes
+# xsettingsd &
+
 bspc monitor -d 1 2 3 4 5 6
 
 bspc config border_width 1
@@ -47,7 +50,7 @@ xsetroot -cursor_name left_ptr &
 # Automatically change the Window classes for floating windows so Picom can use them to decide whether to put a shadow
 pgrep -x bspwm_actions > /dev/null || ~/scripts/bspwm_actions.sh shadow_class &
 # Start light locker
-pgrep -x light-locker > /dev/null || light-locker --no-lock-on-lid --lock-on-suspend &
+pgrep -x light-locker > /dev/null || light-locker --no-lock-on-lid --lock-on-suspend --no-idle-hint --no-late-locking &
 # Start Ulauncher in the background
 pgrep -x ulauncher > /dev/null || ulauncher --no-window-shadow --hide-window &
 
@@ -64,9 +67,12 @@ pgrep -x kdeconnect-indi > /dev/null || kdeconnect-indicator &
 pgrep -x copyq > /dev/null || copyq &
 # Start Notification Daemon
 pgrep -x xfce4-notifyd > /dev/null || /usr/lib/xfce4/notifyd/xfce4-notifyd &
+# Start Onboard (On-screen keyboard)
+pgrep -x onboard > /dev/null || onboard &
+
 
 # Reminder to stand up or smth lmao
-while sleep 1200; do notify-call "20 minutes is up" "It's time to take a break" -i media-playback-pause; done & 
+while sleep 1200; do notify-call "20 minutes is up" "It's time to take a break" -i media-playback-pause --hint int:transient:1; done & 
 
 # Start keyring daemon
 eval $(gnome-keyring-daemon --start)
