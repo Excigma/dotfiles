@@ -17,6 +17,7 @@ watch() {
 
 case $1 in
 	watch) watch ;;
+	config) xfce4-notifyd-config ;;
 	toggle) xfconf-query -c xfce4-notifyd -p /do-not-disturb -T ;;
 	*) exit 1 ;;
 esac
