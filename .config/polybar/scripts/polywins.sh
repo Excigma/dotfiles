@@ -3,24 +3,32 @@
 
 # SETTINGS {{{ ---
 
-active_text_color="#5294e2"
-active_bg="#32343d"
-active_underline="#5294e2"
+active_text_color=#5294e2
+active_bg=#32343d
+active_underline=#5294e2
 
-inactive_text_color="#7c818c"
+inactive_text_color=#7c818c
 inactive_bg=
 inactive_underline=
 
 separator=""
-forbidden_classes="Polybar Conky Gmrun Ulauncher"
-empty_desktop_message="Desktop"
+show="window_classname" # options: window_title, window_class, window_classname
+forbidden_classes="Polybar Conky Ulauncher"
+empty_desktop_message=""
 
-char_limit=25
+char_limit=16
 max_windows=15
 char_case="normal" # normal, upper, lower
-add_spaces="false"
+add_spaces="true"
 resize_increment=16
 wm_border_width=1 # setting this might be required for accurate resize position
+
+declare -A sub;
+sub[Navigator]=Firefox
+sub[Microsoft Edge Beta]=Edge
+# sub[Code]="VSCode"
+sub[Org]="Files"
+sub[Xournalpp]="Xournal++"
 
 # --- }}}
 
@@ -166,45 +174,29 @@ generate_window_list() {
 			window_count=$(( window_count + 1 ))
 			continue
 		fi
-
-		if [ "$cls" = "Microsoft-edge-beta" ]; then
-			w_name="爵 Edge" 
-			
-			case "$title" in
-				"Discord - "*) w_name="ﭮ Discord" ;;
-				"Spotify - "*) w_name=" Spotify" ;;
-				*" at DuckDuckGo - Personal - Microsoft​ Edge Beta") w_name=" DuckDuckGo" ;;
-				*" - Stack Overflow - Personal - Microsoft​ Edge Beta") w_name=" Stack Overflow" ;;
-				"bonk.io - Official Site: Play Bonk Here! - Personal - Microsoft​ Edge Beta") w_name=" Bonk.io" ;;
-				"diep.io - Personal - Microsoft​ Edge Beta") w_name=" Diep.io" ;;
-			esac
-		else
-			case "$cls" in
-				"Code") w_name=" Code" ;;
-				"Alacritty") w_name=" Terminal" ;;
-				"gnome") w_name="Files" ;;
-				"1") w_name="Minecraft" ;;
-				*) w_name="$title" ;;
-			esac
-		fi
-
-
-		# Use user-selected character case
-		case "$char_case" in
-			"lower") w_name=$(
-				echo "$w_name" | tr '[:upper:]' '[:lower:]'
-				) ;;
-			"upper") w_name=$(
-				echo "$w_name" | tr '[:lower:]' '[:upper:]'
-				) ;;
+		
+		# Show the user-selected window property
+		case "$show" in
+			"window_class") w_name="${cls[@]^}" ;;
+			"window_classname") w_name="$(echo "$cname" | tr - ' ' | sed -e "s/\b\(.\)/\u\1/g")" ;;
+			"window_title") w_name="${title[@]^}" ;;
 		esac
+
+		echo "$cname" >> /tmp/class_list
+
+		if exists "$w_name" in sub; then
+			w_name="${sub["$w_name"]}"	
+		fi
 
 		# Truncate displayed name to user-selected limit
 		if [ "${#w_name}" -gt "$char_limit" ]; then
 			w_name="$(echo "$w_name" | cut -c1-$((char_limit-1)))…"
 		fi
 
-		w_name=" $w_name "
+		# Apply add-spaces setting
+		if [ "$add_spaces" = "true" ]; then
+			w_name="  $w_name  "
+		fi
 
 		# Add left and right formatting to displayed name
 		if [ "$wid" = "$active_wid" ]; then
@@ -248,6 +240,37 @@ generate_window_list() {
 	echo ""
 }
 
+exists() {
+  if [ "$2" != in ]; then
+    echo "Incorrect usage."
+    echo "Correct usage: exists {key} in {array}"
+    return
+  fi   
+  eval '[ ${'"$3"'[$1]+lol} ]'  
+}
+
 # --- }}}
 
 main "$@"
+
+# MIT License
+
+# Copyright (c) 2020 aroma1994
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION W﻿ITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
