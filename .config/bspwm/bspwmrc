@@ -1,36 +1,28 @@
-#! /bin/sh
+#!/usr/bin/env sh
 
 # xrdb merge ~/.Xresources &
 
-# Set the background color
-hsetroot -solid '#1b1c22' &
-# Start picom
-pgrep -x picom > /dev/null || picom -b --experimental-backends &
-# Start polybar
-~/.config/polybar/launch.sh &
-
-# Start Simple X hotkey daemon
-pgrep -x sxhkd > /dev/null || sxhkd &
-# Start touchegg (Trackpad gestures)
-# pgrep -x touchegg > /dev/null || touchegg &
-touchegg &
+# Make X use nice left pointer cursor when not hovering any window
 
 # Start the settings daemon that allows live reloading of GTK themes
 # xsettingsd &
 
-bspc monitor -d 1 2 3 4 5 6
+bspc monitor -d 0 1 2 3 4
+bspc desktop -f 2
 
 bspc config border_width 1
-bspc config normal_border_color \#32343d
-bspc config focused_border_color \#5294e2
+bspc config normal_border_color \#37393f
+# bspc config focused_border_color \#5294e2
+bspc config focused_border_color \#39679e
 
 bspc config window_gap 0
 
 bspc config automatic_scheme longest_side
 bspc config single_monocle true
-bspc config borderless_monocle false
+bspc config borderless_monocle true
 bspc config gapless_monocle true
 bspc config focus_follows_pointer true
+bspc config honor_size_hints true
 
 # Enable mouse for floating windows
 # Left click drag to resize
@@ -40,40 +32,50 @@ bspc config pointer_action3 resize_corner
 bspc rule -a MultiMC5 state=floating
 bspc rule -a android-studio state=floating
 bspc rule -a Pavucontrol state=floating rectangle=665x300+1250+28
-bspc rule -a SimpleScreenRecorder state=floating rectangle=600x750+1315+28 
-bspc rule -a Peek state=floating
+bspc rule -a SimpleScreenRecorder state=floating rectangle=600x750+1315+28
+bspc rule -a "*:Picture in picture" state=floating follow=true
 bspc rule -a zoom state=floating
+# bspc rule -a *:floating state=floating
+# bspc rule -a floating state=floating
 
-# Make X use nice left pointer cursor
-xsetroot -cursor_name left_ptr &
+
+# Application Autostart
+# Start picom
+picom -b --experimental-backends &
+
+# Start Simple X hotkey daemon
+sxhkd &
+
+# Trackpad gestures
+touchegg &
 
 # Automatically change the Window classes for floating windows so Picom can use them to decide whether to put a shadow
-pgrep -x bspwm_actions > /dev/null || ~/scripts/bspwm_actions.sh shadow_class &
-# Start light locker
-pgrep -x light-locker > /dev/null || light-locker --no-lock-on-lid --lock-on-suspend --no-idle-hint --no-late-locking &
+~/scripts/bspwm_actions.sh shadow_class &
+# Start script to automatically pause Spotify when media is playing
+~/scripts/spotify_automute.sh &
+
 # Start Ulauncher in the background
-pgrep -x ulauncher > /dev/null || ulauncher --no-window-shadow --hide-window &
+ulauncher --no-window-shadow --hide-window &
 
 # Tray icons
 # Network/WiFi
-pgrep -x nm-applet > /dev/null || nm-applet --indicator &
+nm-applet --indicator &
 # Flameshot
-pgrep -x flameshot > /dev/null || flameshot &
+flameshot &
 # KDE Connect
-pgrep -x kdeconnect-indi > /dev/null || kdeconnect-indicator &
+/usr/lib/kdeconnectd &
 # Blueman (Bluetooth manager) applet
 # pgrep -x blueman-applet > /dev/null || blueman-applet &
 # Start Clipboard manager
-pgrep -x copyq > /dev/null || copyq &
+diodon &
 # Start Notification Daemon
-pgrep -x xfce4-notifyd > /dev/null || /usr/lib/xfce4/notifyd/xfce4-notifyd &
-# Start Onboard (On-screen keyboard)
-pgrep -x onboard > /dev/null || onboard &
-
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
 
 # Reminder to stand up or smth lmao
 while sleep 1200; do notify-call "20 minutes is up" "It's time to take a break" -i media-playback-pause --hint int:transient:1; done & 
 
-# Start keyring daemon
-eval $(gnome-keyring-daemon --start)
-export SSH_AUTH_SOCK
+# Start xfce-polkit for GUI password prompts
+# /usr/lib/xfce-polkit/xfce-polkit &
+
+# Start barrier
+# barrier &
