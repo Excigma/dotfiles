@@ -26,21 +26,20 @@ font:
   normal:
     family: JetbrainsMono Nerd Font Mono
     style: Regular
-  size: 9
+  size: 8
 
 window:
+  startup_mode: Windowed
   padding:
-    x: 6
-    y: 6
+    x: 4
+    y: 4
+  dimensions:
+    columns: 173
+    lines: 43
+
 
 cursor:
   unfocused_hollow: true
-
-shell:
-  program: /usr/bin/zsh
-
-env:
-  TERM: xterm-256color
 
 key_bindings:
   - { key: V, mods: Control, action: Paste }

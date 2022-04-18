@@ -8,6 +8,9 @@
   <property name="applications" type="empty">
     <property name="known_applications" type="array">
       <value type="string" value=""/>
+      <value type="string" value="Authy Desktop"/>
+      <value type="string" value="brave-browser"/>
+      <value type="string" value="com.github.hluk.copyq"/>
       <value type="string" value="discord"/>
       <value type="string" value="dunstify"/>
       <value type="string" value="Electron"/>
@@ -25,6 +28,7 @@
       <value type="string" value="signal"/>
       <value type="string" value="signalbeta"/>
       <value type="string" value="Spotify"/>
+      <value type="string" value="Studio"/>
       <value type="string" value="TimerExtension"/>
       <value type="string" value="tor-browser"/>
       <value type="string" value="ulauncher"/>

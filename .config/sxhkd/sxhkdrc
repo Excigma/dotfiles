@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 ### Super + Alt + Key: Hotkeys for text
 super + shift + {@d, @s}
 	~/scripts/hotkeys.sh {date_time, zero_width}
@@ -17,7 +19,7 @@ super + space
 
 # Open browser
 super + b
-	microsoft-edge-beta --enable-features=VaapiVideoDecoder,VaapiVideoEncoder
+	microsoft-edge-beta
 
 # Open Visual Studio Code
 super + c
@@ -28,7 +30,7 @@ super + Return
 	alacritty
 
 super + v
-	copyq menu
+	diodon
 
 # Open browser
 super + l
@@ -48,6 +50,10 @@ Print
 Pause
 	flameshot full -c
 
+# Screenshot all workspaces with flameshot
+super + Print
+	~/scripts/screenshot.sh
+
 # Screen color grabber
 ctrl + shift + Print
 	xcolor | tr -d '\n' | xsel -ib
@@ -62,13 +68,16 @@ alt + shift + Print
 
 # Rebind mute to play/pause
 XF86AudioMute
-	playerctl play-pause
+	playerctl play-pause -p spotify
 
 XF86AudioLowerVolume
 	~/scripts/volume.sh down
 
 XF86AudioRaiseVolume
 	~/scripts/volume.sh up
+
+XF86Tools
+	~/scripts/brightness.sh down
 
 XF86MonBrightnessDown
 	~/scripts/brightness.sh down
@@ -106,6 +115,9 @@ super + g
 super + {t,f}
 	bspc node -t {tiled,floating}
 
+super + {s,h}
+	bspc node -g {sticky,hidden}
+
 # Focus the next/previous node in the current desktop
 alt + {_,shift +} grave
 	bspc node -f {next,prev}.local.window.!hidden
@@ -115,8 +127,8 @@ alt + Tab
 	bspc node -f last.local.window.!hidden
 
 # Focus the last focused desktop
-super + Tab
-	bspc desktop -f last
+# super + Tab
+# 	bspc desktop -f last
 
 
 # Focus given desktop or
@@ -129,6 +141,11 @@ super + {_,shift + ,ctrl + }{1-9,0}
 ctrl + super + {Left, Right}
 	bspc desktop -f {prev, next}
 
+button8
+	bspc desktop -f prev
+
+button9
+	bspc desktop -f next
 #
 # move/resize
 #
@@ -150,3 +167,6 @@ ctrl + super + {Left, Right}
 # expand a window by moving one of its side outward
 super + {Left,Down,Up,Right}
 	~/scripts/bspwm_actions.sh resize {left,down,up,right}
+
+super + r
+	bspc node @parent -R 90
