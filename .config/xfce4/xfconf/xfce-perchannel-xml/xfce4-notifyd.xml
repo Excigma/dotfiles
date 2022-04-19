@@ -43,7 +43,7 @@
     <property name="muted_applications" type="array">
     </property>
   </property>
-  <property name="do-not-disturb" type="bool" value="false"/>
+  <property name="do-not-disturb" type="bool" value="true"/>
   <property name="do-slideout" type="bool" value="false"/>
   <property name="expire-timeout" type="int" value="5"/>
   <property name="notification-log" type="bool" value="true"/>
