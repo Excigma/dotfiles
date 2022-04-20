@@ -41,7 +41,7 @@ bspc rule -a zoom state=floating
 
 # Application Autostart
 # Start picom
-picom -b --experimental-backends &
+picom -C -z &
 
 # Start Simple X hotkey daemon
 sxhkd &
