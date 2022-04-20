@@ -19,7 +19,7 @@ super + space
 
 # Open browser
 super + b
-	microsoft-edge-beta
+	brave
 
 # Open Visual Studio Code
 super + c

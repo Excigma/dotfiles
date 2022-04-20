@@ -52,7 +52,8 @@ touchegg &
 # Automatically change the Window classes for floating windows so Picom can use them to decide whether to put a shadow
 ~/scripts/bspwm_actions.sh shadow_class &
 # Start script to automatically pause Spotify when media is playing
-~/scripts/spotify_automute.sh &
+# (it's more annoying than it is worth)
+# ~/scripts/spotify_automute.sh &
 
 # Start Ulauncher in the background
 ulauncher --no-window-shadow --hide-window &
