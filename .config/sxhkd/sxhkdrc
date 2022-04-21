@@ -11,6 +11,14 @@ super + shift + {@d, @s}
 
 # Isn't this opinionated enough already?
 
+# Project somehow turns into super + p
+super + p
+	:
+
+# Actually sleep, since we've disabled the sleep fn key
+super + XF86Sleep
+	systemctl suspend
+
 ### Super + Key: Start some application
 
 # Open ULauncher
