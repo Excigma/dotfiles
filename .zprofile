@@ -6,6 +6,7 @@ export LIBVA_DRIVER_NAME=iHD
 export VDPAU_DRIVER=va_gl
 export ZEITGEIST_DATABASE_PATH=':memory:'
 export SXHKD_SHELL='/usr/bin/sh'
+export MOZ_USE_XINPUT2=1
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     exec startx -- vt1 &> /dev/null
