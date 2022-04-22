@@ -60,7 +60,7 @@ ulauncher --no-window-shadow --hide-window &
 
 # Tray icons
 # Network/WiFi
-nm-applet --indicator &
+nm-applet &
 # Flameshot
 flameshot &
 # KDE Connect
