@@ -16,7 +16,7 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
-SAVEHIST=1000
+SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
 # Mmm color
