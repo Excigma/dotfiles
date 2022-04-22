@@ -27,7 +27,7 @@ alias ls='ls --color=auto'
 
 # Custom gotop layout
 alias gotop='gotop -l main -p -a'
-alias config='/usr/bin/git --git-dir=/home/excigma/.cfg/ --work-tree=/home/excigma'
+alias config='/usr/bin/git --git-dir=/home/excigma/.dotfiles/ --work-tree=/home/excigma'
 
 # Ctrl + Backspace/Delete to delete word
 bindkey '^H' backward-kill-word

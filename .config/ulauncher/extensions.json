@@ -2,29 +2,29 @@
     "com.github.iboyperson.ulauncher-system": {
         "id": "com.github.iboyperson.ulauncher-system",
         "url": "https://github.com/iboyperson/ulauncher-system",
-        "updated_at": "2022-01-21T16:35:16.012578",
+        "updated_at": "2022-04-22T18:02:34.237098",
         "last_commit": "667613bf7bb6b4affa4f2121b58589477cd89829",
         "last_commit_time": "2021-11-08T18:16:55"
     },
     "com.github.manahter.ulauncher-translate": {
         "id": "com.github.manahter.ulauncher-translate",
         "url": "https://github.com/manahter/ulauncher-translate",
-        "updated_at": "2022-01-21T16:35:31.651919",
+        "updated_at": "2022-04-22T18:02:40.064976",
         "last_commit": "f81d32c583c7e3542bdba655e991a56e6d9a2c28",
         "last_commit_time": "2021-04-09T18:12:40"
     },
     "com.github.tchar.ulauncher-albert-calculate-anything": {
         "id": "com.github.tchar.ulauncher-albert-calculate-anything",
         "url": "https://github.com/tchar/ulauncher-albert-calculate-anything",
-        "updated_at": "2022-01-21T16:40:19.511252",
+        "updated_at": "2022-04-22T18:02:48.296253",
         "last_commit": "ee0903174c8b87cd1f7c3b6c1acef10702547507",
         "last_commit_time": "2021-08-12T06:39:56"
     },
     "com.github.rootwork.ulauncher-symbol": {
         "id": "com.github.rootwork.ulauncher-symbol",
         "url": "https://github.com/rootwork/ulauncher-symbol",
-        "updated_at": "2022-01-21T16:57:14.171778",
-        "last_commit": "8a580616039acc8e24c9f3b4c534cb2afc3b7107",
-        "last_commit_time": "2021-10-26T04:05:08"
+        "updated_at": "2022-04-22T18:02:50.446021",
+        "last_commit": "c5d7ab5c94c1b418cb1f8a9161be169a29c65658",
+        "last_commit_time": "2022-02-24T01:17:09"
     }
 }
