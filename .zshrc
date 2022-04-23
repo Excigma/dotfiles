@@ -23,11 +23,15 @@ HISTFILE=~/.zsh_history
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
 alias ls='ls --color=auto'
 
 # Custom gotop layout
 alias gotop='gotop -l main -p -a'
 alias config='/usr/bin/git --git-dir=/home/excigma/.dotfiles/ --work-tree=/home/excigma'
+
+# I'm lazy
+alias ..='cd ..'
 
 # Ctrl + Backspace/Delete to delete word
 bindkey '^H' backward-kill-word
