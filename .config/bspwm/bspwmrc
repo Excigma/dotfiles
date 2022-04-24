@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 
-# xrdb merge ~/.Xresources &
+# Turn off beep, set cursor, set color
+xset b off &
+xsetroot -cursor_name left_ptr &
+hsetroot -solid '#1b1c22' &
+
+# Start polybar and tint
+~/.config/polybar/launch.sh &
+tint2 &
 
 # Make X use nice left pointer cursor when not hovering any window
 

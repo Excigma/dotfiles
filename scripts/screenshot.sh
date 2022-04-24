@@ -2,13 +2,13 @@
 
 # Thanks to https://askubuntu.com/questions/211750/taking-screenshots-of-all-or-specific-virtual-desktops-workspaces-or-windows
 
-original_ws=$(xdotool get_desktop)
+original_ws=$(bspc query -D -d focused)
 
 # Array of workspaces with windows open
 has_windows=()
 
 # Find workspaces with windows open
-for (( ws = 0; ws < $(xdotool get_num_desktops); ws++ ))
+for (( ws = 0; ws < $(bspc query -D | wc -l); ws++ ))
 do
      # Check if workspace has windows open
      windows="$(bspc query -N -n .window -d "$ws")"
