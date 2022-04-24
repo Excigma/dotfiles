@@ -6,6 +6,7 @@ export VDPAU_DRIVER=va_gl
 export SXHKD_SHELL='/usr/bin/dash'
 export MOZ_USE_XINPUT2=1
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    exec startx -- vt1 &> /dev/null
+if [ -n "$DESKTOP_SESSION" ];then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
 fi

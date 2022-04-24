@@ -2,7 +2,7 @@
 Name=Discord (Browser)
 Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
 GenericName=Internet Messenger
-Exec=/usr/bin/brave --app="http://discord.com/app"
+Exec=/usr/bin/brave --app="http://canary.discord.com/app"
 Icon=discord
 Type=Application
 Categories=Network;InstantMessaging;
