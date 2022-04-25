@@ -42,8 +42,7 @@ bspc rule -a Pavucontrol state=floating rectangle=665x300+1250+28
 bspc rule -a SimpleScreenRecorder state=floating rectangle=600x750+1315+28
 bspc rule -a "*:Picture in picture" state=floating follow=true
 bspc rule -a zoom state=floating
-# bspc rule -a *:floating state=floating
-# bspc rule -a floating state=floating
+bspc rule -a Xpra state=floating
 
 
 # Application Autostart
@@ -67,13 +66,12 @@ ulauncher --no-window-shadow --hide-window &
 
 # Tray icons
 # Network/WiFi
-nm-applet &
+# nm-applet &
 # Flameshot
 flameshot &
 # KDE Connect
 /usr/lib/kdeconnectd &
 # Blueman (Bluetooth manager) applet
-# pgrep -x blueman-applet > /dev/null || blueman-applet &
 # Start Clipboard manager
 diodon &
 # Start Notification Daemon
