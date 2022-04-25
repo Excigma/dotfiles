@@ -25,6 +25,7 @@
       <value type="string" value="org.gnome.baobab"/>
       <value type="string" value="org.gnome.Nautilus"/>
       <value type="string" value="org.kde.kdeconnect.daemon"/>
+      <value type="string" value="Plasma Workspace (via Xpra)"/>
       <value type="string" value="signal"/>
       <value type="string" value="signalbeta"/>
       <value type="string" value="Spotify"/>
