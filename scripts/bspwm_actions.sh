@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 # Please tell me if there is a better way, this is so bad
 resize() {
@@ -28,7 +28,7 @@ resize() {
 
 shadow_class() {
 	bspc subscribe node_state | while read -r _ _ _ node state status; do
-		if [[ "$state" == "floating" ]]; then
+		if [ "$state" = "floating" ]; then
 			case "$status" in
 				on) xprop -id "$node" -f _BSPWM_FLOATING 32c -set _BSPWM_FLOATING 1;;
 				off) xprop -id "$node" -remove _BSPWM_FLOATING;;

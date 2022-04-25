@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 notif () {
 	volume=$(pamixer --get-volume)
