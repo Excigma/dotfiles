@@ -6,7 +6,7 @@ xsetroot -cursor_name left_ptr &
 hsetroot -solid '#1b1c22' &
 
 # Start polybar and tint
-~/.config/polybar/launch.sh &
+polybar &
 tint2 &
 
 # Make X use nice left pointer cursor when not hovering any window
