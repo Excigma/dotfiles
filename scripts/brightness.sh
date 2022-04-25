@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 notif () {
 	brightness=$(brightnessctl -m | cut -d, -f4 | tr -d %)
