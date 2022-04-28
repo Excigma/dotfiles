@@ -1,0 +1,12 @@
+[submodule ".config/rofi/scripts/rofimoji"]
+	path = .config/rofi/scripts/rofimoji
+	url = https://github.com/fdw/rofimoji.git
+[submodule ".config/rofi/scripts/rofi-translate"]
+	path = .config/rofi/scripts/rofi-translate
+	url = https://github.com/garyparrot/rofi-translate
+[submodule ".config/rofi/scripts/rofi-calc"]
+	path = .config/rofi/scripts/rofi-calc
+	url = https://github.com/svenstaro/rofi-calc
+[submodule ".config/rofi/scripts/rofi-power-menu"]
+	path = .config/rofi/scripts/rofi-power-menu
+	url = https://github.com/jluttine/rofi-power-menu

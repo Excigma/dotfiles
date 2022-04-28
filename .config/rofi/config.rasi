@@ -1,0 +1,71 @@
+configuration {
+  display-combi: "";
+  show-icons: true;
+  font: "JetbrainsMono Nerd Font Mono 14";
+  modi: "combi,calc";
+	terminal: "alacritty";
+	drun-display-format: "{name}\n[<span weight='light' size='11pt'>{comment}</span>]";
+	combi-modi: "drun,unicode:rofimoji -a copy -f /home/excigma/.config/rofi/math.csv";
+	combi-hide-mode-prefix: true;
+
+	kb-clear-line: "Control+a";
+	kb-move-front: "";
+} 
+
+
+* {
+  background-color: #1e222a;
+  border-color: #2e343f;
+  text-color: #8ca0aa;
+  spacing: 0;
+}
+
+window {
+  border: 1px;
+  border-color: #315396;
+  location: center;
+  anchor: center;
+  width: 700px;
+  height: 650px;
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [entry];
+}
+
+textbox {
+  background-color: #2e343f;
+  border: 0 0 1px 0;
+  border-color: #282C33;
+  padding: 8px 18px;
+}
+
+entry {
+  padding: 18px;
+}
+
+listview {
+  cycle: false;
+}
+
+element {
+  border: 0 0 1px 0;
+  padding: 8px;
+}
+
+element selected {
+  text-color: inherit;
+  background-color: #2e343f;
+}
+
+element-text, element-icon {
+  vertical-align: 0.5;
+  background-color: inherit;
+  text-color: inherit;
+}
+
+element-icon {
+  size: 2em;
+  margin: 0px 18px 0 9px;
+}

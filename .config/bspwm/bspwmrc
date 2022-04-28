@@ -62,7 +62,7 @@ touchegg &
 # ~/scripts/spotify_automute.sh &
 
 # Start Ulauncher in the background
-ulauncher --no-window-shadow --hide-window &
+# ulauncher --no-window-shadow --hide-window &
 
 # Tray icons
 # Network/WiFi
