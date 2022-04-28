@@ -22,8 +22,8 @@ super + XF86Sleep
 ### Super + Key: Start some application
 
 # Open ULauncher
-super + space
-	ulauncher-toggle
+super + @space
+	rofi -theme ~/.config/rofi/config.rasi -show combi -drun-use-desktop-cache -hover-select -replace
 
 # Open browser
 super + b
