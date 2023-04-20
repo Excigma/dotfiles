@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# By https://github.com/diced
+
 filename="$HOME/Videos/Recordings/recording-$(date -u '+%Y-%m-%d_%H.%M.%S').mp4"
 
 wf-recorder \
