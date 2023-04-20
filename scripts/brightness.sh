@@ -1,22 +1,17 @@
-#!/bin/dash
+#!/bin/zsh
 
-notif () {
-	brightness=$(brightnessctl -m | cut -d, -f4 | tr -d %)
-	if [ "$brightness" -lt "51" ]; then 
-		notify-call -i display-brightness-low-symbolic "Brightness:" -R "excigma-brightness-change" --hint int:value:"$brightness" --hint int:transient:1;
-	else
-		notify-call -i display-brightness-high-symbolic "Brightness:" -R "excigma-brightness-change" --hint int:value:"$brightness" --hint int:transient:1;
-	fi
+up () {
+	/usr/bin/brillo -q -u 20000 -A 5
+	brightess=$(brillo -q)
+	qdbus org.kde.plasmashell /org/kde/osdService org.kde.osdService.brightnessChanged "${brightess%.*}"
+	sleep 0.05
 }
 
-up() {
-	brightnessctl set 4+% -e
-	notif
-}
-
-down() {
-	brightnessctl set 4-% -e
-	notif
+down () {
+	/usr/bin/brillo -q -u 20000 -U 5
+	brightess=$(brillo -q)
+	qdbus org.kde.plasmashell /org/kde/osdService org.kde.osdService.brightnessChanged "${brightess%.*}"
+	sleep 0.05
 }
 
 case $1 in
