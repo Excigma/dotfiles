@@ -25,9 +25,15 @@ down() {
 	notif
 }
 
+zero() {
+	pactl set-sink-volume @DEFAULT_SINK@ 1%
+	notif
+}
+
 case $1 in
-	mute) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+	toggle) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
 	up) up ;;
 	down) down ;;
+	zero) zero ;;
 	*) exit 1 ;;
 esac
