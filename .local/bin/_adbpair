@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# From https://gist.github.com/benigumocom/a6a87fc1cb690c3c4e3a7642ebf2be6f
+
 """
 Android11
 Pair and connect devices for wireless debug on terminal

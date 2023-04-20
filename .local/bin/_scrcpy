@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
+# This is adapted from https://gist.github.com/gnumoksha/f9a5b2e01b1e74ffa2a055b6e18f7c58
+
 # This script will try to find the adb remote debugging port in the specified
 # IP address and then tell adb to try to connect to it.
 # It is useful for connecting to an android device without opening the
 # "Wireless debugging" screen to get the IP and the random port, which is
 # cumbersome.
-
-# This script is from: adb-wireless-connect.sh
 
 for line in $(avahi-browse --terminate --resolve --parsable --no-db-lookup _adb-tls-connect._tcp); do
 	if [[ $line != =* ]]; then

@@ -41,6 +41,7 @@ export QT_QUICK_CONTROLS_STYLE=org.kde.desktop
 
 export BROWSER=firefox
 export EDITOR=nano
+
 export RUSTFLAGS="-C target-cpu=native"
 
 export PATH=$PATH:/home/excigma/.local/bin:/home/excigma/.local/share/go/bin:/home/excigma/.local/share/cargo/bin
