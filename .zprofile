@@ -40,6 +40,7 @@ export QT_QUICK_CONTROLS_STYLE=org.kde.desktop
 # export GDK_DEBUG=portals
 
 export BROWSER=firefox
+export VISUAL=nano
 export EDITOR=nano
 
 export RUSTFLAGS="-C target-cpu=native"
