@@ -93,6 +93,9 @@ zstyle ':completion::complete:*' gain-privileges 1
 # Ignore completion functions for not installed packages
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
+# Hide usernames for ssh autocomplete
+zstyle ':completion:*:ssh:*:users' hidden true
+
 autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
