@@ -1,4 +1,4 @@
-{ lib, config, pkgs, user, ... }: {
+{ lib, config, pkgs, user, self, ... }: {
   imports = let inherit (builtins) filter attrNames readDir;
   in map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
@@ -8,14 +8,14 @@
 
     # link the configuration file in current directory to the specified location in home directory
     file = {
-      ".p10k.zsh".source = ./.config/.p10k.zsh;
-      "face.jpg".source = ./.local/share/backgrounds/Profile.jpg;
+      ".p10k.zsh".source = "${self}/.config/.p10k.zsh";
+      "face.jpg".source = "${self}/.local/share/backgrounds/Profile.jpg";
       ".local" = {
-        source = ./.local;
+        source = "${self}/.local";
         recursive = true;
       };
       ".config" = {
-        source = ./.config;
+        source = "${self}/.config"; 
         recursive = true;
       };
     };
