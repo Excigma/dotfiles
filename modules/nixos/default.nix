@@ -168,7 +168,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     brave
     xournalpp
@@ -238,6 +237,33 @@
     zsh-powerlevel10k
     zsh-syntax-highlighting
     zoxide
+
+    (pkgs.buildGoModule {
+      pname = "10mb-video";
+      version = "14e8aaac56189d48418d157171bae10f2ea9defd";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "ugjka";
+        repo = "10mb.video";
+        rev = "14e8aaac56189d48418d157171bae10f2ea9defd";
+        sha256 = "sha256-mcpQ6AVAXJjNbClUF6pgZbU47KCn4viaA6fB7eF7CZg";
+      };
+
+      vendorHash = null;
+      subPackages = [ "." ];
+      buildInputs = with pkgs; [ ffmpeg fdk-aac-encoder ];
+
+      meta = with pkgs.lib; {
+        description = "Fit a video into a 10mb file (Discord nitro pls?)";
+        homepage = "https://github.com/ugjka/10mb.video";
+        license = licenses.mit;
+        maintainers = [ ];
+        platforms = platforms.all;
+      };
+    })
+
+    ffmpeg
+    fdk-aac-encoder
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
