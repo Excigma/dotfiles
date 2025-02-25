@@ -1,9 +1,7 @@
 {
   description = "NixOS configuration";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,9 +38,9 @@
         default = latitude-nixos;
         latitude-nixos = nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
-
           modules = [
             ./modules/nixos
+            home-manager.nixosModules.home-manager
 
             (if builtins.pathExists ./secrets/default.nix then
               ./secrets
@@ -51,46 +49,38 @@
 
             {
               nix = {
-                registry.pkgs.flake = self;
-                optimise.automatic = true;
-                settings = {
-                  auto-optimise-store = true;
-                  experimental-features = [ "nix-command" "flakes" ];
-                  trusted-users = [ user ];
-                  nix-path = "nixpkgs=/etc/nix/inputs/nixpkgs";
-                };
                 gc = {
                   automatic = true;
                   options = "--delete-older-than 30d";
                 };
+                optimise.automatic = true;
+                registry.pkgs.flake = self;
+                settings = {
+                  auto-optimise-store = true;
+                  experimental-features = [ "nix-command" "flakes" ];
+                  nix-path = "nixpkgs=/etc/nix/inputs/nixpkgs";
+                  trusted-users = [ user ];
+                };
               };
-
               nixpkgs = {
                 inherit config;
                 hostPlatform = system;
               };
-            }
-
-            # make home-manager as a module of nixos
-            # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-            inputs.home-manager.nixosModules.home-manager
-            {
               home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${user} = import ./modules/hm/default.nix;
                 extraSpecialArgs = specialArgs;
+                useGlobalPkgs = true;
+                users.${user} = import ./modules/hm/default.nix;
+                useUserPackages = true;
               };
-              # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
             }
           ];
         };
       };
 
       homeConfigurations."${user}@latitude-nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { inherit config system; };
-        modules = [ ./modules/hm/default.nix ];
         extraSpecialArgs = specialArgs;
+        modules = [ ./modules/hm/default.nix ];
+        inherit pkgs;
       };
     };
 }
