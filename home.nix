@@ -56,6 +56,12 @@
       extended = false;
       share = true;
     };
+    sessionVariables = {
+      VISUAL = "code --wait";
+      EDITOR = "code --wait";
+      # Needed to make SSH not double echo key presses.
+      TERM = "xterm-256color";
+    };
   };
 
   programs.zsh.defaultKeymap = "emacs";
@@ -706,7 +712,6 @@
       };
 
       "org/virt-manager/virt-manager/details" = { show-toolbar = true; };
-
     };
   };
 
