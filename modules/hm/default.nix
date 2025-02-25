@@ -1,11 +1,10 @@
-{ lib, config, pkgs, ... }:
-
-{
-  imports = [ ./hm-dconf.nix ];
+{ lib, config, pkgs, user, ... }: {
+  imports = let inherit (builtins) filter attrNames readDir;
+  in map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
   home = {
-    username = "excigma";
-    homeDirectory = "/home/excigma";
+    username = user;
+    homeDirectory = "/home/${user}";
 
     # link the configuration file in current directory to the specified location in home directory
     file = {
