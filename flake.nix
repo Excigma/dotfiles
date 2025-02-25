@@ -68,7 +68,6 @@
               nixpkgs = {
                 inherit config;
                 hostPlatform = system;
-                overlays = [ inputs.nur.overlays.default ];
               };
             }
 
