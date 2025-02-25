@@ -48,7 +48,21 @@
               pkgs.lib.warn "excigma: no secrets found!" { })
 
             {
-              nix.settings.experimental-features = [ "nix-command" "flakes" ];
+              nix = {
+                registry.pkgs.flake = self;
+                optimise.automatic = true;
+                settings = {
+                  auto-optimise-store = true;
+                  experimental-features = [ "nix-command" "flakes" ];
+                  trusted-users = [ user ];
+                  nix-path = "nixpkgs=/etc/nix/inputs/nixpkgs";
+                };
+                gc = {
+                  automatic = true;
+                  options = "--delete-older-than 30d";
+                };
+              };
+
               nixpkgs = {
                 inherit config;
                 hostPlatform = system;
