@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ pkgs, lib, self, ... }: {
   dconf = with lib.hm.gvariant; {
     enable = true;
     settings = lib.mkMerge [
@@ -47,8 +47,8 @@
         "org/gnome/desktop/background" = {
           color-shading-type = "solid";
           picture-options = "zoom";
-          picture-uri = "file://${config.home.homeDirectory}/.local/share/backgrounds/SolidDesert-Light.png";
-          picture-uri-dark = "file://${config.home.homeDirectory}/.local/share/backgrounds/SolidDesert-Dark.png";
+          picture-uri = "file://${self}/.local/share/backgrounds/SolidDesert-Light.png";
+          picture-uri-dark = "file://${self}/.local/share/backgrounds/SolidDesert-Dark.png";
         };
         "org/gnome/desktop/calendar" = { show-weekdate = false; };
         "org/gnome/desktop/interface" = {
