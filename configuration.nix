@@ -188,6 +188,7 @@
     gh
     gimp
     gnirehtet
+    gnome-power-manager
     gnome-tweaks
     htop
     helvum
