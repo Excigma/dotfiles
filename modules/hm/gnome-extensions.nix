@@ -1,4 +1,4 @@
-{ pkgs, lib, self, ... }: {
+{ pkgs, lib, ... }: {
   # Install extensions
   home.packages = with pkgs.gnomeExtensions; [
     (pkgs.marble-shell-theme.override { colors = [ "blue" ]; })
