@@ -1,0 +1,26 @@
+{
+	"nix.enableLanguageServer": true,
+	"nix.serverPath": "nixd",
+	"nix.formatterPath": "nixfmt",
+	"nix.serverSettings": {
+		"nixd": {
+			"formatting": {
+				"command": [
+					"nixfmt",
+					"-w120"
+				]
+			},
+			"nixpkgs": {
+				"expr": "(builtins.getFlake \"${workspaceFolder}\").nixosConfigurations.latitude-nixos.pkgs"
+			},
+			"options": {
+				"nixos": {
+					"expr": "(builtins.getFlake \"${workspaceFolder}\").nixosConfigurations.latitude-nixos.options"
+				},
+				"home-manager": {
+					"expr": "(builtins.getFlake \"${workspaceFolder}\").homeConfigurations.\"excigma@latitude-nixos\".options"
+				}
+			}
+		}
+	}
+}
