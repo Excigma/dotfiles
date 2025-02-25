@@ -116,6 +116,7 @@
     middle-click-to-close-in-overview
     night-theme-switcher
     osd-volume-number
+    quick-settings-tweaker
     quick-settings-audio-panel
     quick-touchpad-toggle
     tailscale-qs
@@ -150,6 +151,7 @@
           night-theme-switcher.extensionUuid
           osd-volume-number.extensionUuid
           quick-settings-audio-panel.extensionUuid
+          quick-settings-tweaker.extensionUuid
           quick-touchpad-toggle.extensionUuid
           tailscale-qs.extensionUuid
           toggle-workspace-span.extensionUuid
