@@ -2,9 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, user, ... }:
-
-{
+{ config, pkgs, user, ... }: {
+  imports = let inherit (builtins) filter attrNames readDir;
+  in map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
   # Bootloader.
   boot.loader = {
@@ -79,7 +79,7 @@
 
   services.tailscale.enable = true;
   services.tailscale.openFirewall = true;
-  services.tailscale.extraSetFlags = [ "--advertise-exit-node" "--operator=${user}" ];
+  services.tailscale.extraSetFlags = [ "--advertise-exit-node" "--operator=excigma" ];
   services.tailscale.extraUpFlags = [ "--ssh" ];
 
   # Enable automatic rotation.
@@ -87,11 +87,11 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
-    groups.libvirtd.members = [ "${user}" ];
+    groups.libvirtd.members = [ user ];
     defaultUserShell = pkgs.zsh;
     users.${user} = {
       isNormalUser = true;
-      description = "${user}";
+      description = user;
       extraGroups = [ "networkmanager" "wheel" "input" "video" "libvirtd" ];
       # packages = with pkgs; [
       # ];
@@ -99,7 +99,7 @@
   };
 
   security.sudo.extraRules = [{
-    users = [ "${user}" ];
+    users = [ user ];
     commands = [{
       command = "ALL";
       options = [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea

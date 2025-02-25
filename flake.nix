@@ -20,6 +20,7 @@
       config.allowUnfree = true;
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit config system; };
+      specialArgs = { inherit self user; };
     in {
       formatter.${system} = pkgs.nixfmt-classic;
       # Exposes repl accessible with `nix develop`
@@ -38,12 +39,10 @@
       nixosConfigurations = rec {
         default = latitude-nixos;
         latitude-nixos = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit user; };
+          inherit system specialArgs;
 
           modules = [
-            ./hardware-configuration.nix
-            ./configuration.nix
+            ./modules/nixos
 
             (if builtins.pathExists ./secrets/default.nix then
               ./secrets
@@ -80,7 +79,8 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users."${user}" = import ./home.nix;
+                users.${user} = import ./modules/hm/default.nix;
+                extraSpecialArgs = specialArgs;
               };
               # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
             }
@@ -90,7 +90,8 @@
 
       homeConfigurations."${user}@latitude-nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { inherit config system; };
-        modules = [ ./home.nix ];
+        modules = [ ./modules/hm/default.nix ];
+        extraSpecialArgs = specialArgs;
       };
     };
 }
