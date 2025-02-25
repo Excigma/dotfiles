@@ -78,6 +78,7 @@
 
   services.tailscale.enable = true;
   services.tailscale.openFirewall = true;
+  services.tailscale.extraSetFlags = [ "--advertise-exit-node" "--operator=excigma" ];
   services.tailscale.extraUpFlags = [ "--ssh" ];
 
   # Enable automatic rotation.
@@ -212,7 +213,6 @@
     rsync
     scrcpy
     stress
-    tailscale
     thermald
     (tela-circle-icon-theme.override { colorVariants = [ "blue" ]; })
     tlrc
