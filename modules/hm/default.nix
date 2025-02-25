@@ -6,7 +6,7 @@
     username = user;
     homeDirectory = "/home/${user}";
 
-    # link the configuration file in current directory to the specified location in home directory
+    # Link the configuration file in current directory to the specified location in home directory
     file = {
       ".p10k.zsh".source = "${self}/.config/.p10k.zsh";
       "face.jpg".source = "${self}/.local/share/backgrounds/Profile.jpg";
@@ -60,7 +60,7 @@
     sessionVariables = {
       VISUAL = "code --wait";
       EDITOR = "code --wait";
-      # Needed to make SSH not double echo key presses.
+      # Needed to make SSH not double echo key presses
       TERM = "xterm-256color";
     };
   };
@@ -102,35 +102,6 @@
     enableZshIntegration = true;
     settings = { theme = "dark:dark-theme,light:light-theme"; };
   };
-
-  # Packages that should be installed to the user profile.
-  home.packages = with pkgs.gnomeExtensions; [
-    (pkgs.marble-shell-theme.override { colors = [ "blue" ]; })
-
-    appindicator
-    alphabetical-app-grid
-    app-icons-taskbar
-    battery-health-charging
-    bluetooth-battery-meter
-    caffeine
-    clipboard-indicator
-    dim-completed-calendar-events
-    do-not-disturb-while-screen-sharing-or-recording
-    native-window-placement
-    launch-new-instance
-    gnome-40-ui-improvements
-    just-perfection
-    middle-click-to-close-in-overview
-    night-theme-switcher
-    osd-volume-number
-    quick-settings-tweaker
-    quick-settings-audio-panel
-    quick-touchpad-toggle
-    tailscale-qs
-    toggle-workspace-span
-    user-themes
-    vitals
-  ];
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
