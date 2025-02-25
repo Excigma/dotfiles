@@ -14,8 +14,9 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
+      user = "excigma";
       config.allowUnfree = true;
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit config system; };
@@ -38,6 +39,8 @@
         default = latitude-nixos;
         latitude-nixos = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit user; };
+
           modules = [
             ./hardware-configuration.nix
             ./configuration.nix
@@ -45,7 +48,7 @@
             (if builtins.pathExists ./secrets/default.nix then
               ./secrets
             else
-              pkgs.lib.warn "excigma: no secrets found!" { })
+              pkgs.lib.warn "${user}: no secrets found!" { })
 
             {
               nix = {
@@ -77,7 +80,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.excigma = import ./home.nix;
+                users."${user}" = import ./home.nix;
               };
               # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
             }
@@ -85,7 +88,7 @@
         };
       };
 
-      homeConfigurations."excigma@latitude-nixos" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."${user}@latitude-nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { inherit config system; };
         modules = [ ./home.nix ];
       };
