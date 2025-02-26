@@ -1,4 +1,4 @@
-{ user, self, ... }: {
+{ user, self, lib, pkgs, ... }: {
   imports = let inherit (builtins) filter attrNames readDir;
   in map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
@@ -187,26 +187,16 @@
         where() { readlink -f "$(which "$@")"; }
 
         SGR () { for i in "$@"; do echo -ne "\e[$i"m; done; }
-        nix-find() { nix-locate --no-group --top-level -r "$@"; }
+        nix-find() { ${lib.getBin pkgs.nix-index}/bin/nix-locate --no-group --top-level -r "$@"; }
         command_not_found_handler() {(
           CMD="$1"; IFS=$'\n'
-          # Exit if inside a Distrobox container
-          if [ -n "$CONTAINER_ID" ]; then
-            echo "$(SGR 1 34)❭❭ $(SGR 0 1)$CMD$(SGR 0) not found (running inside Distrobox)." >&2
-            exit 127
-          fi
-
-          # Exit if not on NixOS
-          if ! grep -q '^ID=nixos$' /etc/os-release 2>/dev/null; then
-            echo "$(SGR 1 34)❭❭ $(SGR 0 1)$CMD$(SGR 0) not found (not running on NixOS)." >&2
-            exit 127
-          fi
-
           if [ "$NIX_MISSING" = "never" ]; then
             echo "$(SGR 1 34)❭❭ $(SGR 0 1)$CMD$(SGR 0) not found! You can use $(SGR 1)nix-find -wtx /$CMD$(SGR 0) to find it" >&2
             exit 127
           fi
-          PACKAGES=($(nix-locate --minimal --no-group --type x --type s --top-level --whole-name --at-root "/bin/$CMD"))
+          PACKAGES=($(${
+            lib.getBin pkgs.nix-index
+          }/bin/nix-locate --minimal --no-group --type x --type s --top-level --whole-name --at-root "/bin/$CMD"))
           case "''${#PACKAGES}" in
             0) echo "$(SGR 1 34)❭❭ $(SGR 0 1)$CMD$(SGR 0) not found! Are you sure you've typed the command correctly?" >&2 ;;
             1) [ "$NIX_MISSING" = "auto" ] &&
