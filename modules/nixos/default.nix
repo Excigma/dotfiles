@@ -77,6 +77,10 @@
         ovmf.packages = [ pkgs.OVMFFull.fd ];
       };
     };
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
     spiceUSBRedirection.enable = true;
   };
 
@@ -135,6 +139,7 @@
         arch-install-scripts
         eza
         fastfetch
+        distrobox
         gh
         htop
         scrcpy
