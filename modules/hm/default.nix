@@ -1,4 +1,4 @@
-{ lib, config, pkgs, user, self, ... }: {
+{ user, self, ... }: {
   imports = let inherit (builtins) filter attrNames readDir;
   in map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
@@ -6,7 +6,6 @@
     username = user;
     homeDirectory = "/home/${user}";
 
-    # Link the configuration file in current directory to the specified location in home directory
     file = {
       ".p10k.zsh".source = "${self}/.config/.p10k.zsh";
       "face.jpg".source = "${self}/.local/share/backgrounds/Profile.jpg";
@@ -15,103 +14,95 @@
         recursive = true;
       };
       ".config" = {
-        source = "${self}/.config"; 
+        source = "${self}/.config";
         recursive = true;
       };
     };
+
+    # It‘s perfectly fine and recommended to leave this value
+    # at the release version of the first install of this system.
+    stateVersion = "24.11";
   };
 
-  qt.enable = true;
-  qt.platformTheme.name = "gtk3";
-
-  programs.git = {
+  qt = {
     enable = true;
-    userName = "Excigma";
-    userEmail = "git@excigma.xyz";
+    platformTheme.name = "gtk3";
   };
 
-  programs.zsh = {
-    enable = true;
-    initExtraFirst = ''
-      # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-      # Initialization code that may require console input (password prompts, [y/n]
-      # confirmations, etc.) must go above this block; everything else may go below.
-      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-      fi
+  programs = {
+    ghostty = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = { theme = "dark:dark-theme,light:light-theme"; };
+    };
+    git = {
+      enable = true;
+      userName = "Excigma";
+      userEmail = "git@excigma.xyz";
+    };
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [ "--cmd cd" ];
+    };
+    zsh = {
+      enable = true;
+      defaultKeymap = "emacs";
+      history = {
+        size = 10000;
+        append = true;
+        ignoreAllDups = true;
+        extended = false;
+        share = true;
+      };
+      initExtraFirst = ''
+        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+         source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
+        # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      '';
+      initExtra = ''
+        zstyle ':autocomplete:history-search-backward:*' list-lines 1000
 
-      # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    '';
-    shellAliases = {
-      ".." = "cd ..";
-      "grep" = "grep --color=auto";
-      "diff" = "diff --color=auto";
-      "neofetch" = "fastfetch --load-config neofetch";
-      "ls" = "eza --all --git --icons";
-    };
-    history = {
-      size = 10000;
-      append = true;
-      ignoreAllDups = true;
-      extended = false;
-      share = true;
-    };
-    sessionVariables = {
-      VISUAL = "code --wait";
-      EDITOR = "code --wait";
-      # Needed to make SSH not double echo key presses
-      TERM = "xterm-256color";
+        ZLE_RPROMPT_INDENT=0
+        ZSH_AUTOSUGGEST_USE_ASYNC=true
+        ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
+
+        # Ctrl + Backspace/Delete to delete word
+        bindkey '^H' backward-kill-word
+        bindkey "^[[3;5~" kill-word
+
+        # Delete to delete
+        bindkey "^[[3~" delete-char
+
+        # Ctrl + ArrowLeft / ArrowRight to move cursor
+        bindkey "^[[1;5C" forward-word
+        bindkey "^[[1;5D" backward-word
+
+        # Home/End keys
+        bindkey '^[[H' beginning-of-line
+        bindkey '^[[F' end-of-line
+
+        zstyle ':autocomplete:*' min-input 3
+        zstyle ':autocomplete:*' delay 0.1
+      '';
+      sessionVariables = {
+        VISUAL = "code --wait";
+        EDITOR = "code --wait";
+        # Needed to make SSH not double echo key presses
+        TERM = "xterm-256color";
+      };
+      shellAliases = {
+        ".." = "cd ..";
+        "grep" = "grep --color=auto";
+        "diff" = "diff --color=auto";
+        "neofetch" = "fastfetch --load-config neofetch";
+        "ls" = "eza --all --git --icons";
+      };
     };
   };
-
-  programs.zsh.defaultKeymap = "emacs";
-  programs.zsh.initExtra = ''
-    zstyle ':autocomplete:history-search-backward:*' list-lines 1000
-
-    ZLE_RPROMPT_INDENT=0
-    ZSH_AUTOSUGGEST_USE_ASYNC=true
-    ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
-
-    # Ctrl + Backspace/Delete to delete word
-    bindkey '^H' backward-kill-word
-    bindkey "^[[3;5~" kill-word
-
-    # Delete to delete
-    bindkey "^[[3~" delete-char
-
-    # Ctrl + ArrowLeft / ArrowRight to move cursor
-    bindkey "^[[1;5C" forward-word
-    bindkey "^[[1;5D" backward-word
-
-    # Home/End keys
-    bindkey '^[[H' beginning-of-line
-    bindkey '^[[F' end-of-line
-
-    zstyle ':autocomplete:*' min-input 3
-    zstyle ':autocomplete:*' delay 0.1
-  '';
-
-  programs.zoxide.enable = true;
-  programs.zoxide.enableZshIntegration = true;
-  programs.zoxide.options = [ "--cmd cd" ];
-
-  programs.ghostty = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = { theme = "dark:dark-theme,light:light-theme"; };
-  };
-
-  # This value determines the home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update home Manager without changing this value. See
-  # the home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "24.11";
 
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -1,4 +1,4 @@
-{ pkgs, lib, self, ... }: {
+{ lib, self, ... }: {
   dconf = with lib.hm.gvariant; {
     enable = true;
     settings = lib.mkMerge [
