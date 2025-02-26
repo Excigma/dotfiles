@@ -170,6 +170,13 @@
           fi
         }
 
+        sudo() {
+          if [[ "$1" == "-s" && -z "$2" ]]; then
+              echo ""
+          fi
+          command sudo "$@"
+        }
+
         nix-run() {
           NIXPKGS_ALLOW_UNFREE=1 nix shell --impure "nixpkgs#$1" \
             --command sh -c "which ''${1#*.} &>/dev/null && exec ''${1#*.} ''${*:2}; exec ''${*:2}"
