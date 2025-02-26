@@ -1,7 +1,7 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 SCRIPT_DIR="$(cd -- "$(dirname "${BASH_SOURCE[0]:-${(%):-%N}}")" && pwd)"
 SRC="${SRC:-$SCRIPT_DIR}"
 SUDO="${SUDO:-sudo}"
 
-"$SUDO" nixos-rebuild "$@" --flake "git+file://$SRC?submodules=1" --log-format internal-json |& nom --json
+"$SUDO" nixos-rebuild "$@" --flake "git+file://$SRC?submodules=1#$HOST" --log-format internal-json |& nom --json
