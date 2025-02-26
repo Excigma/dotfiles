@@ -139,6 +139,7 @@
         htop
         scrcpy
         nano
+        nix-output-monitor
         rsync
         stress
         mosh

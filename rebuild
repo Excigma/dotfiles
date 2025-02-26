@@ -4,4 +4,4 @@ SCRIPT_DIR="$(cd -- "$(dirname "${BASH_SOURCE[0]:-${(%):-%N}}")" && pwd)"
 SRC="${SRC:-$SCRIPT_DIR}"
 SUDO="${SUDO:-sudo}"
 
-"$SUDO" nixos-rebuild "$@" --flake "git+file://$SRC?submodules=1"
+"$SUDO" nixos-rebuild "$@" --flake "git+file://$SRC?submodules=1" --log-format internal-json |& nom --json
