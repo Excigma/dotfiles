@@ -36,6 +36,8 @@
       settings = {
         theme = "dark:dark-theme,light:light-theme";
         term = "xterm-256color";
+        confirm-close-surface = false;
+        shell-integration-features = true;
         keybind = [ "ctrl+t=new_tab" "ctrl+w=close_tab" ];
       };
       themes = {
