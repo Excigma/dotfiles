@@ -148,9 +148,10 @@
         nano
         rsync
         stress
-        miniserve
         mosh
         tlrc
+        intel-gpu-tools
+        intel-undervolt
       ]
 
       # text & notes
@@ -194,7 +195,9 @@
       [
         brave
         cloudflared
+        gnirehtet
         localsend
+        miniserve
         openfortivpn
         putty
         xpra
@@ -213,26 +216,30 @@
         gimp
       ]
 
-      # other
+      # printing
       [
-        adw-gtk3
-        (tela-circle-icon-theme.override { colorVariants = [ "blue" ]; })
-        bitwarden
-        eyedropper
-
         foomatic-db-ppds-withNonfreeDb
         foomatic-db-engine
         gutenprint
-        gnirehtet
+      ]
 
+      # theming
+      [
+        adw-gtk3
+        (tela-circle-icon-theme.override { colorVariants = [ "blue" ]; })
+      ]
+
+      # other
+      [
+        bitwarden
+        eyedropper
         gnome-power-manager
         gnome-tweaks
-        helvum
-        intel-gpu-tools
-        intel-undervolt
         ghostty
-        libsmbios
+        helvum
         resources
+
+        libsmbios
         thermald
         smartmontools
         ventoy
