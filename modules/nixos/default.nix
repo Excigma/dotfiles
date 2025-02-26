@@ -190,6 +190,7 @@
         brave
         cloudflared
         gnirehtet
+        iriunwebcam
         localsend
         miniserve
         openfortivpn

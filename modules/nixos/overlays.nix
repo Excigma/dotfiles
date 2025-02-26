@@ -6,7 +6,7 @@
     (final: prev: {
 
       go-10mb-video = pkgs.buildGoModule {
-        pname = "10mb-video";
+        pname = "10mb.video";
         version = "14e8aaac56189d48418d157171bae10f2ea9defd";
 
         src = pkgs.fetchFromGitHub {
@@ -26,11 +26,29 @@
           license = licenses.mit;
           maintainers = [ ];
           platforms = platforms.all;
-          mainProgram = "10mb.video";
+          mainProgram = pname;
         };
       };
 
+      iriunwebcam = pkgs.stdenvNoCC.mkDerivation rec {
+        pname = "iriunwebcam";
+        version = "2.8.4";
+        meta.mainProgram = pname;
+        nativeBuildInputs = with pkgs; [ autoPatchelfHook dpkg qt5.wrapQtAppsHook ];
+        buildInputs = with pkgs; [ alsa-lib avahi libdrm libgcc libusbmuxd libsForQt5.qt5.qtbase ];
+        unpackPhase = "dpkg-deb -x $src .";
+        installPhase = ''
+          mkdir -p $out
+          cp -r etc $out/etc
+          cp -r usr/share $out/share
+          cp -r usr/local/bin $out/bin
+          chmod +x $out/bin/iriunwebcam
+        '';
+        src = pkgs.fetchurl {
+          url = "http://iriun.gitlab.io/iriunwebcam-${version}.deb";
+          hash = "sha256-4Et+X10fRbyyQcPjzQcXTR4WlXf0rWQlvdGwQip1T1o=";
+        };
+      };
     })
   ];
-
 }
