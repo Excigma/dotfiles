@@ -128,6 +128,7 @@
     shellAliases = { ls = null; };
     enableGlobalCompInit = true;
     syntaxHighlighting.enable = true;
+    promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
   };
 
   environment = {

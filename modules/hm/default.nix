@@ -152,7 +152,6 @@
         zstyle ':autocomplete:*' min-input 3
         zstyle ':autocomplete:*' delay 0.1
 
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
 
         function ls() {
           if command -v eza >/dev/null 2>&1; then
