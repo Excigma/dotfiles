@@ -195,8 +195,6 @@
       sessionVariables = {
         VISUAL = "code --wait";
         EDITOR = "code --wait";
-        # Needed to make SSH not double echo key presses
-        TERM = "xterm-256color";
       };
       shellAliases = {
         ".." = "cd ..";
