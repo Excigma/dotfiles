@@ -36,10 +36,7 @@
       settings = {
         theme = "dark:dark-theme,light:light-theme";
         term = "xterm-256color";
-        keybind = ''
-          ctrl+t=new_tab
-          ctrl+w=close_tab
-        '';
+        keybind = [ "ctrl+t=new_tab" "ctrl+w=close_tab" ];
       };
       themes = {
         light-theme = {
