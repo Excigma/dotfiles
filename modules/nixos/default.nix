@@ -146,6 +146,8 @@
         tlrc
         intel-gpu-tools
         intel-undervolt
+        usbutils
+        pciutils
       ]
 
       # text & notes
