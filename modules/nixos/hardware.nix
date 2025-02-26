@@ -7,7 +7,7 @@
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" "v4l2loopback" ];
+    kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop" ];
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
   };
 
