@@ -125,137 +125,152 @@
       enable = true;
       async = true;
     };
+    shellAliases = { ls = null; };
     enableGlobalCompInit = true;
-    enableLsColors = false;
     syntaxHighlighting.enable = true;
     promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
   };
 
-  environment.systemPackages = with pkgs;
-    lib.flatten [
-      # cli
-      [
-        wget
-        arch-install-scripts
-        eza
-        fastfetch
-        distrobox
-        gh
-        htop
-        scrcpy
-        nano
-        nix-output-monitor
-        rsync
-        stress
-        mosh
-        tlrc
-        intel-gpu-tools
-        intel-undervolt
-        usbutils
-        pciutils
-      ]
+  environment = {
+    etc."distrobox/distrobox.conf" = {
+      enable = true;
+      text = ''
+        PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$PATH"
+        container_additional_volumes="
+          /etc/nix:/etc/nix:ro
+          /etc/static:/etc/static:ro
+          /run/current-system:/run/current-system:ro
+          /etc/profiles/per-user:/etc/profiles/per-user:ro
+          /nix:/nix
+        "
+      '';
+    };
+    systemPackages = with pkgs;
+      lib.flatten [
+        # cli
+        [
+          wget
+          arch-install-scripts
+          eza
+          fastfetch
+          distrobox
+          gh
+          htop
+          scrcpy
+          nano
+          nix-output-monitor
+          rsync
+          stress
+          mosh
+          tlrc
+          intel-gpu-tools
+          intel-undervolt
+          usbutils
+          pciutils
+        ]
 
-      # text & notes
-      [
-        xournalpp
-        rnote
-        libreoffice-fresh
-      ]
+        # text & notes
+        [
+          xournalpp
+          rnote
+          libreoffice-fresh
+        ]
 
-      # qemu
-      [
-        virt-manager
-        virt-viewer
-        spice
-        spice-gtk
-        spice-protocol
-      ]
+        # qemu
+        [
+          virt-manager
+          virt-viewer
+          spice
+          spice-gtk
+          spice-protocol
+        ]
 
-      # zsh
-      [
         # zsh
-        # zsh-autosuggestions
-        # zsh-autocomplete
-        zsh-completions
-        zsh-history
-        # zsh-powerlevel10k
-        # zsh-syntax-highlighting
-        zoxide
-      ]
+        [
+          # zsh
+          # zsh-autosuggestions
+          # zsh-autocomplete
+          zsh-completions
+          zsh-history
+          # zsh-powerlevel10k
+          # zsh-syntax-highlighting
+          zoxide
+        ]
 
-      # dev
-      [
-        rustup
-        lmstudio
-        nixd
-        nixfmt-classic
-        vscode
-      ]
+        # dev
+        [
+          rustup
+          lmstudio
+          nixd
+          nixfmt-classic
+          vscode
+        ]
 
-      # network
-      [
-        brave
-        cloudflared
-        gnirehtet
-        iriunwebcam
-        localsend
-        miniserve
-        openfortivpn
-        putty
-        xpra
-      ]
+        # network
+        [
+          brave
+          cloudflared
+          gnirehtet
+          iriunwebcam
+          localsend
+          miniserve
+          openfortivpn
+          putty
+          xpra
+        ]
 
-      # social
-      [
-        discord
-        slack
-        signal-desktop
-      ]
+        # social
+        [
+          discord
+          slack
+          signal-desktop
+        ]
 
-      # media
-      [
-        blender
-        playerctl
-        vlc
-        yt-dlp
-        go-10mb-video
-        ffmpeg
-        fdk-aac-encoder
-        flameshot
-        gimp
-      ]
+        # media
+        [
+          blender
+          playerctl
+          vlc
+          yt-dlp
+          go-10mb-video
+          ffmpeg
+          fdk-aac-encoder
+          flameshot
+          gimp
+        ]
 
-      # printing
-      [
-        foomatic-db-ppds-withNonfreeDb
-        foomatic-db-engine
-        gutenprint
-      ]
+        # printing
+        [
+          foomatic-db-ppds-withNonfreeDb
+          foomatic-db-engine
+          gutenprint
+        ]
 
-      # theming
-      [
-        adw-gtk3
-        (tela-circle-icon-theme.override { colorVariants = [ "blue" ]; })
-      ]
+        # theming
+        [
+          adw-gtk3
+          (tela-circle-icon-theme.override { colorVariants = [ "blue" ]; })
+        ]
 
-      # other
-      [
-        bitwarden
-        eyedropper
-        gnome-power-manager
-        gnome-tweaks
-        ghostty
-        helvum
-        resources
+        # other
+        [
+          bitwarden
+          eyedropper
+          gnome-power-manager
+          gnome-tweaks
+          ghostty
+          helvum
+          resources
 
-        libsmbios
-        thermald
-        smartmontools
-        ventoy
+          libsmbios
+          thermald
+          smartmontools
+          ventoy
 
-        prismlauncher
-      ]
-    ];
+          prismlauncher
+        ]
+      ];
+  };
 
   # Some programs need SUID wrappers, which means they won't work without the options
   # programs.mtr.enable = true;
