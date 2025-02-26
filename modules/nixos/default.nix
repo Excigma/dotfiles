@@ -66,13 +66,6 @@
 
   security = {
     rtkit.enable = true; # gui privilege escalation
-    sudo.extraRules = [{
-      users = [ user ];
-      commands = [{
-        command = "ALL";
-        options = [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
-      }];
-    }];
   };
 
   virtualisation = {
@@ -201,6 +194,13 @@
         openfortivpn
         putty
         xpra
+      ]
+
+      # social
+      [
+        discord
+        slack
+        signal-desktop
       ]
 
       # media
