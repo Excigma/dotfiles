@@ -106,7 +106,7 @@
     zoxide = {
       enable = true;
       enableZshIntegration = true;
-      options = [ "--cmd cd" ];
+      options = [ "--no-cmd" ];
     };
 
     zsh = {
@@ -152,6 +152,23 @@
         zstyle ':autocomplete:*' min-input 3
         zstyle ':autocomplete:*' delay 0.1
 
+
+        function ls() {
+          if command -v eza >/dev/null 2>&1; then
+              eza --all --git --icons "$@"
+          else
+              command ls --color=auto "$@"
+          fi
+        }
+
+        function cd() {
+          if command -v zoxide >/dev/null 2>&1; then
+              __zoxide_z "$@"
+          else
+              command cd "$@"
+          fi
+        }
+
         nix-run() {
           NIXPKGS_ALLOW_UNFREE=1 nix shell --impure "nixpkgs#$1" \
             --command sh -c "which ''${1#*.} &>/dev/null && exec ''${1#*.} ''${*:2}; exec ''${*:2}"
@@ -173,6 +190,18 @@
         nix-find() { nix-locate --no-group --top-level -r "$@"; }
         command_not_found_handler() {(
           CMD="$1"; IFS=$'\n'
+          # Exit if inside a Distrobox container
+          if [ -n "$CONTAINER_ID" ]; then
+            echo "$(SGR 1 34)❭❭ $(SGR 0 1)$CMD$(SGR 0) not found (running inside Distrobox)." >&2
+            exit 127
+          fi
+
+          # Exit if not on NixOS
+          if ! grep -q '^ID=nixos$' /etc/os-release 2>/dev/null; then
+            echo "$(SGR 1 34)❭❭ $(SGR 0 1)$CMD$(SGR 0) not found (not running on NixOS)." >&2
+            exit 127
+          fi
+
           if [ "$NIX_MISSING" = "never" ]; then
             echo "$(SGR 1 34)❭❭ $(SGR 0 1)$CMD$(SGR 0) not found! You can use $(SGR 1)nix-find -wtx /$CMD$(SGR 0) to find it" >&2
             exit 127
@@ -201,7 +230,6 @@
         "grep" = "grep --color=auto";
         "diff" = "diff --color=auto";
         "neofetch" = "fastfetch --load-config neofetch";
-        "ls" = "eza --all --git --icons";
       };
     };
   };
