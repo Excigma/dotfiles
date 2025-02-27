@@ -18,6 +18,7 @@
         "extensions.activeThemeID" = "default-theme@mozilla.org";
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
+        "sidebar.verticalTabs" = true;
       };
 
       search = {
