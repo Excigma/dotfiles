@@ -24,6 +24,7 @@ in {
   };
 
   services = {
+    fstrim.enable = true;
     printing.enable = true; # CUPS
     fwupd.enable = true; # firmware updates
     thermald.enable = true;
