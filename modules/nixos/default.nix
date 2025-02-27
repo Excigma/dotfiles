@@ -26,6 +26,7 @@ in {
   services = {
     printing.enable = true; # CUPS
     fwupd.enable = true; # firmware updates
+    thermald.enable = true;
     # openssh.enable = true;
     pipewire = {
       enable = true;
@@ -272,7 +273,6 @@ in {
           resources
 
           libsmbios
-          thermald
           smartmontools
           ventoy
 
