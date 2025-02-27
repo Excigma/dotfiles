@@ -1,4 +1,4 @@
-{ self, pkgs, ... }: {
+{ pkgs, ... }: {
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-devedition;
@@ -34,7 +34,7 @@
                 }
                 {
                   name = "release";
-                  value = "release-23.11";
+                  value = "release-24.11";
                 }
               ];
             }];

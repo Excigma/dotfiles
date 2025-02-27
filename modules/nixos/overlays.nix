@@ -4,10 +4,7 @@
     nur.overlays.default
 
     (final: prev: {
-      unstable = import nixpkgs-unstable {
-        config = final.config;
-        system = final.system;
-      };
+      unstable = import nixpkgs-unstable { inherit (prev) config system; };
 
       go-10mb-video = pkgs.buildGoModule {
         pname = "10mb.video";
