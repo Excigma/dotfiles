@@ -47,6 +47,7 @@
         variant = "";
       };
     };
+    gnome = { gnome-browser-connector.enable = true; };
   };
 
   # Enable automatic rotation.
@@ -106,7 +107,6 @@
 
   programs = {
     dconf.enable = true;
-    firefox.enable = true;
     nix-ld.enable = true;
     steam = {
       enable = true;
@@ -212,7 +212,7 @@
 
         # network
         [
-          unstable.brave
+          chromium
           cloudflared
           gnirehtet
           iriunwebcam
