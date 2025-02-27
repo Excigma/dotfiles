@@ -1,0 +1,9 @@
+[Added Associations]
+
+[Default Applications]
+text/html=firefox-devedition.desktop
+
+[Removed Associations]
+application/octet-stream=firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop
+x-scheme-handler/http=firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop
+x-scheme-handler/https=firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop

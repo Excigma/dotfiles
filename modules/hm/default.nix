@@ -23,19 +23,8 @@
     stateVersion = "24.11";
   };
 
-  xdg = {
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "text/html" = "firefox-devedition.desktop";
-      };
-      associations.removed = {
-        "application/octet-stream" = "firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop";
-        "x-scheme-handler/http" = "firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop";
-        "x-scheme-handler/https" = "firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop";
-      };
-    };
-  };
+  # GNOME will overwrite the symlink and break things
+  xdg.mimeApps.enable = false;
 
   qt = {
     enable = true;
