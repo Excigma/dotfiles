@@ -164,6 +164,7 @@
         "org/gnome/settings-daemon/plugins/media-keys" = {
           control-center = [ "<Super>i" ];
           custom-keybindings = [
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"
@@ -185,7 +186,12 @@
           volume-down = [ "AudioLowerVolume" ];
           volume-step = 2;
           volume-up = [ "AudioRaiseVolume" ];
-          www = [ "<Super>b" ];
+          www = [ ];
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          binding = "<Super>b";
+          command = "firefox-devedition";
+          name = "Open Browser";
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
           binding = "<Super>Return";
