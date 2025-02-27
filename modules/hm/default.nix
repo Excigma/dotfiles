@@ -23,14 +23,24 @@
     stateVersion = "24.11";
   };
 
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = "firefox-devedition.desktop";
-      "x-scheme-handler/ftp" = "firefox-devedition.desktop";
-      "x-scheme-handler/http" = "firefox-devedition.desktop";
-      "x-scheme-handler/https" = "firefox-devedition.desktop";
-      "x-scheme-handler/about" = "firefox-devedition.desktop";
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "firefox-devedition.desktop";
+        "x-scheme-handler/ftp" = "firefox-devedition.desktop";
+        "x-scheme-handler/http" = "firefox-devedition.desktop";
+        "x-scheme-handler/https" = "firefox-devedition.desktop";
+        "x-scheme-handler/about" = "firefox-devedition.desktop";
+      };
+      associations.removed = {
+        "application/octet-stream" =
+          [ "firefox-devedition.desktop" "chromium-browser.desktop" "org.gnome.Epiphany.desktop" ];
+        "x-scheme-handler/http" =
+          [ "firefox-devedition.desktop" "chromium-browser.desktop" "org.gnome.Epiphany.desktop" ];
+        "x-scheme-handler/https" =
+          [ "firefox-devedition.desktop" "chromium-browser.desktop" "org.gnome.Epiphany.desktop" ];
+      };
     };
   };
 
