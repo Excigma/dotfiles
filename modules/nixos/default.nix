@@ -1,6 +1,9 @@
-{ self, pkgs, user, ... }: {
-  imports = let inherit (builtins) filter attrNames readDir;
-  in map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
+{ self, pkgs, lib, user, ... }:
+let
+  inherit (builtins) filter attrNames readDir listToAttrs;
+  inherit (lib) flatten;
+in {
+  imports = map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
   boot.loader = {
     timeout = 0;
@@ -141,20 +144,19 @@
   };
 
   environment = {
-    etc."distrobox/distrobox.conf" = {
-      enable = true;
-      source = "${self}/etc/distrobox/distrobox.conf";
-    };
-    etc."powerlevel10k/.p10k.zsh" = {
-      enable = true;
-      source = "${self}/etc/powerlevel10k/.p10k.zsh";
-    };
-    etc."xdg/mimeapps.list" = {
-      enable = true;
-      source = "${self}/etc/xdg/mimeapps.list";
-    };
+    etc = listToAttrs (map (name: {
+      inherit name;
+      value = {
+        enable = true;
+        source = "${self}/etc/${name}";
+      };
+    }) [ # etc imports
+      "distrobox/distrobox.conf"
+      "powerlevel10k/.p10k.zsh"
+      "xdg/mimeapps.list"
+    ]);
     systemPackages = with pkgs;
-      lib.flatten [
+      flatten [
         # cli
         [
           wget
@@ -166,7 +168,6 @@
           htop
           scrcpy
           nano
-          nix-output-monitor
           rsync
           stress
           mosh
@@ -195,13 +196,8 @@
 
         # zsh
         [
-          # zsh
-          # zsh-autosuggestions
-          # zsh-autocomplete
           zsh-completions
           zsh-history
-          # zsh-powerlevel10k
-          # zsh-syntax-highlighting
           zoxide
         ]
 
@@ -210,6 +206,7 @@
           rustup
           lmstudio
           nixd
+          nix-output-monitor
           nixfmt-classic
           vscode
         ]
