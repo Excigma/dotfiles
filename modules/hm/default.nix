@@ -23,6 +23,17 @@
     stateVersion = "24.11";
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "firefox-devedition.desktop";
+      "x-scheme-handler/ftp" = "firefox-devedition.desktop";
+      "x-scheme-handler/http" = "firefox-devedition.desktop";
+      "x-scheme-handler/https" = "firefox-devedition.desktop";
+      "x-scheme-handler/about" = "firefox-devedition.desktop";
+    };
+  };
+
   qt = {
     enable = true;
     platformTheme.name = "gtk3";
@@ -216,8 +227,10 @@
         )}
       '';
       sessionVariables = {
-        VISUAL = "code --wait";
-        EDITOR = "code --wait";
+        VISUAL = "${lib.getExe pkgs.vscode} --wait";
+        EDITOR = "${lib.getExe pkgs.vscode} --wait";
+        BROWSER = "${lib.getExe pkgs.firefox-devedition}";
+        MOZ_USE_XINPUT2 = "1";
       };
       shellAliases = {
         ".." = "cd ..";
