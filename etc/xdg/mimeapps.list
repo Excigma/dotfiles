@@ -1,7 +1,10 @@
 [Added Associations]
+text/html=firefox-devedition.desktop;
 
 [Default Applications]
 text/html=firefox-devedition.desktop
+x-scheme-handler/about=firefox-devedition.desktop
+x-scheme-handler/unknown=firefox-devedition.desktop
 
 [Removed Associations]
 application/octet-stream=firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop
