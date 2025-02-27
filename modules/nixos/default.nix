@@ -159,6 +159,7 @@ in {
       flatten [
         # cli
         [
+          android-tools
           wget
           arch-install-scripts
           eza
