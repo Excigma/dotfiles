@@ -212,7 +212,7 @@
 
         # network
         [
-          brave
+          unstable.brave
           cloudflared
           gnirehtet
           iriunwebcam
