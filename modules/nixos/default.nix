@@ -92,6 +92,7 @@ in {
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
+      intel-ocl
       intel-compute-runtime
       intel-media-driver # opengl, vulkan, vaapi
       vpl-gpu-rt
