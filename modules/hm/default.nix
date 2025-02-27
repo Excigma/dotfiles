@@ -7,7 +7,6 @@
     homeDirectory = "/home/${user}";
 
     file = {
-      ".p10k.zsh".source = "${self}/.config/.p10k.zsh";
       "face.jpg".source = "${self}/.local/share/backgrounds/Profile.jpg";
       ".local" = {
         source = "${self}/.local";
@@ -120,11 +119,10 @@
         share = true;
       };
       initExtraFirst = ''
-        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-         source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-        # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+        # To customize prompt, run `p10k configure` or edit /etc/powerlevel10k/.p10k.zsh.
+        [[ ! -f /etc/powerlevel10k/.p10k.zsh ]] || source /etc/powerlevel10k/.p10k.zsh
+
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       '';
       initExtra = ''
         zstyle ':autocomplete:history-search-backward:*' list-lines 1000
@@ -151,7 +149,6 @@
 
         zstyle ':autocomplete:*' min-input 3
         zstyle ':autocomplete:*' delay 0.1
-
 
         function ls() {
           if command -v eza >/dev/null 2>&1; then

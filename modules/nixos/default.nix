@@ -1,4 +1,4 @@
-{ pkgs, user, ... }: {
+{ self, pkgs, user, ... }: {
   imports = let inherit (builtins) filter attrNames readDir;
   in map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
@@ -128,7 +128,16 @@
     shellAliases = { ls = null; };
     enableGlobalCompInit = true;
     syntaxHighlighting.enable = true;
-    promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    shellInit = ''
+      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+       source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+      fi'';
+    promptInit = ''
+      # To customize prompt, run `p10k configure` or edit /etc/powerlevel10k/.p10k.zsh.
+      [[ ! -f /etc/powerlevel10k/.p10k.zsh ]] || source /etc/powerlevel10k/.p10k.zsh
+
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+    '';
   };
 
   environment = {
@@ -137,6 +146,7 @@
       text = ''
         PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$PATH"
         container_additional_volumes="
+          /etc/powerlevel10k:/etc/powerlevel10k:ro
           /etc/nix:/etc/nix:ro
           /etc/static:/etc/static:ro
           /run/current-system:/run/current-system:ro
@@ -144,6 +154,10 @@
           /nix:/nix
         "
       '';
+    };
+    etc."powerlevel10k/.p10k.zsh" = {
+      enable = true;
+      source = "${self}/etc/powerlevel10k/.p10k.zsh";
     };
     systemPackages = with pkgs;
       lib.flatten [
