@@ -205,6 +205,7 @@ in {
 
         # dev
         [
+          arduino-ide
           rustup
           lmstudio
           nixd
