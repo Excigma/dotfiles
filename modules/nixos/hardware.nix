@@ -9,6 +9,10 @@
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop" ];
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    extraModprobeConfig = ''
+      options v4l2loopback exclusive_caps=1 devices=1 card_label="Iriun Webcam,Iriun Webcam #2,Iriun Webcam #3,Iriun Webcam #4"
+      options snd-aloop index=0
+    '';
   };
 
   fileSystems = {
