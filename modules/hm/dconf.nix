@@ -167,10 +167,10 @@
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/"
           ];
           help = [ ];
           home = [ "<Super>e" ];
@@ -203,22 +203,22 @@
           command = ''script --command "flameshot gui" /dev/null'';
           name = "Flameshot";
         };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
           binding = "<Super>n";
           command = "rnote";
           name = "Open RNote";
         };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
           binding = "<Super>c";
           command = "gtk-launch code.desktop";
           name = "VSCode";
         };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6" = {
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
           binding = "<Shift><Control>Escape";
           command = "resources";
           name = "Task Manager";
         };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7" = {
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6" = {
           binding = "AudioMute";
           command = "playerctl play-pause";
           name = "Play/pause";
