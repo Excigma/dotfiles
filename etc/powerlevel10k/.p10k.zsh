@@ -804,6 +804,25 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_NIX_SHELL_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
+  prompt_nix_packages='$(
+    DIRS=(${(s/:/)PATH}) PKGS=()
+    for i in "${DIRS[@]}"; do
+      [[ $i =~ /nix/store ]] ||
+        if [ -n "$PKGS" ]; then break; else continue; fi
+      PKG=${${i:44:-4}%-[[:digit:]]*}
+      [[ $PKGS =~ $PKG ]] || PKGS+=$PKG
+    done 2> /dev/null
+    [ -n "$PKGS" ] && echo "${(j: :)PKGS}"
+  )'
+
+  function prompt_nix_shell() {
+    _p9k_prompt_segment $0 4 $_p9k_color1 NIX_SHELL_ICON 0 '' "${(e)prompt_nix_packages}"
+  }
+
+  function instant_prompt_nix_shell() {
+    _p9k_prompt_segment prompt_nix_shell 4 $_p9k_color1 NIX_SHELL_ICON 1 "$_p9k_nix_shell_cond" "$prompt_nix_packages"
+  }
+
   ##################[ chezmoi_shell: chezmoi shell (https://www.chezmoi.io/) ]##################
   # chezmoi shell color.
   typeset -g POWERLEVEL9K_CHEZMOI_SHELL_FOREGROUND=0
