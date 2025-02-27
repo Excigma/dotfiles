@@ -19,6 +19,7 @@
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
         "sidebar.verticalTabs" = true;
+        "extensions.pocket.enabled" = false;
       };
 
       search = {
