@@ -33,7 +33,6 @@ in {
   };
 
   programs = {
-    nix-index.enable = true;
     ghostty = {
       enable = true;
       enableZshIntegration = true;

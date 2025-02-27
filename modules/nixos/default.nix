@@ -109,6 +109,7 @@ in {
   };
 
   programs = {
+    command-not-found.enable = false;
     dconf.enable = true;
     nix-ld.enable = true;
     steam = {
@@ -208,6 +209,7 @@ in {
           lmstudio
           nixd
           nix-output-monitor
+          nix-index
           nixfmt-classic
           vscode
         ]
