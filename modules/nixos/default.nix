@@ -149,6 +149,10 @@
       enable = true;
       source = "${self}/etc/powerlevel10k/.p10k.zsh";
     };
+    etc."xdg/mimeapps.list" = {
+      enable = true;
+      source = "${self}/etc/xdg/mimeapps.list";
+    };
     systemPackages = with pkgs;
       lib.flatten [
         # cli
