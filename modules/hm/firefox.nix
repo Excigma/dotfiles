@@ -19,6 +19,7 @@
         "browser.urlbar.suggest.history" = false;
         "browser.urlbar.suggest.recentsearches" = false;
         "browser.urlbar.suggest.trending" = false;
+        "browser.shell.checkDefaultBrowser" = false;
         "app.shield.optoutstudies.enabled" = false;
         "app.normandy.enabled" = false;
         "signon.autofillForms" = false;
