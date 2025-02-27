@@ -143,17 +143,7 @@
   environment = {
     etc."distrobox/distrobox.conf" = {
       enable = true;
-      text = ''
-        PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$PATH"
-        container_additional_volumes="
-          /etc/powerlevel10k:/etc/powerlevel10k:ro
-          /etc/nix:/etc/nix:ro
-          /etc/static:/etc/static:ro
-          /run/current-system:/run/current-system:ro
-          /etc/profiles/per-user:/etc/profiles/per-user:ro
-          /nix:/nix
-        "
-      '';
+      source = "${self}/etc/distrobox/distrobox.conf";
     };
     etc."powerlevel10k/.p10k.zsh" = {
       enable = true;
