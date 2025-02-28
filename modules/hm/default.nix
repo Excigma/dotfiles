@@ -1,4 +1,4 @@
-{ user, self, ... }:
+{ user, self, lib, ... }:
 let inherit (builtins) filter attrNames readDir;
 in {
   imports = map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
@@ -6,6 +6,11 @@ in {
   home = {
     username = user;
     homeDirectory = "/home/${user}";
+
+    activation.symlinkScreencasts = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p /tmp/Screencasts
+      ln -sf /tmp/Screencasts /home/${user}/Videos/Screencasts
+    '';
 
     file = {
       "face.jpg".source = "${self}/.local/share/backgrounds/Profile.jpg";
