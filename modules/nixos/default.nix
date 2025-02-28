@@ -285,7 +285,6 @@ in {
 
         # other
         [
-          bitwarden
           eyedropper
           gnome-power-manager
           gnome-tweaks
