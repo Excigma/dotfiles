@@ -1,5 +1,4 @@
 { pkgs, self, ... }: {
-
   nixpkgs.overlays = with self.inputs; [
     nur.overlays.default
 
@@ -40,9 +39,14 @@
         unpackPhase = "dpkg-deb -x $src .";
         installPhase = ''
           mkdir -p $out
+
           cp -r etc $out/etc
-          cp -r usr/share $out/share
           cp -r usr/local/bin $out/bin
+
+          mkdir -p $out/share
+          cp -r usr/share/* $out/share
+
+          sed -i "s|Exec=.*|Exec=iriunwebcam|g" $out/share/applications/iriunwebcam.desktop
           chmod +x $out/bin/iriunwebcam
         '';
         src = pkgs.fetchurl {
