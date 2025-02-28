@@ -12,6 +12,11 @@ in {
       ln -sf /tmp/Screencasts /home/${user}/Videos/Screencasts
     '';
 
+    activation.makeTmpFolder = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p /tmp/${user}
+      ln -sf /tmp/${user} /home/${user}/Temporary
+    '';
+
     file = {
       "face.jpg".source = "${self}/.local/share/backgrounds/Profile.jpg";
       ".local" = {
