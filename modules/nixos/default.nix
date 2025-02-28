@@ -151,6 +151,7 @@ in {
     gnome.excludePackages = with pkgs; [
       epiphany # browser
       geary
+      gnome-backgrounds
       gnome-console
       gnome-contacts
       gnome-logs
