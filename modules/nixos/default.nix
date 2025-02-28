@@ -264,6 +264,8 @@ in {
           fdk-aac-encoder
           flameshot
           gimp
+          inkscape
+          pstoedit
         ]
 
         # printing
