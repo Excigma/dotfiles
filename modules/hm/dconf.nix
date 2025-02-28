@@ -219,7 +219,7 @@
           name = "Task Manager";
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6" = {
-          binding = "AudioMute";
+          binding = "<Super>AudioMute";
           command = "playerctl play-pause";
           name = "Play/pause";
         };
