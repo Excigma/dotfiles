@@ -223,6 +223,7 @@ in {
         # dev
         [
           arduino-ide
+          dconf-editor
           rustup
           lmstudio
           nixd
