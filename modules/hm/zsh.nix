@@ -18,10 +18,11 @@ in {
         share = true;
       };
       initExtraFirst = ''
-        # To customize prompt, run `p10k configure` or edit /etc/powerlevel10k/.p10k.zsh.
-        [[ ! -f /etc/powerlevel10k/.p10k.zsh ]] || source /etc/powerlevel10k/.p10k.zsh
-
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+        if [ -f ~/.p10k.zsh ]; then source ~/.p10k.zsh
+        else
+          source /etc/powerlevel10k/.p10k.zsh
+        fi
       '';
       initExtra = ''
         zstyle ':autocomplete:history-search-backward:*' list-lines 1000
@@ -77,22 +78,22 @@ in {
             --command sh -c "which ''${1#*.} &>/dev/null && exec ''${1#*.} ''${*:2}; exec ''${*:2}"
         }
         nix-shell() {(
+          ARGS=()
           for i in "$@"; do
-            if [ -n "$OPTION" ] || [[ "''${i:0:1}" == "-" ]]; then
-              ARGS+=" \"$i\""
-              OPTION=1; continue
+            if [[ -n $OPTION || $i[1] = - ]]; then
+              ARGS+="$i" OPTION=1
+               continue
             fi
-            NIX_SHELL_PACKAGES+=" $i";
-            ARGS+=" \"nixpkgs#$i\""
+            ARGS+="nixpkgs#$i"
           done
-          eval "NIX_SHELL_PACKAGES=\"''${NIX_SHELL_PACKAGES#* }\" NIXPKGS_ALLOW_UNFREE=1 nix shell --impure $ARGS"
+          IN_NIX_SHELL=impure NIXPKGS_ALLOW_UNFREE=1 nix shell --impure "''${ARGS[@]}"
         )}
         where() { readlink -f "$(which "$@")"; }
 
-        SGR () { for i in "$@"; do echo -ne "\e[$i"m; done; }
         nix-find() { ${pkgs.nix-index}/bin/nix-locate --no-group --top-level -r "$@"; }
         command_not_found_handler() {(
-          CMD="$1"; IFS=$'\n'
+          CMD="$1" IFS=$'\n'
+          SGR() { echo -ne "\e[''${(j:m\e[:)@}m"; }
           if [ "$NIX_MISSING" = "never" ]; then
             echo "$(SGR 1 34)❭❭ $(SGR 0 1)$CMD$(SGR 0) not found! You can use $(SGR 1)nix-find -wtx /$CMD$(SGR 0) to find it" >&2
             exit 127
