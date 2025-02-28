@@ -150,11 +150,15 @@ in {
   environment = {
     gnome.excludePackages = with pkgs; [
       epiphany # browser
+      geary
       gnome-console
       gnome-contacts
+      gnome-logs
+      gnome-maps
       gnome-music
       gnome-text-editor
       gnome-tour
+      gnome-weather
       totem # videos
       yelp # help
     ];
