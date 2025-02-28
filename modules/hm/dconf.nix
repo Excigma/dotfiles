@@ -190,7 +190,7 @@
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
           binding = "<Super>b";
-          command = "firefox-devedition";
+          command = "gtk-launch brave-browser.desktop";
           name = "Open Browser";
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {

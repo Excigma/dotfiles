@@ -1,12 +1,12 @@
 [Added Associations]
-text/html=firefox-devedition.desktop;
+text/html=brave-browser.desktop
 
 [Default Applications]
-text/html=firefox-devedition.desktop
-x-scheme-handler/about=firefox-devedition.desktop
-x-scheme-handler/unknown=firefox-devedition.desktop
+text/html=brave-browser.desktop
+x-scheme-handler/about=brave-browser.desktop
+x-scheme-handler/unknown=brave-browser.desktop
 
 [Removed Associations]
-application/octet-stream=firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop
-x-scheme-handler/http=firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop
-x-scheme-handler/https=firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop
+application/octet-stream=brave-browser.desktop;firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop
+x-scheme-handler/http=brave-browser.desktop;firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop
+x-scheme-handler/https=brave-browser.desktop;firefox-devedition.desktop;torbrowser.desktop;chromium-browser.desktop;org.gnome.Epiphany.desktop

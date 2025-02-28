@@ -220,6 +220,7 @@ in {
 
         # network
         [
+          unstable.brave
           chromium
           cloudflared
           gnirehtet
