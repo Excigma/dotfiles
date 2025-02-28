@@ -24,8 +24,25 @@ in {
     stateVersion = "24.11";
   };
 
-  # GNOME will overwrite the symlink and break things
-  xdg.mimeApps.enable = false;
+  xdg.desktopEntries = builtins.listToAttrs (map (name: {
+    inherit name;
+    value = {
+      inherit name;
+      noDisplay = true;
+    };
+  }) [
+    "xterm"
+    "xpra-gui"
+    "scrcpy"
+    "PuTTY Terminal Emulator"
+    # libreoffice suite
+    "math"
+    "base"
+    "impress"
+    "writer"
+    "draw"
+    "calc"
+  ]);
 
   qt = {
     enable = true;
