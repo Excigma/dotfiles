@@ -256,6 +256,7 @@ in {
         # media
         [
           blender
+          cheese
           playerctl
           vlc
           yt-dlp
