@@ -148,6 +148,16 @@ in {
   };
 
   environment = {
+    gnome.excludePackages = with pkgs; [
+      epiphany # browser
+      gnome-console
+      gnome-contacts
+      gnome-music
+      gnome-text-editor
+      gnome-tour
+      totem # videos
+      yelp # help
+    ];
     etc = listToAttrs (map (name: {
       inherit name;
       value = {
@@ -280,6 +290,7 @@ in {
           ventoy
 
           prismlauncher
+          nautilus-python
         ]
       ];
   };
