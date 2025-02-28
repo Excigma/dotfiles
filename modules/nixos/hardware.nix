@@ -7,7 +7,7 @@
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.unstable.linuxPackages;
     kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop" ];
     kernelParams = [ "i915.fastboot=1" ];
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
