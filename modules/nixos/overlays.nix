@@ -5,6 +5,10 @@
     (final: prev: {
       unstable = import nixpkgs-unstable { inherit (prev) config system; };
 
+      sound-theme-freedesktop = prev.sound-theme-freedesktop.overrideAttrs (oldAttrs: {
+        postInstall = (oldAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/camera-shutter.oga";
+      });
+
       go-10mb-video = pkgs.buildGoModule {
         pname = "10mb.video";
         version = "14e8aaac56189d48418d157171bae10f2ea9defd";
