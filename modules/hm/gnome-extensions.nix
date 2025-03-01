@@ -34,7 +34,7 @@
       # Enable extensions
       "org/gnome/shell" = {
         disable-user-extensions = false;
-        disabled-extensions = [ ];
+        disabled-extensions = with pkgs.gnomeExtensions; [ night-theme-switcher.extensionUuid ];
         enabled-extensions = with pkgs.gnomeExtensions; [
           appindicator.extensionUuid
           alphabetical-app-grid.extensionUuid
@@ -49,7 +49,6 @@
           just-perfection.extensionUuid
           launch-new-instance.extensionUuid
           middle-click-to-close-in-overview.extensionUuid
-          night-theme-switcher.extensionUuid
           osd-volume-number.extensionUuid
           quick-settings-audio-panel.extensionUuid
           quick-settings-tweaker.extensionUuid
@@ -203,6 +202,10 @@
         manual-schedule = true;
         nightthemeswitcher-ondemand-keybinding = [ "<Shift><Super>t" ];
       };
+      "org/gnome/shell/extensions/nightthemeswitcher/color-scheme" = {
+        day = "prefer-light";
+        night = "prefer-dark";
+      };
       "org/gnome/shell/extensions/osd-volume-number" = {
         adapt-panel-menu = true;
         icon-position = "left";
@@ -261,7 +264,6 @@
         volume-mixer-show-description = true;
         volume-mixer-show-icon = true;
       };
-      "org/gnome/shell/extensions/user-theme" = { name = "Marble-blue-dark"; };
       "org/gnome/shell/extensions/vitals" = {
         alphabetize = false;
         fixed-widths = true;

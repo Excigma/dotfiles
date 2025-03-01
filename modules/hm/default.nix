@@ -1,4 +1,4 @@
-{ user, self, lib, ... }:
+{ pkgs, user, self, lib, ... }:
 let inherit (builtins) filter attrNames readDir;
 in {
   imports = map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
@@ -7,6 +7,8 @@ in {
     username = user;
     homeDirectory = "/home/${user}";
 
+    # Needed to use gnome-extensions below
+    extraActivationPath = with pkgs; [ gnome-shell ];
     activation = {
       symlinkTemporaryFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run mkdir -p /tmp/${user}/Screencasts
@@ -16,6 +18,9 @@ in {
         run ln -sf /tmp/${user}/Screencasts /home/${user}/Videos
         run ln -sf /tmp/${user}/Screenshots /home/${user}/Pictures
         run ln -sf /tmp/${user}/Temporary /home/${user}
+      '';
+      setTheme = lib.hm.dag.entryAfter [ "installPackages" ] ''
+        run gnome-extensions enable nightthemeswitcher@romainvigier.fr
       '';
     };
 

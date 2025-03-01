@@ -56,13 +56,11 @@
           clock-format = "24h";
           clock-show-seconds = true;
           clock-show-weekday = true;
-          color-scheme = "prefer-dark";
           cursor-size = 32;
           cursor-theme = "Adwaita";
           enable-animations = true;
           enable-hot-corners = true;
           gtk-enable-primary-paste = false;
-          gtk-theme = "adw-gtk3-dark";
           icon-theme = "Tela-circle-blue";
           locate-pointer = true;
           monospace-font-name = "JetBrainsMono Nerd Font Mono 10";
