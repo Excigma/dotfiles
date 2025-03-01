@@ -34,7 +34,7 @@
       # Enable extensions
       "org/gnome/shell" = {
         disable-user-extensions = false;
-        disabled-extensions = with pkgs.gnomeExtensions; [ night-theme-switcher.extensionUuid ];
+        disabled-extensions = [ ];
         enabled-extensions = with pkgs.gnomeExtensions; [
           appindicator.extensionUuid
           alphabetical-app-grid.extensionUuid
@@ -49,6 +49,7 @@
           just-perfection.extensionUuid
           launch-new-instance.extensionUuid
           middle-click-to-close-in-overview.extensionUuid
+          night-theme-switcher.extensionUuid
           osd-volume-number.extensionUuid
           quick-settings-audio-panel.extensionUuid
           quick-settings-tweaker.extensionUuid

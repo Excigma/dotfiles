@@ -20,7 +20,7 @@ in {
         run ln -sf /tmp/${user}/Temporary /home/${user}
       '';
       setTheme = lib.hm.dag.entryAfter [ "installPackages" ] ''
-        run gnome-extensions enable nightthemeswitcher@romainvigier.fr
+        run gnome-extensions disable nightthemeswitcher@romainvigier.fr && gnome-extensions enable nightthemeswitcher@romainvigier.fr
       '';
     };
 
