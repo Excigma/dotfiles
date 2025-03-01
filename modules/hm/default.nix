@@ -12,9 +12,9 @@ in {
       mkdir -p /tmp/${user}/Screenshots
       mkdir -p /tmp/${user}/Temporary
 
-      ln -sf /tmp/${user}/Screencasts /home/${user}/Videos/Screencasts
-      ln -sf /tmp/${user}/Screenshots /home/${user}/Pictures/Screenshots
-      ln -sf /tmp/${user}/Temporary /home/${user}/Temporary
+      ln -sf /tmp/${user}/Screencasts /home/${user}/Videos
+      ln -sf /tmp/${user}/Screenshots /home/${user}/Pictures
+      ln -sf /tmp/${user}/Temporary /home/${user}
     '';
 
     file = {
