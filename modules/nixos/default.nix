@@ -5,10 +5,16 @@ let
 in {
   imports = map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
-  boot.loader = {
-    timeout = 0;
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    tmp = {
+      useTmpfs = true;
+      tmpfsSize = "75%";
+    };
+    loader = {
+      timeout = 0;
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 
   networking = {
