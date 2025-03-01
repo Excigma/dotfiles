@@ -17,6 +17,11 @@ in {
     };
   };
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 75;
+  };
+
   networking = {
     hostName = "latitude-nixos";
     networkmanager.enable = true;
