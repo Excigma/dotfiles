@@ -21,6 +21,7 @@
     "/" = {
       device = "/dev/disk/by-uuid/d1ed8f8e-7a95-4cc3-a36e-186e62b6d109";
       fsType = "ext4";
+      options = [ "noatime" ];
     };
     "/boot" = {
       device = "/dev/disk/by-uuid/126C-B207";
