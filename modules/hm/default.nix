@@ -7,14 +7,14 @@ in {
     username = user;
     homeDirectory = "/home/${user}";
 
-    activation.symlinkScreencasts = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      mkdir -p /tmp/Screencasts
-      ln -sf /tmp/Screencasts /home/${user}/Videos/Screencasts
-    '';
+    activation.symlinkTemporaryFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p /tmp/${user}/Screencasts
+      mkdir -p /tmp/${user}/Screenshots
+      mkdir -p /tmp/${user}/Temporary
 
-    activation.makeTmpFolder = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      mkdir -p /tmp/${user}
-      ln -sf /tmp/${user} /home/${user}/Temporary
+      ln -sf /tmp/${user}/Screencasts /home/${user}/Videos/Screencasts
+      ln -sf /tmp/${user}/Screenshots /home/${user}/Pictures/Screenshots
+      ln -sf /tmp/${user}/Temporary /home/${user}/Temporary
     '';
 
     file = {
