@@ -7,15 +7,17 @@ in {
     username = user;
     homeDirectory = "/home/${user}";
 
-    activation.symlinkTemporaryFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      mkdir -p /tmp/${user}/Screencasts
-      mkdir -p /tmp/${user}/Screenshots
-      mkdir -p /tmp/${user}/Temporary
+    activation = {
+      symlinkTemporaryFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        run mkdir -p /tmp/${user}/Screencasts
+        run mkdir -p /tmp/${user}/Screenshots
+        run mkdir -p /tmp/${user}/Temporary
 
-      ln -sf /tmp/${user}/Screencasts /home/${user}/Videos
-      ln -sf /tmp/${user}/Screenshots /home/${user}/Pictures
-      ln -sf /tmp/${user}/Temporary /home/${user}
-    '';
+        run ln -sf /tmp/${user}/Screencasts /home/${user}/Videos
+        run ln -sf /tmp/${user}/Screenshots /home/${user}/Pictures
+        run ln -sf /tmp/${user}/Temporary /home/${user}
+      '';
+    };
 
     file = {
       "face.jpg".source = "${self}/.local/share/backgrounds/Profile.jpg";
