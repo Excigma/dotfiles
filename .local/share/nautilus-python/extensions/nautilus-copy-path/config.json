@@ -1,0 +1,23 @@
+{
+	"items": {
+		"path": true,
+		"uri": true,
+		"name": true,
+		"content": true
+	},
+	"selections": {
+		"clipboard": true,
+		"primary": true
+	},
+	"shortcuts": {
+		"path": "<Ctrl><Shift>C",
+		"uri": "<Ctrl><Shift>U",
+		"name": "<Ctrl><Shift>D",
+		"content": "<Ctrl><Shift>G"
+	},
+	"language": "auto",
+	"separator": ", ",
+	"escape_value_items": false,
+	"escape_value": false,
+	"name_ignore_extension": false
+}
