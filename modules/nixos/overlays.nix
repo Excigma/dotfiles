@@ -24,6 +24,40 @@
         subPackages = [ "." ];
         buildInputs = with pkgs; [ ffmpeg fdk-aac-encoder ];
 
+        patches = [
+          (builtins.toFile "single-path" ''
+            diff --git a/main.go b/main.go
+            index dc8d412..0c06e72 100644
+            --- a/main.go
+            +++ b/main.go
+            @@ -21,6 +21,7 @@ import (
+             	"os/exec"
+             	"os/signal"
+             	"path"
+            +	"path/filepath"
+             	"strconv"
+             	"strings"
+             	"syscall"
+            @@ -228,10 +229,10 @@ func main() {
+             		vbitrate = int(bitfloat)
+             	}
+             
+            -	// construct output filename
+            -	arr := strings.Split(file, ".")
+            -	output := strings.Join(arr[0:len(arr)-1], ".")
+            -	output = fmt.Sprintf("%gmb.%s.mp4", *size, output)
+            +	// construct output filename next to the input file
+            +	base := filepath.Base(file)
+            +	name := strings.TrimSuffix(base, filepath.Ext(base))
+            +	output := filepath.Join(filepath.Dir(file), fmt.Sprintf("%gmb.%s.mp4", *size, name))
+             
+             	// beware: changing this changes the muxing overhead
+             	const FPS = 24
+            -- 
+            2.47.2
+          '')
+        ];
+
         meta = with pkgs.lib; {
           description = "Fit a video into a 10mb file (Discord nitro pls?)";
           homepage = "https://github.com/ugjka/10mb.video";
