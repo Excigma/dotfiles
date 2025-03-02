@@ -1,9 +1,9 @@
 {
 	"items": {
 		"path": true,
-		"uri": true,
-		"name": true,
-		"content": true
+		"uri": false,
+		"name": false,
+		"content": false
 	},
 	"selections": {
 		"clipboard": true,
