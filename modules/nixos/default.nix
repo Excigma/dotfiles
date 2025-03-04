@@ -158,6 +158,8 @@ in {
     '';
   };
 
+  systemd.services = { NetworkManager-wait-online.enable = false; };
+
   environment = {
     gnome.excludePackages = with pkgs; [
       epiphany # browser
