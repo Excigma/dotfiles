@@ -242,6 +242,8 @@ in {
           lmstudio
           nixd
           nh
+          python3
+          nodejs
           nix-index
           nixfmt-classic
           vscode
