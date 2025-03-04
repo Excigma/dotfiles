@@ -200,6 +200,7 @@ in {
           gh
           htop
           scrcpy
+          libnotify
           nano
           rsync
           stress

@@ -3,37 +3,35 @@
 
 
 from gi.repository import Nautilus, GObject
-from subprocess import call
+import subprocess
 import os
+
 
 class CompressVideoExtension(GObject.GObject, Nautilus.MenuProvider):
     def compress_video(self, menu, files):
         for file in files:
             filepath = file.get_location().get_path()
             if os.path.exists(filepath):
-                call(f'10mb.video "{filepath}" &', shell=True)
+                subprocess.Popen(
+                    f'(10mb.video "{filepath}" && notify-send --app-name="10mb.video" "Compression Complete" "{filepath} has been compressed.") &',
+                    shell=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
 
     def get_file_items(self, *args):
         files = args[-1]
-        video_mime_types = [
-            "video/mp4", "video/x-matroska", "video/quicktime",
-            "video/x-msvideo", "video/x-flv", "video/mpeg", "video/webm"
-        ]
-
         # Filter the files to only include video files
-        filtered_files = [
-            file for file in files
-            if any(file.is_mime_type(mime) for mime in video_mime_types)
-        ]
+        filtered_files = [file for file in files if "video/" in file.get_mime_type()]
 
         # Only show the menu item if there is at least one video file
         if filtered_files:
             item = Nautilus.MenuItem(
-                name='CompressVideo',
-                label='Run 10mb.video',
-                tip='Runs 10mb.video on the selected video files to compress them'
+                name="CompressVideo",
+                label="Run 10mb.video",
+                tip="Runs 10mb.video on the selected video files to compress them",
             )
-            item.connect('activate', self.compress_video, filtered_files)
+            item.connect("activate", self.compress_video, filtered_files)
             return [item]
 
         return []
