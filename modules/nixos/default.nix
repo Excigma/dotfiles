@@ -239,7 +239,7 @@ in {
           rustup
           lmstudio
           nixd
-          nix-output-monitor
+          nh
           nix-index
           nixfmt-classic
           vscode
