@@ -11,13 +11,13 @@
 
       go-10mb-video = pkgs.buildGoModule {
         pname = "10mb.video";
-        version = "14e8aaac56189d48418d157171bae10f2ea9defd";
+        version = "ccd13c04b0b6b630cb46c1230b4b714424e073d0";
 
         src = pkgs.fetchFromGitHub {
           owner = "ugjka";
           repo = "10mb.video";
-          rev = "14e8aaac56189d48418d157171bae10f2ea9defd";
-          sha256 = "sha256-mcpQ6AVAXJjNbClUF6pgZbU47KCn4viaA6fB7eF7CZg";
+          rev = "ccd13c04b0b6b630cb46c1230b4b714424e073d0";
+          sha256 = "sha256-VIb1F3ovq/JD4h/reLdIogoq/LgnMg+guGoUv+CK/AQ=";
         };
 
         vendorHash = null;
@@ -27,29 +27,34 @@
         patches = [
           (builtins.toFile "single-path" ''
             diff --git a/main.go b/main.go
-            index dc8d412..0c06e72 100644
+            index 6b5f33e..702b2e2 100644
             --- a/main.go
             +++ b/main.go
-            @@ -21,6 +21,7 @@ import (
-             	"os/exec"
-             	"os/signal"
-             	"path"
-            +	"path/filepath"
-             	"strconv"
-             	"strings"
-             	"syscall"
-            @@ -228,10 +229,10 @@ func main() {
-             		vbitrate = int(bitfloat)
+            @@ -79,17 +79,11 @@ func main() {
+             		os.Exit(1)
              	}
              
-            -	// construct output filename
-            -	arr := strings.Split(file, ".")
-            -	output := strings.Join(arr[0:len(arr)-1], ".")
-            -	output = fmt.Sprintf("%gmb.%s.mp4", *size, output)
-            +	// construct output filename next to the input file
-            +	base := filepath.Base(file)
-            +	name := strings.TrimSuffix(base, filepath.Ext(base))
-            +	output := filepath.Join(filepath.Dir(file), fmt.Sprintf("%gmb.%s.mp4", *size, name))
+            -	destdir, err := os.Getwd()
+            -	if err != nil {
+            -		fmt.Fprintln(os.Stderr, err)
+            -		os.Exit(1)
+            -	}
+            -
+             	filepath := flag.Args()[0]
+             	file := path.Base(filepath)
+             	dir := path.Dir(filepath)
+             
+            -	err = os.Chdir(dir)
+            +	err := os.Chdir(dir)
+             	if err != nil {
+             		fmt.Fprintln(os.Stderr, err)
+             		os.Exit(1)
+            @@ -246,7 +240,7 @@ func main() {
+             	// construct output filename
+             	arr := strings.Split(file, ".")
+             	output := strings.Join(arr[0:len(arr)-1], ".")
+            -	output = fmt.Sprintf("%s/%gmb.%s.mp4", destdir, *size, output)
+            +	output = fmt.Sprintf("%s/%gmb.%s.mp4", dir, *size, output)
              
              	// beware: changing this changes the muxing overhead
              	const FPS = 24
