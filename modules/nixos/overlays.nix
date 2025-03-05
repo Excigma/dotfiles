@@ -11,57 +11,18 @@
 
       go-10mb-video = pkgs.buildGoModule {
         pname = "10mb.video";
-        version = "ccd13c04b0b6b630cb46c1230b4b714424e073d0";
+        version = "e5cd1ed583d6fce1e2552a91d48959f3243d341f";
 
         src = pkgs.fetchFromGitHub {
           owner = "ugjka";
           repo = "10mb.video";
-          rev = "ccd13c04b0b6b630cb46c1230b4b714424e073d0";
-          sha256 = "sha256-VIb1F3ovq/JD4h/reLdIogoq/LgnMg+guGoUv+CK/AQ=";
+          rev = "e5cd1ed583d6fce1e2552a91d48959f3243d341f";
+          sha256 = "sha256-vYId1/sKz8DWjxbP5VmyzCEoBkSIxodgdfAsbUSdbKk=";
         };
 
         vendorHash = null;
         subPackages = [ "." ];
         buildInputs = with pkgs; [ ffmpeg fdk-aac-encoder ];
-
-        patches = [
-          (builtins.toFile "single-path" ''
-            diff --git a/main.go b/main.go
-            index 6b5f33e..702b2e2 100644
-            --- a/main.go
-            +++ b/main.go
-            @@ -79,17 +79,11 @@ func main() {
-             		os.Exit(1)
-             	}
-             
-            -	destdir, err := os.Getwd()
-            -	if err != nil {
-            -		fmt.Fprintln(os.Stderr, err)
-            -		os.Exit(1)
-            -	}
-            -
-             	filepath := flag.Args()[0]
-             	file := path.Base(filepath)
-             	dir := path.Dir(filepath)
-             
-            -	err = os.Chdir(dir)
-            +	err := os.Chdir(dir)
-             	if err != nil {
-             		fmt.Fprintln(os.Stderr, err)
-             		os.Exit(1)
-            @@ -246,7 +240,7 @@ func main() {
-             	// construct output filename
-             	arr := strings.Split(file, ".")
-             	output := strings.Join(arr[0:len(arr)-1], ".")
-            -	output = fmt.Sprintf("%s/%gmb.%s.mp4", destdir, *size, output)
-            +	output = fmt.Sprintf("%s/%gmb.%s.mp4", dir, *size, output)
-             
-             	// beware: changing this changes the muxing overhead
-             	const FPS = 24
-            -- 
-            2.47.2
-          '')
-        ];
 
         meta = with pkgs.lib; {
           description = "Fit a video into a 10mb file (Discord nitro pls?)";

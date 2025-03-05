@@ -13,7 +13,7 @@ class CompressVideoExtension(GObject.GObject, Nautilus.MenuProvider):
             filepath = file.get_location().get_path()
             if os.path.exists(filepath):
                 subprocess.Popen(
-                    f'(10mb.video "{filepath}" && notify-send --app-name="10mb.video" "Compression Complete" "{filepath} has been compressed.") &',
+                    f'(10mb.video -s "{filepath}" && notify-send --app-name="10mb.video" "Compression Complete" "{filepath} has been compressed.") &',
                     shell=True,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
