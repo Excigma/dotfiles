@@ -1,9 +1,8 @@
 { pkgs, ... }: {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-devedition;
     nativeMessagingHosts = [ pkgs.gnome-browser-connector ];
-    profiles."dev-edition-default" = {
+    profiles."default" = {
       id = 0;
       isDefault = true;
       settings = {

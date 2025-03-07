@@ -116,7 +116,6 @@ in {
       sessionVariables = {
         VISUAL = "${getExe pkgs.vscode} --wait";
         EDITOR = "${getExe pkgs.vscode} --wait";
-        BROWSER = "${getExe pkgs.firefox-devedition}";
         MOZ_USE_XINPUT2 = "1";
       };
       shellAliases = {
