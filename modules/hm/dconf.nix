@@ -67,7 +67,6 @@
           show-battery-percentage = true;
         };
         "org/gnome/desktop/notifications" = {
-          show-banners = true;
           show-in-lock-screen = false;
         };
         "org/gnome/desktop/search-providers" = {
