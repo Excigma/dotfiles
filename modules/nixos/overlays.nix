@@ -9,7 +9,28 @@
         postInstall = (oldAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/camera-shutter.oga";
       });
 
-      marble-shell-theme = prev.marble-shell-theme.overrideAttrs (oldAttrs: {
+      marble-shell-theme = let
+        no-backgrounds = ''
+          diff --git a/theme/gnome-shell/.css/panel.css b/theme/gnome-shell/.css/panel.css
+          index 43b478b..6c67062 100644
+          --- a/theme/gnome-shell/.css/panel.css
+          +++ b/theme/gnome-shell/.css/panel.css
+          @@ -36,6 +36,13 @@
+               box-shadow: inset 0 0 0 1px BORDER-SHADOW;
+           }
+
+          +/* App icons taskbar - hide button background */
+          +.panel-button.azTaskbar-BaseIcon {
+          +    background-color: transparent !important;
+          +    border: none !important;
+          +    box-shadow: none !important;
+          +}
+          +
+           .panel-button:hover,
+           .panel-button:hover .clock,
+           .panel-button:active,
+        '';
+      in prev.marble-shell-theme.overrideAttrs (oldAttrs: {
         version = "47.0";
         nativeBuildInputs = with pkgs; [ python3 dconf gnome-shell ];
         src = pkgs.fetchFromGitHub {
@@ -18,6 +39,14 @@
           rev = "1e83e073f7e50eaaf82763edbdae59585ca5e585";
           hash = "sha256-+uPjwOUwrdFfBvpWtuZhe789v2xvZG3XeFyYw8HP8QM=";
         };
+        patchPhase = ''
+          runHook prePatch
+          substituteInPlace scripts/config.py --replace-fail "~/.themes" ".themes"
+          patch -p1 << EOF
+          ${no-backgrounds}
+          EOF
+          runHook postPatch
+        '';
       });
 
       htop = prev.htop.overrideAttrs (oldAttrs: {
