@@ -20,6 +20,16 @@
         };
       });
 
+      htop = prev.htop.overrideAttrs (oldAttrs: {
+        patches = [
+          (pkgs.fetchpatch {
+            name = "1352.patch";
+            url = "https://github.com/htop-dev/htop/pull/1352.patch";
+            hash = "sha256-BoXKQPPJcKLDaZxwwtRgtsRHEU0XJ4lDRelIm30csts=";
+          })
+        ] ++ oldAttrs.patches or [ ];
+      });
+
       go-10mb-video = pkgs.buildGoModule {
         pname = "10mb.video";
         version = "e5cd1ed583d6fce1e2552a91d48959f3243d341f";
