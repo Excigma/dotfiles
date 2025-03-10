@@ -1,31 +1,30 @@
 { pkgs, lib, ... }: {
   # Install extensions
-  home.packages = with pkgs.gnomeExtensions; [
-    (pkgs.marble-shell-theme.override { colors = [ "blue" ]; })
-
-    appindicator
-    alphabetical-app-grid
-    app-icons-taskbar
-    battery-health-charging
-    bluetooth-battery-meter
-    caffeine
-    clipboard-indicator
-    dim-completed-calendar-events
-    do-not-disturb-while-screen-sharing-or-recording
-    native-window-placement
-    launch-new-instance
-    gnome-40-ui-improvements
-    just-perfection
-    middle-click-to-close-in-overview
-    night-theme-switcher
-    osd-volume-number
-    quick-settings-tweaker
-    quick-settings-audio-panel
-    quick-touchpad-toggle
-    tailscale-qs
-    toggle-workspace-span
-    user-themes
-    vitals
+  home.packages = with pkgs; [
+    (marble-shell-theme.override { colors = [ "blue" ]; })
+    gnomeExtensions.appindicator
+    gnomeExtensions.alphabetical-app-grid
+    gnomeExtensions.app-icons-taskbar
+    gnomeExtensions.battery-health-charging
+    gnomeExtensions.bluetooth-battery-meter
+    gnomeExtensions.caffeine
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.dim-completed-calendar-events
+    gnomeExtensions.do-not-disturb-while-screen-sharing-or-recording
+    gnomeExtensions.native-window-placement
+    gnomeExtensions.launch-new-instance
+    gnomeExtensions.gnome-40-ui-improvements
+    gnomeExtensions.just-perfection
+    gnomeExtensions.middle-click-to-close-in-overview
+    gnomeExtensions.night-theme-switcher
+    gnomeExtensions.osd-volume-number
+    gnomeExtensions.quick-settings-tweaker
+    gnomeExtensions.quick-settings-audio-panel
+    gnomeExtensions.quick-touchpad-toggle
+    gnomeExtensions.tailscale-qs
+    gnomeExtensions.toggle-workspace-span
+    gnomeExtensions.user-themes
+    gnomeExtensions.vitals
   ];
 
   dconf = with lib.hm.gvariant; {

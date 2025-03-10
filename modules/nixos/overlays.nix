@@ -9,6 +9,17 @@
         postInstall = (oldAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/camera-shutter.oga";
       });
 
+      marble-shell-theme = prev.marble-shell-theme.overrideAttrs (oldAttrs: {
+        version = "47.0";
+        nativeBuildInputs = with pkgs; [ python3 dconf gnome-shell ];
+        src = pkgs.fetchFromGitHub {
+          owner = "imarkoff";
+          repo = "Marble-shell-theme";
+          rev = "1e83e073f7e50eaaf82763edbdae59585ca5e585";
+          hash = "sha256-+uPjwOUwrdFfBvpWtuZhe789v2xvZG3XeFyYw8HP8QM=";
+        };
+      });
+
       go-10mb-video = pkgs.buildGoModule {
         pname = "10mb.video";
         version = "e5cd1ed583d6fce1e2552a91d48959f3243d341f";
