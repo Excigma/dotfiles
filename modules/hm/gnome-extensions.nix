@@ -1,7 +1,10 @@
 { pkgs, lib, ... }: {
   # Install extensions
   home.packages = with pkgs; [
-    (marble-shell-theme.override { colors = [ "blue" ]; })
+    (marble-shell-theme.override {
+      colors = [ "blue" ];
+      additionalInstallationTweaks = [ "--filled" ];
+    })
     gnomeExtensions.appindicator
     gnomeExtensions.alphabetical-app-grid
     gnomeExtensions.app-icons-taskbar
