@@ -116,7 +116,6 @@
           move-to-workspace-right =
             [ "<Super><Shift>Page_Down" "<Super><Shift><Alt>Right" "<Control><Shift><Alt>Right" ];
           move-to-workspace-up = [ "<Control><Shift><Alt>Up" ];
-          panel-run-dialog = [ ];
           switch-applications = [ ];
           switch-applications-backward = [ ];
           switch-group = [ "<Super>Above_Tab" "<Alt>Above_Tab" ];
