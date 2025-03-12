@@ -30,6 +30,20 @@
            .panel-button:hover .clock,
            .panel-button:active,
         '';
+        fix-padding = ''
+          diff --git a/theme/gnome-shell/.css/quick-settings.css b/theme/gnome-shell/.css/quick-settings.css
+          index fcf8f86..e5f5c42 100644
+          --- a/theme/gnome-shell/.css/quick-settings.css
+          +++ b/theme/gnome-shell/.css/quick-settings.css
+          @@ -2,7 +2,7 @@
+           
+           /* QS section */
+           .quick-settings {
+          -	padding: 15px;
+          +	padding: 15px !important;
+           	border-radius: 24px;
+           }
+        '';
       in prev.marble-shell-theme.overrideAttrs (oldAttrs: {
         version = "47.0";
         nativeBuildInputs = with pkgs; [ python3 dconf gnome-shell ];
@@ -44,6 +58,9 @@
           substituteInPlace scripts/config.py --replace-fail "~/.themes" ".themes"
           patch -p1 << EOF
           ${no-backgrounds}
+          EOF
+          patch -p1 << EOF
+          ${fix-padding}
           EOF
           runHook postPatch
         '';
