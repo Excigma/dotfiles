@@ -127,7 +127,7 @@ in {
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      nerd-fonts.jetbrains-mono
     ];
   };
 
@@ -254,7 +254,6 @@ in {
           nh
           python3
           nodejs
-          nix-index
           nixfmt-classic
           vscode
         ]
