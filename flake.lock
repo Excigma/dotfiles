@@ -42,6 +42,26 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1741619381,
+        "narHash": "sha256-koZtlJRqi0/MD/AKd0KrXLA2NuBOVzlIyAJprjzpxZE=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "66537fb185462ba9b07f4e6f2d54894a1b2d04ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1741513245,
@@ -99,11 +119,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1741835418,
-        "narHash": "sha256-z/WmwiP30/E7bnlcOHaY9/kq0JhWHe0b/mo7f/19nrc=",
+        "lastModified": 1741836558,
+        "narHash": "sha256-GhZYrdD1Ka3NWe9yXv4oVr5YAkIWWhYsPZyLTJXhpQY=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "0ebe870599022881b924860a7c9cd930df899474",
+        "rev": "33bbd4d164ae43114c8fab141a0b1e7e356061bd",
         "type": "github"
       },
       "original": {
@@ -115,6 +135,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
