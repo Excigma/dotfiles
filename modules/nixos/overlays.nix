@@ -6,9 +6,9 @@
       unstable = import nixpkgs-unstable { inherit (prev) config system; };
       stable = import nixpkgs-unstable { inherit (prev) config system; };
 
-      # sound-theme-freedesktop = prev.sound-theme-freedesktop.overrideAttrs (oldAttrs: {
-      #   postInstall = (oldAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/camera-shutter.oga";
-      # });
+      sound-theme-freedesktop = prev.sound-theme-freedesktop.overrideAttrs (oldAttrs: {
+        postInstall = (oldAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/screen-capture.oga";
+      });
 
       marble-shell-theme = let
         no-backgrounds = ''
