@@ -135,6 +135,10 @@ in {
     command-not-found.enable = false;
     dconf.enable = true;
     nix-ld.enable = true;
+    localsend = {
+      enable = true;
+      openFirewall = true;
+    };
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # 27031..27036
@@ -265,7 +269,6 @@ in {
           cloudflared
           gnirehtet
           iriunwebcam
-          localsend
           miniserve
           openfortivpn
           putty
