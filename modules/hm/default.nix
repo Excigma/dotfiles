@@ -52,13 +52,6 @@ in {
     "xpra-gui"
     "scrcpy"
     "PuTTY Terminal Emulator"
-    # libreoffice suite
-    "math"
-    "base"
-    "impress"
-    "writer"
-    "draw"
-    "calc"
   ]);
 
   qt = {
