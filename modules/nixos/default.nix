@@ -39,6 +39,9 @@ in {
     printing.enable = true; # CUPS
     fwupd.enable = true; # firmware updates
     thermald.enable = true;
+    # foldingathome = {
+    #   enable = true;
+    # };
     # openssh.enable = true;
     pipewire = {
       enable = true;
@@ -319,6 +322,8 @@ in {
           ghostty
           helvum
           resources
+
+          fahclient
 
           libsmbios
           smartmontools
