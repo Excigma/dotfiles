@@ -331,6 +331,8 @@ in {
 
           prismlauncher
           nautilus-python
+
+          zotero
         ]
       ];
   };
