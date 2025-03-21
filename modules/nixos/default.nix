@@ -254,6 +254,7 @@ in {
         # dev
         [
           arduino-ide
+          android-studio
           dconf-editor
           rustup
           lmstudio
