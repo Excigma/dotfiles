@@ -48,7 +48,7 @@ in {
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      # jack.enable = true;
+      jack.enable = true;
     };
     udev.packages = with pkgs; [ gnome-settings-daemon ];
     tailscale = {
