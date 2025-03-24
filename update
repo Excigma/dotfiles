@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+OLD_REV=$(nix flake metadata --json | jq -r '.inputs.nixpkgs.lock.rev')
+
+nix flake update nixpkgs
+
+NEW_REV=$(nix flake metadata --json | jq -r '.inputs.nixpkgs.lock.rev')
+
+if [ "$OLD_REV" != "$NEW_REV" ]; then
+    echo "nixpkgs updated: $OLD_REV -> $NEW_REV"
+    ./rebuild switch --update && git commit -am "chore: update packages"
+    echo "nixpkgs updated: $OLD_REV -> $NEW_REV"
+else
+    echo "nixpkgs is already up-to-date. No update necessary."
+fi
