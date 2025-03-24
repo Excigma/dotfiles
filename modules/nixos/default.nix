@@ -215,6 +215,7 @@ in {
           distrobox
           gh
           htop
+          jq
           scrcpy
           libnotify
           nano
