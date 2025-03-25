@@ -6,10 +6,10 @@ in {
   imports = map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
 
   boot = {
-    tmp = {
-      useTmpfs = true;
-      tmpfsSize = "85%";
-    };
+    # tmp = {
+    #   useTmpfs = true;
+    #   tmpfsSize = "85%";
+    # };
     loader = {
       timeout = 0;
       systemd-boot.enable = true;
