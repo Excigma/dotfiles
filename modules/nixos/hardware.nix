@@ -2,6 +2,10 @@
   hardware = {
     enableRedistributableFirmware = lib.mkDefault true;
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    ipu6 = {
+      enable = true;
+      platform = "ipu6ep";
+    };
   };
 
   boot = {
