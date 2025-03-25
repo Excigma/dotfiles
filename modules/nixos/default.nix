@@ -8,7 +8,7 @@ in {
   boot = {
     tmp = {
       useTmpfs = true;
-      tmpfsSize = "75%";
+      tmpfsSize = "85%";
     };
     loader = {
       timeout = 0;
