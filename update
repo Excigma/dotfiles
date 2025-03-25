@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 
-OLD_REV=$(nix flake metadata --json | jq -r '.inputs.nixpkgs.lock.rev')
+OLD_REV=$(nix flake metadata --json | jq -r '.locks.nodes.nixpkgs.locked.rev')
 
 nix flake update nixpkgs
 
-NEW_REV=$(nix flake metadata --json | jq -r '.inputs.nixpkgs.lock.rev')
+NEW_REV=$(nix flake metadata --json | jq -r '.locks.nodes.nixpkgs.locked.rev')
 
 if [ "$OLD_REV" != "$NEW_REV" ]; then
     echo "nixpkgs updated: $OLD_REV -> $NEW_REV"
