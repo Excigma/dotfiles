@@ -32,6 +32,7 @@ in {
     # 	# allowedUDPPorts = [ 25565 ];
     #   # enable = false; # disable firewall
     # };
+    firewall.enable = false;
   };
 
   services = {
