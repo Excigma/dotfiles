@@ -264,7 +264,10 @@ in {
           python3
           nodejs
           nixfmt-classic
-          vscode
+          vscode.fhs
+
+          # needed for rpi pico for capstone
+          libusb1
         ]
 
         # network
