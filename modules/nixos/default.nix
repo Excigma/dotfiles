@@ -50,7 +50,16 @@ in {
       pulse.enable = true;
       jack.enable = true;
     };
-    udev.packages = with pkgs; [ gnome-settings-daemon ];
+    udev = {
+      packages = with pkgs; [ gnome-settings-daemon ];
+      extraRules = ''
+        SUBSYSTEM!="usb_device", ACTION!="add", GOTO="rpi2_end"
+        # Raspberry Pi Pico
+        ATTR{idVendor}=="2e8a", ATTRS{idProduct}=="0003", MODE="0666", GROUP="plugdev"
+
+        LABEL="rpi2_end"
+      '';
+    };
     tailscale = {
       enable = true;
       openFirewall = true;
@@ -79,7 +88,7 @@ in {
     users.${user} = {
       isNormalUser = true;
       description = user;
-      extraGroups = [ "networkmanager" "wheel" "input" "video" "libvirtd" ];
+      extraGroups = [ "networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "plugdev" ];
       # packages = with pkgs; [];
     };
   };
