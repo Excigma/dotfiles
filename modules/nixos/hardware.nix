@@ -15,13 +15,6 @@
     kernelPackages = pkgs.unstable.linuxPackages;
     kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop" ];
     kernelParams = [ "i915.fastboot=1" "i915.force_probe=!a7a1" "xe.force_probe=a7a1" ];
-    kernelPatches = [{
-      name = "OV02C10";
-      patch = pkgs.fetchurl {
-        url = "https://github.com/jwrdegoede/linux-sunxi/commit/ab8552ca88c7adea5efc6639f905cb29e5b38e6f.patch";
-        hash = "sha256-c2r5yQpPkXlf4eVUlzKNAPe0AmLYFBTLxYE3L/vowjo=";
-      };
-    }];
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 devices=1 card_label="Iriun Webcam,Iriun Webcam #2,Iriun Webcam #3,Iriun Webcam #4"
