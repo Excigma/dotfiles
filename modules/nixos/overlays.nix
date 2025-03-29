@@ -11,6 +11,8 @@
       });
 
       marble-shell-theme = prev.marble-shell-theme.overrideAttrs (oldAttrs: {
+        colors = [ "blue" ];
+        additionalInstallationTweaks = [ "--wider-panel" "--panel-default-size" ];
         patches = [
           (builtins.toFile "single-path" ''
             diff --git a/theme/gnome-shell/.css/panel.css b/theme/gnome-shell/.css/panel.css
