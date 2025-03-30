@@ -131,6 +131,10 @@ in {
         vpl-gpu-rt
       ];
     };
+    bluetooth = {
+      enable = true;
+      settings = { General = { Experimental = true; }; };
+    };
   };
 
   fonts = {
