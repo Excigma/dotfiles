@@ -59,6 +59,10 @@ in {
     platformTheme.name = "gtk3";
   };
 
+  services = {
+    mpris-proxy.enable = true;
+  };
+
   programs = {
     direnv = {
       enable = true;
