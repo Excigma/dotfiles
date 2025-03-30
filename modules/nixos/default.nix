@@ -79,9 +79,6 @@ in {
     gnome = { gnome-browser-connector.enable = true; };
   };
 
-  # Enable automatic rotation.
-  hardware.sensor.iio.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     groups.libvirtd.members = [ user ];
@@ -123,14 +120,17 @@ in {
     spiceUSBRedirection.enable = true;
   };
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-ocl
-      intel-compute-runtime
-      intel-media-driver # opengl, vulkan, vaapi
-      vpl-gpu-rt
-    ];
+  hardware = {
+    sensor.iio.enable = true;
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-ocl
+        intel-compute-runtime
+        intel-media-driver # opengl, vulkan, vaapi
+        vpl-gpu-rt
+      ];
+    };
   };
 
   fonts = {
