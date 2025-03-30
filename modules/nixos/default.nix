@@ -352,6 +352,8 @@ in {
           playerctl
           vlc
           yt-dlp
+          gpu-screen-recorder
+          gpu-screen-recorder-gtk
           go-10mb-video
           ffmpeg
           fdk-aac-encoder
