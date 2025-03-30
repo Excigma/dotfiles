@@ -14,7 +14,7 @@
         colors = [ "blue" ];
         additionalInstallationTweaks = [ "--wider-panel" "--panel-default-size" ];
         patches = [
-          (builtins.toFile "single-path" ''
+          (builtins.toFile "disable-taskbar-icon-background" ''
             diff --git a/theme/gnome-shell/.css/panel.css b/theme/gnome-shell/.css/panel.css
             index 43b478b..6c67062 100644
             --- a/theme/gnome-shell/.css/panel.css
@@ -35,7 +35,7 @@
              .panel-button:active,
           '')
 
-          (builtins.toFile "single-path" ''
+          (builtins.toFile "fix-quick-settings-padding" ''
             diff --git a/theme/gnome-shell/.css/quick-settings.css b/theme/gnome-shell/.css/quick-settings.css
             index fcf8f86..e5f5c42 100644
             --- a/theme/gnome-shell/.css/quick-settings.css
@@ -139,7 +139,7 @@
         # Disable tests, and they take a long time to run.
         mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dtests=false" ];
         patches = [
-          (builtins.toFile "single-path" ''
+          (builtins.toFile "use-cool-platform-profile" ''
             diff --git a/src/ppd-driver-platform-profile.c b/src/ppd-driver-platform-profile.c
             index 28fc335..706ab82 100644
             --- a/src/ppd-driver-platform-profile.c
