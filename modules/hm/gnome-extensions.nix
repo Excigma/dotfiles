@@ -21,7 +21,6 @@
     gnomeExtensions.middle-click-to-close-in-overview
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.osd-volume-number
-    gnomeExtensions.quick-settings-tweaker
     gnomeExtensions.quick-settings-audio-panel
     gnomeExtensions.quick-touchpad-toggle
     gnomeExtensions.tailscale-qs
@@ -54,7 +53,6 @@
           night-theme-switcher.extensionUuid
           osd-volume-number.extensionUuid
           quick-settings-audio-panel.extensionUuid
-          quick-settings-tweaker.extensionUuid
           quick-touchpad-toggle.extensionUuid
           tailscale-qs.extensionUuid
           toggle-workspace-span.extensionUuid
