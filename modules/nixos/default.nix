@@ -45,6 +45,13 @@ in {
     # };
     # openssh.enable = true;
     gvfs.enable = true;
+    logind = {
+      lidSwitch = "suspend";
+      lidSwitchDocked = "ignore";
+      lidSwitchExternalPower = "suspend";
+      powerKey = "suspend";
+      powerKeyLongPress = "poweroff";
+    };
     pipewire = {
       enable = true;
       alsa.enable = true;
