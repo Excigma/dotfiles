@@ -126,7 +126,7 @@ in {
     users.${user} = {
       isNormalUser = true;
       description = user;
-      extraGroups = [ "networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "plugdev" ];
+      extraGroups = [ "kvm" "networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "plugdev" ];
       # packages = with pkgs; [];
     };
   };
