@@ -126,7 +126,7 @@ in {
     users.${user} = {
       isNormalUser = true;
       description = user;
-      extraGroups = [ "kvm" "networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "plugdev" ];
+      extraGroups = [ "kvm" "adbusers" "networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "plugdev" ];
       # packages = with pkgs; [];
     };
   };
@@ -189,6 +189,7 @@ in {
   };
 
   programs = {
+    adb.enable = true;
     command-not-found.enable = false;
     dconf.enable = true;
     nix-ld.enable = true;
