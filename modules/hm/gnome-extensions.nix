@@ -3,7 +3,7 @@
   home.packages = with pkgs; [
     (marble-shell-theme.override {
       colors = [ "blue" ];
-      additionalInstallationTweaks = [ "--opaque" "--panel_default_size" ];
+      additionalInstallationTweaks = [ "--opaque" "--panel-default-size" ];
     })
     gnomeExtensions.appindicator
     gnomeExtensions.alphabetical-app-grid
