@@ -193,6 +193,8 @@ in {
       noto-fonts-cjk-serif
       noto-fonts-emoji
       nerd-fonts.jetbrains-mono
+      vistafonts
+      corefonts
     ];
   };
 
