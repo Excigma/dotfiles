@@ -94,7 +94,7 @@ in {
             ];
 
             "bluez5.hfphsp-backend" = "none";
-            "bluez5.enable-hw-volume" = "false";
+            # "bluez5.enable-hw-volume" = "false";
           };
         };
       };
