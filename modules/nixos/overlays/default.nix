@@ -6,6 +6,26 @@
       unstable = import nixpkgs-unstable { inherit (prev) config system; };
       stable = import nixpkgs-stable { inherit (prev) config system; };
 
+      cloudflared = (prev.cloudflared.override {
+        buildGoModule = pkgs.buildGoModule.override {
+          go = pkgs.buildPackages.go_1_23.overrideAttrs (old: {
+            pname = "cloudflare-go";
+            version = "1.22.5-devel-cf";
+
+            src = pkgs.fetchFromGitHub {
+              owner = "cloudflare";
+              repo = "go";
+              rev = "af19da5605ca11f85776ef7af3384a02a315a52b";
+              hash = "sha256-6VT9CxlHkja+mdO1DeFoOTq7gjb3T5jcf2uf9TB/CkU=";
+            };
+
+            patches = map (patch:
+              if (baseNameOf patch == "go_no_vendor_checks-1.23.patch") then ./go-no-vendor-1.22.patch else patch)
+              old.patches;
+          });
+        };
+      }).overrideAttrs { meta.broken = false; };
+
       sound-theme-freedesktop = prev.sound-theme-freedesktop.overrideAttrs (oldAttrs: {
         postInstall = (oldAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/screen-capture.oga";
       });
@@ -39,7 +59,7 @@
             --- a/theme/gnome-shell/.css/quick-settings.css
             +++ b/theme/gnome-shell/.css/quick-settings.css
             @@ -2,7 +2,7 @@
-             
+
              /* QS section */
              .quick-settings {
             -	padding: 15px;
@@ -110,8 +130,8 @@
             @@ -228,19 +228,8 @@ nautilus_python_check_all_directories(GTypeModule *module) {
                  gchar *prefix_extension_dir = DATADIR "/nautilus-python/extensions";
                  dirs = g_list_append(dirs, g_strdup (prefix_extension_dir));
-             
-            -    // Check all system data dirs 
+
+            -    // Check all system data dirs
             -    const gchar *const *temp = g_get_system_data_dirs();
             -    while (*temp != NULL) {
             -        gchar *dir = g_build_filename(*temp,
@@ -126,7 +146,7 @@
             -    }
             +    dirs = g_list_append(dirs, g_build_filename("/run", "current-system", "sw",
             +        "share", "nautilus-python", "extensions", NULL));
-             
+
                  dirs = g_list_first(dirs);
                  while (dirs != NULL) {
           '')
@@ -151,7 +171,7 @@
                case PPD_PROFILE_PERFORMANCE:
                  return "performance";
                }
-            -- 
+            --
             2.48.1
           '')
         ] ++ old.patches or [ ];
