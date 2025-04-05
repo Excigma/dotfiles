@@ -124,14 +124,13 @@
         patches = [
           (builtins.toFile "single-path" ''
             diff --git a/src/nautilus-python.c b/src/nautilus-python.c
-            index 6e230ba..f5b51f1 100644
+            index 6e230ba..291640f 100644
             --- a/src/nautilus-python.c
             +++ b/src/nautilus-python.c
-            @@ -228,19 +228,8 @@ nautilus_python_check_all_directories(GTypeModule *module) {
-                 gchar *prefix_extension_dir = DATADIR "/nautilus-python/extensions";
+            @@ -229,18 +229,8 @@ nautilus_python_check_all_directories(GTypeModule *module) {
                  dirs = g_list_append(dirs, g_strdup (prefix_extension_dir));
-
-            -    // Check all system data dirs
+             
+                 // Check all system data dirs 
             -    const gchar *const *temp = g_get_system_data_dirs();
             -    while (*temp != NULL) {
             -        gchar *dir = g_build_filename(*temp,
@@ -146,7 +145,7 @@
             -    }
             +    dirs = g_list_append(dirs, g_build_filename("/run", "current-system", "sw",
             +        "share", "nautilus-python", "extensions", NULL));
-
+             
                  dirs = g_list_first(dirs);
                  while (dirs != NULL) {
           '')
