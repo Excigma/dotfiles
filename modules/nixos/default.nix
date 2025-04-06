@@ -423,6 +423,7 @@ in
           go-10mb-video
           ffmpeg
           fdk-aac-encoder
+          openfreebuds
           flameshot
           gimp
           inkscape

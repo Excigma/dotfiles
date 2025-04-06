@@ -91,7 +91,14 @@
           pname = "openfreebuds";
           version = "0.17.0";
           format = "pyproject";
-          nativeBuildInputs = [ pdm-backend ];
+          nativeBuildInputs = [
+            pkgs.pdm
+            pkgs.just
+            pyqt6
+            pkgs.qt6.qttools
+            pkgs.qt6.wrapQtAppsHook
+            pdm-backend
+          ];
           propagatedBuildInputs = [
             aiocmd
             aiohttp
@@ -99,9 +106,11 @@
             pillow
             psutil
             qasync
+            pyqt6
             pynput
             dbus-next
           ];
+          configurePhase = ''pyuic6 ./openfreebuds_qt/designer/'';
           src = pkgs.fetchFromGitHub {
             owner = "melianmiko";
             repo = pname;
