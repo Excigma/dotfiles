@@ -1,9 +1,13 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   # Install extensions
   home.packages = with pkgs; [
     (marble-shell-theme.override {
       colors = [ "blue" ];
-      additionalInstallationTweaks = [ "--opaque" "--panel-default-size" ];
+      additionalInstallationTweaks = [
+        "--opaque"
+        "--panel-default-size"
+      ];
     })
     gnomeExtensions.appindicator
     gnomeExtensions.alphabetical-app-grid
@@ -94,14 +98,20 @@
         indicator-color-focused = "rgb(127,170,214)";
         indicator-location = "BOTTOM";
         isolate-monitors = false;
-        main-panel-height = mkTuple [ false 29 ];
+        main-panel-height = mkTuple [
+          false
+          29
+        ];
         middle-click-action = "QUIT";
         multi-window-indicator-style = "MULTI_DASH";
         notification-badges = false;
         panel-location = "TOP";
         panel-on-all-monitors = false;
         scroll-action = "NO_ACTION";
-        show-apps-button = mkTuple [ false 0 ];
+        show-apps-button = mkTuple [
+          false
+          0
+        ];
         show-panel-activities-button = true;
         show-weather-by-clock = "OFF";
         unity-badges = false;
@@ -251,8 +261,7 @@
         input-always-show = false;
         input-show-selected = true;
         last-unsafe-state = false;
-        list-buttons = ''
-          [{"name":"SystemItem","title":null,"visible":true},{"name":"OutputStreamSlider","title":null,"visible":true},{"name":"InputStreamSlider","title":null,"visible":false},{"name":"BrightnessItem","title":null,"visible":true},{"name":"NMWiredToggle","title":null,"visible":false},{"name":"NMWirelessToggle","title":"Wi-Fi","visible":true},{"name":"NMModemToggle","title":null,"visible":false},{"name":"NMBluetoothToggle","title":null,"visible":false},{"name":"NMVpnToggle","title":null,"visible":false},{"name":"BluetoothToggle","title":"Bluetooth","visible":true},{"name":"PowerProfilesToggle","title":"Power Mode","visible":true},{"name":"NightLightToggle","title":"Night Light","visible":true},{"name":"DarkModeToggle","title":"Dark Style","visible":true},{"name":"KeyboardBrightnessToggle","title":"Keyboard","visible":false},{"name":"RfkillToggle","title":"Airplane Mode","visible":true},{"name":"RotationToggle","title":"Auto Rotate","visible":true},{"name":"CaffeineToggle","title":"Caffeine","visible":true},{"name":"TailscaleMenuToggle","title":"Tailscale","visible":true},{"name":"FeatureToggle","title":"Touchpad","visible":true},{"name":"DndQuickToggle","title":"Do Not Disturb","visible":true},{"name":"BackgroundAppsToggle","title":"No Background Apps","visible":false},{"name":"MediaSection","title":null,"visible":false}]'';
+        list-buttons = ''[{"name":"SystemItem","title":null,"visible":true},{"name":"OutputStreamSlider","title":null,"visible":true},{"name":"InputStreamSlider","title":null,"visible":false},{"name":"BrightnessItem","title":null,"visible":true},{"name":"NMWiredToggle","title":null,"visible":false},{"name":"NMWirelessToggle","title":"Wi-Fi","visible":true},{"name":"NMModemToggle","title":null,"visible":false},{"name":"NMBluetoothToggle","title":null,"visible":false},{"name":"NMVpnToggle","title":null,"visible":false},{"name":"BluetoothToggle","title":"Bluetooth","visible":true},{"name":"PowerProfilesToggle","title":"Power Mode","visible":true},{"name":"NightLightToggle","title":"Night Light","visible":true},{"name":"DarkModeToggle","title":"Dark Style","visible":true},{"name":"KeyboardBrightnessToggle","title":"Keyboard","visible":false},{"name":"RfkillToggle","title":"Airplane Mode","visible":true},{"name":"RotationToggle","title":"Auto Rotate","visible":true},{"name":"CaffeineToggle","title":"Caffeine","visible":true},{"name":"TailscaleMenuToggle","title":"Tailscale","visible":true},{"name":"FeatureToggle","title":"Touchpad","visible":true},{"name":"DndQuickToggle","title":"Do Not Disturb","visible":true},{"name":"BackgroundAppsToggle","title":"No Background Apps","visible":false},{"name":"MediaSection","title":null,"visible":false}]'';
         media-control-compact-mode = false;
         media-control-enabled = true;
         notifications-enabled = false;
@@ -269,7 +278,11 @@
         alphabetize = false;
         fixed-widths = true;
         hide-icons = false;
-        hot-sensors = [ "_fan_dell_ddv_cpu fan_" "_battery_rate_" "_processor_usage_" ];
+        hot-sensors = [
+          "_fan_dell_ddv_cpu fan_"
+          "_battery_rate_"
+          "_processor_usage_"
+        ];
         icon-style = 1;
         include-static-info = false;
         menu-centered = true;

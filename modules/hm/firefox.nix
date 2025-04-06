@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.firefox = {
     enable = true;
     nativeMessagingHosts = [ pkgs.gnome-browser-connector ];
@@ -38,54 +39,82 @@
         force = true;
         engines = {
           "Home Manager" = {
-            urls = [{
-              template = "https://home-manager-options.extranix.com";
-              params = [
-                {
-                  name = "query";
-                  value = "{searchTerms}";
-                }
-                {
-                  name = "release";
-                  value = "release-24.11";
-                }
-              ];
-            }];
+            urls = [
+              {
+                template = "https://home-manager-options.extranix.com";
+                params = [
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                  {
+                    name = "release";
+                    value = "release-24.11";
+                  }
+                ];
+              }
+            ];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "!homeopt" "!homeopts" ];
+            definedAliases = [
+              "!homeopt"
+              "!homeopts"
+            ];
           };
           "MyNixOS" = {
-            urls = [{
-              template = "https://mynixos.com/search";
-              params = [{
-                name = "q";
-                value = "{searchTerms}";
-              }];
-            }];
+            urls = [
+              {
+                template = "https://mynixos.com/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
-            definedAliases = [ "!mynix" "!mynixos" ];
+            definedAliases = [
+              "!mynix"
+              "!mynixos"
+            ];
           };
-          "NixOS Wiki" = { # Temporary fix
-            urls = [{
-              template = "https://wiki.nixos.org/w/index.php";
-              params = [{
-                name = "search";
-                value = "{searchTerms}";
-              }];
-            }];
+          "NixOS Wiki" = {
+            # Temporary fix
+            urls = [
+              {
+                template = "https://wiki.nixos.org/w/index.php";
+                params = [
+                  {
+                    name = "search";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "!nix" "!nixos" ];
+            definedAliases = [
+              "!nix"
+              "!nixos"
+            ];
           };
-          "NixOS Options" = { # Temporary fix
-            urls = [{
-              template = "https://search.nixos.org/options";
-              params = [{
-                name = "query";
-                value = "{searchTerms}";
-              }];
-            }];
+          "NixOS Options" = {
+            # Temporary fix
+            urls = [
+              {
+                template = "https://search.nixos.org/options";
+                params = [
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "!nixopt" "!nixopts" ];
+            definedAliases = [
+              "!nixopt"
+              "!nixopts"
+            ];
           };
         };
       };

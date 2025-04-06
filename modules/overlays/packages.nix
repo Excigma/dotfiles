@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   nixpkgs.overlays = [
     (final: prev: {
       go-10mb-video = pkgs.buildGoModule {
@@ -14,7 +15,10 @@
 
         vendorHash = null;
         subPackages = [ "." ];
-        buildInputs = with pkgs; [ ffmpeg fdk-aac-encoder ];
+        buildInputs = with pkgs; [
+          ffmpeg
+          fdk-aac-encoder
+        ];
 
         meta = with pkgs.lib; {
           description = "Fit a video into a 10mb file (Discord nitro pls?)";
@@ -30,8 +34,19 @@
         pname = "iriunwebcam";
         version = "2.8.4";
         meta.mainProgram = pname;
-        nativeBuildInputs = with pkgs; [ autoPatchelfHook dpkg qt5.wrapQtAppsHook ];
-        buildInputs = with pkgs; [ alsa-lib avahi libdrm libgcc libusbmuxd libsForQt5.qt5.qtbase ];
+        nativeBuildInputs = with pkgs; [
+          autoPatchelfHook
+          dpkg
+          qt5.wrapQtAppsHook
+        ];
+        buildInputs = with pkgs; [
+          alsa-lib
+          avahi
+          libdrm
+          libgcc
+          libusbmuxd
+          libsForQt5.qt5.qtbase
+        ];
         unpackPhase = "dpkg-deb -x $src .";
         installPhase = ''
           mkdir -p $out
@@ -51,7 +66,8 @@
         };
       };
 
-      openfreebuds = with pkgs.python3Packages;
+      openfreebuds =
+        with pkgs.python3Packages;
         let
           aiocmd = buildPythonPackage rec {
             pname = "aiocmd";
@@ -70,12 +86,22 @@
               hash = "sha256-NTgV9Zp/ZM2socAwfuE1WKBRL22wZOkv6DN4TwhTnHo=";
             };
           };
-        in buildPythonPackage rec {
+        in
+        buildPythonPackage rec {
           pname = "openfreebuds";
           version = "0.17.0";
           format = "pyproject";
           nativeBuildInputs = [ pdm-backend ];
-          propagatedBuildInputs = [ aiocmd aiohttp packaging pillow psutil qasync pynput dbus-next ];
+          propagatedBuildInputs = [
+            aiocmd
+            aiohttp
+            packaging
+            pillow
+            psutil
+            qasync
+            pynput
+            dbus-next
+          ];
           src = pkgs.fetchFromGitHub {
             owner = "melianmiko";
             repo = pname;

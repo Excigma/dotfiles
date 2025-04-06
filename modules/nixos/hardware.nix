@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   hardware = {
     enableRedistributableFirmware = lib.mkDefault true;
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -9,12 +15,27 @@
   };
 
   boot = {
-    initrd.availableKernelModules =
-      [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" "hid-sensor-hub" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "thunderbolt"
+      "nvme"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+      "hid-sensor-hub"
+    ];
     initrd.kernelModules = [ "xe" ];
     kernelPackages = pkgs.unstable.linuxPackages;
-    kernelModules = [ "kvm-intel" "v4l2loopback" "snd-aloop" ];
-    kernelParams = [ "i915.fastboot=1" "i915.force_probe=!a7a1" "xe.force_probe=a7a1" ];
+    kernelModules = [
+      "kvm-intel"
+      "v4l2loopback"
+      "snd-aloop"
+    ];
+    kernelParams = [
+      "i915.fastboot=1"
+      "i915.force_probe=!a7a1"
+      "xe.force_probe=a7a1"
+    ];
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 devices=1 card_label="Iriun Webcam,Iriun Webcam #2,Iriun Webcam #3,Iriun Webcam #4"
@@ -31,7 +52,10 @@
     "/boot" = {
       device = "/dev/disk/by-uuid/126C-B207";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
     };
   };
 

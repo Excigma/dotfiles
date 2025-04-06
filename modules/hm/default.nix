@@ -1,8 +1,17 @@
-{ pkgs, user, self, lib, ... }:
-let inherit (builtins) filter attrNames readDir;
-in {
-  imports = map (file: "${./.}/${file}")
-    (filter (x: x != "default.nix" && builtins.match ".*.nix" x != null) (attrNames (readDir ./.)));
+{
+  pkgs,
+  user,
+  self,
+  lib,
+  ...
+}:
+let
+  inherit (builtins) filter attrNames readDir;
+in
+{
+  imports = map (file: "${./.}/${file}") (
+    filter (x: x != "default.nix" && builtins.match ".*.nix" x != null) (attrNames (readDir ./.))
+  );
 
   home = {
     username = user;
@@ -42,18 +51,22 @@ in {
     stateVersion = "24.11";
   };
 
-  xdg.desktopEntries = builtins.listToAttrs (map (name: {
-    inherit name;
-    value = {
-      inherit name;
-      noDisplay = true;
-    };
-  }) [
-    "xterm"
-    "xpra-gui"
-    "scrcpy"
-    "PuTTY Terminal Emulator"
-  ]);
+  xdg.desktopEntries = builtins.listToAttrs (
+    map
+      (name: {
+        inherit name;
+        value = {
+          inherit name;
+          noDisplay = true;
+        };
+      })
+      [
+        "xterm"
+        "xpra-gui"
+        "scrcpy"
+        "PuTTY Terminal Emulator"
+      ]
+  );
 
   qt = {
     enable = true;
@@ -79,7 +92,10 @@ in {
         term = "xterm-256color";
         confirm-close-surface = false;
         shell-integration-features = true;
-        keybind = [ "ctrl+t=new_tab" "ctrl+w=close_tab" ];
+        keybind = [
+          "ctrl+t=new_tab"
+          "ctrl+w=close_tab"
+        ];
       };
       themes = {
         light-theme = {

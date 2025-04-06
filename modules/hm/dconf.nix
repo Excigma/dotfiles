@@ -1,4 +1,5 @@
-{ lib, self, ... }: {
+{ lib, self, ... }:
+{
   dconf = with lib.hm.gvariant; {
     enable = true;
     settings = lib.mkMerge [
@@ -43,14 +44,17 @@
         };
       }
 
-      { # gnome/desktop
+      {
+        # gnome/desktop
         "org/gnome/desktop/background" = {
           color-shading-type = "solid";
           picture-options = "zoom";
           picture-uri = "file://${self}/.local/share/backgrounds/SolidDesert-Light.png";
           picture-uri-dark = "file://${self}/.local/share/backgrounds/SolidDesert-Dark.png";
         };
-        "org/gnome/desktop/calendar" = { show-weekdate = false; };
+        "org/gnome/desktop/calendar" = {
+          show-weekdate = false;
+        };
         "org/gnome/desktop/interface" = {
           accent-color = "blue";
           clock-format = "24h";
@@ -95,7 +99,9 @@
             "org.gnome.Settings.desktop"
           ];
         };
-        "org/gnome/desktop/session" = { idle-delay = mkUint32 300; };
+        "org/gnome/desktop/session" = {
+          idle-delay = mkUint32 300;
+        };
         "org/gnome/desktop/sound" = {
           allow-volume-above-100-percent = false;
           event-sounds = true;
@@ -112,14 +118,27 @@
           move-to-monitor-right = [ "<Super><Shift>Right" ];
           move-to-monitor-up = [ "<Super><Shift>Up" ];
           move-to-workspace-down = [ "<Control><Shift><Alt>Down" ];
-          move-to-workspace-left = [ "<Super><Shift>Page_Up" "<Super><Shift><Alt>Left" "<Control><Shift><Alt>Left" ];
-          move-to-workspace-right =
-            [ "<Super><Shift>Page_Down" "<Super><Shift><Alt>Right" "<Control><Shift><Alt>Right" ];
+          move-to-workspace-left = [
+            "<Super><Shift>Page_Up"
+            "<Super><Shift><Alt>Left"
+            "<Control><Shift><Alt>Left"
+          ];
+          move-to-workspace-right = [
+            "<Super><Shift>Page_Down"
+            "<Super><Shift><Alt>Right"
+            "<Control><Shift><Alt>Right"
+          ];
           move-to-workspace-up = [ "<Control><Shift><Alt>Up" ];
           switch-applications = [ ];
           switch-applications-backward = [ ];
-          switch-group = [ "<Super>Above_Tab" "<Alt>Above_Tab" ];
-          switch-group-backward = [ "<Shift><Super>Above_Tab" "<Shift><Alt>Above_Tab" ];
+          switch-group = [
+            "<Super>Above_Tab"
+            "<Alt>Above_Tab"
+          ];
+          switch-group-backward = [
+            "<Shift><Super>Above_Tab"
+            "<Shift><Alt>Above_Tab"
+          ];
           switch-panels = [ ];
           switch-panels-backward = [ ];
           switch-to-workspace-left = [ "<Control><Super>Left" ];
@@ -136,18 +155,33 @@
           visual-bell = false;
         };
       }
-      { # gnome/epiphany
-        "org/gnome/epiphany" = { ask-for-default = false; };
-        "org/gnome/epiphany/lockdown" = { disable-fullscreen = false; };
+      {
+        # gnome/epiphany
+        "org/gnome/epiphany" = {
+          ask-for-default = false;
+        };
+        "org/gnome/epiphany/lockdown" = {
+          disable-fullscreen = false;
+        };
         "org/gnome/epiphany/state" = {
           is-maximized = true;
-          window-size = mkTuple [ 1600 870 ];
+          window-size = mkTuple [
+            1600
+            870
+          ];
         };
       }
-      { # gnome/nautilus
-        "org/gnome/nautilus/compression" = { default-compression-format = "zip"; };
-        "org/gnome/nautilus/icon-view" = { default-zoom-level = "medium"; };
-        "org/gnome/nautilus/list-view" = { default-zoom-level = "large"; };
+      {
+        # gnome/nautilus
+        "org/gnome/nautilus/compression" = {
+          default-compression-format = "zip";
+        };
+        "org/gnome/nautilus/icon-view" = {
+          default-zoom-level = "medium";
+        };
+        "org/gnome/nautilus/list-view" = {
+          default-zoom-level = "large";
+        };
         "org/gnome/nautilus/preferences" = {
           default-folder-viewer = "list-view";
           migrated-gtk-settings = true;
@@ -155,8 +189,11 @@
           search-filter-time-type = "last_modified";
         };
       }
-      { # gnome/settings-daemon
-        "org/gnome/settings-daemon/peripherals/touchscreen" = { orientation-lock = true; };
+      {
+        # gnome/settings-daemon
+        "org/gnome/settings-daemon/peripherals/touchscreen" = {
+          orientation-lock = true;
+        };
         "org/gnome/settings-daemon/plugins/media-keys" = {
           control-center = [ "<Super>i" ];
           custom-keybindings = [
@@ -226,7 +263,9 @@
         };
       }
       {
-        "org/gnome/shell/app-switcher" = { current-workspace-only = true; };
+        "org/gnome/shell/app-switcher" = {
+          current-workspace-only = true;
+        };
         "org/gnome/shell/keybindings" = {
           focus-active-notification = [ ];
           shift-overview-down = [ "<Super><Alt>Down" ];
@@ -239,9 +278,14 @@
           toggle-quick-settings = [ "<Super>s" ];
         };
       }
-      { # gnome other
-        "org/gnome/gedit/preferences/editor" = { scheme = "oblivion"; };
-        "org/gnome/gnome-session" = { logout-prompt = false; };
+      {
+        # gnome other
+        "org/gnome/gedit/preferences/editor" = {
+          scheme = "oblivion";
+        };
+        "org/gnome/gnome-session" = {
+          logout-prompt = false;
+        };
         "org/gnome/mutter" = {
           attach-modal-dialogs = false;
           center-new-windows = true;
@@ -251,11 +295,16 @@
           overlay-key = "Super_L";
           workspaces-only-on-primary = true;
         };
-        "org/gnome/tweaks" = { show-extensions-notice = false; };
+        "org/gnome/tweaks" = {
+          show-extensions-notice = false;
+        };
       }
 
-      { # virt-manager
-        "org/virt-manager/virt-manager" = { xmleditor-enabled = true; };
+      {
+        # virt-manager
+        "org/virt-manager/virt-manager" = {
+          xmleditor-enabled = true;
+        };
         "org/virt-manager/virt-manager/confirm" = {
           delete-storage = true;
           forcepoweroff = false;
@@ -267,10 +316,13 @@
           resize-guest = 1;
           scaling = 2;
         };
-        "org/virt-manager/virt-manager/details" = { show-toolbar = true; };
+        "org/virt-manager/virt-manager/details" = {
+          show-toolbar = true;
+        };
       }
 
-      { # gtk
+      {
+        # gtk
         "org/gtk/gtk4/settings/file-chooser" = {
           date-format = "regular";
           location-mode = "path-bar";
@@ -282,7 +334,10 @@
           sort-order = "ascending";
           type-format = "category";
           view-type = "grid";
-          window-size = mkTuple [ 1080 870 ];
+          window-size = mkTuple [
+            1080
+            870
+          ];
         };
         "org/gtk/settings/file-chooser" = {
           clock-format = "24h";

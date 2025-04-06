@@ -1,6 +1,8 @@
 { pkgs, lib, ... }:
-let inherit (lib) getExe;
-in {
+let
+  inherit (lib) getExe;
+in
+{
   programs = {
     zoxide = {
       enable = true;

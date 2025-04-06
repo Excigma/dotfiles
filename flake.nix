@@ -19,15 +19,23 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-index-database, home-manager, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nix-index-database,
+      home-manager,
+      ...
+    }:
     let
       user = "excigma";
       config.allowUnfree = true;
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit config system; };
       specialArgs = { inherit self user; };
-    in {
-      formatter.${system} = pkgs.nixfmt-classic;
+    in
+    {
+      formatter.${system} = pkgs.nixfmt-rfc-style;
       # Exposes repl accessible with `nix develop`
       devShells.${system} = with pkgs; rec {
         default = repl;
@@ -52,10 +60,12 @@
             home-manager.nixosModules.home-manager
             nix-index-database.nixosModules.nix-index
 
-            (if builtins.pathExists ./secrets/default.nix then
-              ./secrets
-            else
-              pkgs.lib.warn "${user}: no secrets found!" { })
+            (
+              if builtins.pathExists ./secrets/default.nix then
+                ./secrets
+              else
+                pkgs.lib.warn "${user}: no secrets found!" { }
+            )
 
             {
               nix = {
@@ -67,7 +77,10 @@
                 registry.pkgs.flake = self;
                 settings = {
                   auto-optimise-store = true;
-                  experimental-features = [ "nix-command" "flakes" ];
+                  experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
                   nix-path = "nixpkgs=/etc/nix/inputs/nixpkgs";
                   trusted-users = [ user ];
                 };

@@ -1,10 +1,23 @@
-{ self, pkgs, lib, user, ... }:
+{
+  self,
+  pkgs,
+  lib,
+  user,
+  ...
+}:
 let
-  inherit (builtins) filter attrNames readDir listToAttrs;
+  inherit (builtins)
+    filter
+    attrNames
+    readDir
+    listToAttrs
+    ;
   inherit (lib) flatten;
-in {
-  imports = map (file: "${./.}/${file}")
-    (filter (x: x != "default.nix" && builtins.match ".*.nix" x != null) (attrNames (readDir ./.)));
+in
+{
+  imports = map (file: "${./.}/${file}") (
+    filter (x: x != "default.nix" && builtins.match ".*.nix" x != null) (attrNames (readDir ./.))
+  );
 
   boot = {
     # tmp = {
@@ -66,17 +79,30 @@ in {
       # in it even if I have another microphone.
       wireplumber.extraConfig = {
         "50-bluez" = {
-          "monitor.bluez.rules" = [{
-            matches = [{ "device.name" = "~bluez_card.*"; }];
-            actions = {
-              update-props = {
-                "bluez5.auto-connect" = [ "a2dp_sink" "a2dp_source" ];
-                "bluez5.hw-volume" = [ "a2dp_sink" "a2dp_source" ];
+          "monitor.bluez.rules" = [
+            {
+              matches = [ { "device.name" = "~bluez_card.*"; } ];
+              actions = {
+                update-props = {
+                  "bluez5.auto-connect" = [
+                    "a2dp_sink"
+                    "a2dp_source"
+                  ];
+                  "bluez5.hw-volume" = [
+                    "a2dp_sink"
+                    "a2dp_source"
+                  ];
+                };
               };
-            };
-          }];
+            }
+          ];
           "monitor.bluez.properties" = {
-            "bluez5.roles" = [ "a2dp_sink" "a2dp_source" "bap_sink" "bap_source" ];
+            "bluez5.roles" = [
+              "a2dp_sink"
+              "a2dp_source"
+              "bap_sink"
+              "bap_source"
+            ];
 
             "bluez5.codecs" = [
               "ldac"
@@ -113,7 +139,10 @@ in {
     tailscale = {
       enable = true;
       openFirewall = true;
-      extraSetFlags = [ "--advertise-exit-node" "--operator=${user}" ];
+      extraSetFlags = [
+        "--advertise-exit-node"
+        "--operator=${user}"
+      ];
       extraUpFlags = [ "--ssh" ];
     };
     xserver = {
@@ -125,7 +154,9 @@ in {
         variant = "";
       };
     };
-    gnome = { gnome-browser-connector.enable = true; };
+    gnome = {
+      gnome-browser-connector.enable = true;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -135,7 +166,17 @@ in {
     users.${user} = {
       isNormalUser = true;
       description = user;
-      extraGroups = [ "kvm" "adbusers" "networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "plugdev" ];
+      extraGroups = [
+        "kvm"
+        "adbusers"
+        "networkmanager"
+        "wheel"
+        "input"
+        "video"
+        "libvirtd"
+        "dialout"
+        "plugdev"
+      ];
       # packages = with pkgs; [];
     };
   };
@@ -182,7 +223,11 @@ in {
     };
     bluetooth = {
       enable = true;
-      settings = { General = { Experimental = true; }; };
+      settings = {
+        General = {
+          Experimental = true;
+        };
+      };
     };
   };
 
@@ -225,7 +270,9 @@ in {
       enable = true;
       async = true;
     };
-    shellAliases = { ls = null; };
+    shellAliases = {
+      ls = null;
+    };
     enableGlobalCompInit = true;
     syntaxHighlighting.enable = true;
     shellInit = ''
@@ -240,7 +287,9 @@ in {
     '';
   };
 
-  systemd.services = { NetworkManager-wait-online.enable = false; };
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+  };
 
   environment = {
     gnome.excludePackages = with pkgs; [
@@ -258,18 +307,24 @@ in {
       totem # videos
       yelp # help
     ];
-    etc = listToAttrs (map (name: {
-      inherit name;
-      value = {
-        enable = true;
-        source = "${self}/etc/${name}";
-      };
-    }) [ # etc imports
-      "distrobox/distrobox.conf"
-      "powerlevel10k/.p10k.zsh"
-      "xdg/mimeapps.list"
-    ]);
-    systemPackages = with pkgs;
+    etc = listToAttrs (
+      map
+        (name: {
+          inherit name;
+          value = {
+            enable = true;
+            source = "${self}/etc/${name}";
+          };
+        })
+        [
+          # etc imports
+          "distrobox/distrobox.conf"
+          "powerlevel10k/.p10k.zsh"
+          "xdg/mimeapps.list"
+        ]
+    );
+    systemPackages =
+      with pkgs;
       flatten [
         # cli
         [
@@ -329,7 +384,7 @@ in {
           nh
           python3
           nodejs
-          nixfmt-classic
+          nixfmt-rfc-style
           vscode.fhs
 
           # needed for rpi pico for capstone
@@ -416,7 +471,10 @@ in {
   time.timeZone = "Pacific/Auckland";
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = [ "en_US.UTF-8/UTF-8" "en_NZ.UTF-8/UTF-8" ];
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "en_NZ.UTF-8/UTF-8"
+    ];
     extraLocaleSettings = {
       LC_ADDRESS = "en_NZ.UTF-8";
       LC_IDENTIFICATION = "en_NZ.UTF-8";
