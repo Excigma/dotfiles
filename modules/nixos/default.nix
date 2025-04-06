@@ -3,7 +3,8 @@ let
   inherit (builtins) filter attrNames readDir listToAttrs;
   inherit (lib) flatten;
 in {
-  imports = map (file: "${./.}/${file}") (filter (x: x != "default.nix") (attrNames (readDir ./.)));
+  imports = map (file: "${./.}/${file}")
+    (filter (x: x != "default.nix" && builtins.match ".*.nix" x != null) (attrNames (readDir ./.)));
 
   boot = {
     # tmp = {
