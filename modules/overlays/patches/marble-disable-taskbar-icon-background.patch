@@ -1,0 +1,19 @@
+diff --git a/theme/gnome-shell/.css/panel.css b/theme/gnome-shell/.css/panel.css
+index 43b478b..6c67062 100644
+--- a/theme/gnome-shell/.css/panel.css
++++ b/theme/gnome-shell/.css/panel.css
+@@ -36,6 +36,13 @@
+     box-shadow: inset 0 0 0 1px BORDER-SHADOW;
+ }
+
++/* App icons taskbar - hide button background */
++.panel-button.azTaskbar-BaseIcon {
++    background-color: transparent !important;
++    border: none !important;
++    box-shadow: none !important;
++}
++
+ .panel-button:hover,
+ .panel-button:hover .clock,
+ .panel-button:active,
+ 
