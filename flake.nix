@@ -19,7 +19,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-index-database, home-manager, ... }:
+  outputs = { self, nixpkgs, nix-index-database, home-manager, ... }:
     let
       user = "excigma";
       config.allowUnfree = true;
