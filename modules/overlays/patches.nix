@@ -19,7 +19,7 @@
               };
 
               patches = map (patch:
-                if (baseNameOf patch == "go_no_vendor_checks-1.23.patch") then ./go-no-vendor-1.22.patch else patch)
+                if (baseNameOf patch == "go_no_vendor_checks-1.23.patch") then ./cloudflare-go-no-vendor-1.22.patch else patch)
                 old.patches;
             });
           };
