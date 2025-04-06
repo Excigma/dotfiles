@@ -8,8 +8,8 @@ prev.nautilus-python.overrideAttrs (old: {
       +++ b/src/nautilus-python.c
       @@ -229,18 +229,8 @@ nautilus_python_check_all_directories(GTypeModule *module) {
            dirs = g_list_append(dirs, g_strdup (prefix_extension_dir));
-
-           // Check all system data dirs
+       
+           // Check all system data dirs 
       -    const gchar *const *temp = g_get_system_data_dirs();
       -    while (*temp != NULL) {
       -        gchar *dir = g_build_filename(*temp,
@@ -24,7 +24,7 @@ prev.nautilus-python.overrideAttrs (old: {
       -    }
       +    dirs = g_list_append(dirs, g_build_filename("/run", "current-system", "sw",
       +        "share", "nautilus-python", "extensions", NULL));
-
+       
            dirs = g_list_first(dirs);
            while (dirs != NULL) {
     '')
