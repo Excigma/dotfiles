@@ -47,6 +47,7 @@
           inherit system specialArgs;
           modules = [
             ./modules/nixos
+            ./modules/overlays
 
             home-manager.nixosModules.home-manager
             nix-index-database.nixosModules.nix-index
