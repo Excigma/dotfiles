@@ -92,7 +92,7 @@
               home-manager = {
                 extraSpecialArgs = specialArgs;
                 useGlobalPkgs = true;
-                users.${user} = import ./modules/hm/default.nix;
+                users.${user} = import ./modules/home-manager/default.nix;
                 useUserPackages = true;
               };
             }
@@ -102,7 +102,7 @@
 
       homeConfigurations."${user}@latitude-nixos" = home-manager.lib.homeManagerConfiguration {
         extraSpecialArgs = specialArgs;
-        modules = [ ./modules/hm/default.nix ];
+        modules = [ ./modules/home-manager/default.nix ];
         inherit pkgs;
       };
     };
