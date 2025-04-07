@@ -361,6 +361,7 @@ in
         [
           virt-manager
           virt-viewer
+          virtiofsd
           spice
           spice-gtk
           spice-protocol
