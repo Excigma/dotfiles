@@ -92,8 +92,6 @@
           version = "0.17.0";
           format = "pyproject";
           nativeBuildInputs = [
-            pkgs.pdm
-            pkgs.just
             pyqt6
             pkgs.qt6.qttools
             pkgs.qt6.wrapQtAppsHook
@@ -110,7 +108,15 @@
             pynput
             dbus-next
           ];
-          configurePhase = ''pyuic6 ./openfreebuds_qt/designer/'';
+          configurePhase = "pyuic6 ./openfreebuds_qt/designer/";
+          dontWrapQtApps = true;
+          dontWrapPythonPrograms = true;
+          postFixup = ''
+            sed -i "s:#!.*:#!${pkgs.lib.getExe pkgs.python3Full}\nprint(\"Using python39Full interpreter!\"):" $out/bin/openfreebuds_cmd
+            sed -i "s:#!.*:#!${pkgs.lib.getExe pkgs.python3Full}\nprint(\"Using python39Full interpreter!\"):" $out/bin/openfreebuds_qt
+            wrapPythonPrograms
+            wrapQtApp $out/bin/openfreebuds_qt
+          '';
           src = pkgs.fetchFromGitHub {
             owner = "melianmiko";
             repo = pname;
