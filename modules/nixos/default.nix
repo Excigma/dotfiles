@@ -330,6 +330,7 @@ in
         [
           android-tools
           wget
+          mamba-cpp
           arch-install-scripts
           eza
           fastfetch
