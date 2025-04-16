@@ -410,7 +410,7 @@ in
         [
           discord
           slack
-          signal-desktop
+          signal-desktop-bin
         ]
 
         # media
