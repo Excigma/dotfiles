@@ -320,7 +320,7 @@ in
           # etc imports
           "distrobox/distrobox.conf"
           "powerlevel10k/.p10k.zsh"
-          "xdg/mimeapps.list"
+          # "xdg/mimeapps.list"
         ]
     );
     systemPackages =
