@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ self, pkgs, ... }:
 {
   nixpkgs.overlays = [
     (final: prev: {
@@ -18,10 +18,7 @@
 
               patches = map (
                 patch:
-                if (baseNameOf patch == "go_no_vendor_checks-1.23.patch") then
-                  ./patches/cloudflare-go-no-vendor-1.22.patch
-                else
-                  patch
+                if (baseNameOf patch == "go_no_vendor_checks-1.23.patch") then ./patches/cloudflare-go-no-vendor-1.22.patch else patch
               ) prevAttrs.patches;
             });
           };
@@ -46,8 +43,14 @@
       });
 
       sound-theme-freedesktop = prev.sound-theme-freedesktop.overrideAttrs (prevAttrs: {
-        postInstall =
-          (prevAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/screen-capture.oga";
+        postInstall = (prevAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/screen-capture.oga";
+      });
+
+      mutter = prev.mutter.overrideAttrs (prevAttrs: {
+        src = self.inputs.mutter-triple-buffering-src;
+        preConfigure = ''
+          cp -a "${self.inputs.gvdb-src}" ./subprojects/gvdb
+        '';
       });
     })
   ];
