@@ -241,6 +241,7 @@ in
       nerd-fonts.jetbrains-mono
       vistafonts
       corefonts
+      inter
     ];
   };
 
