@@ -17,15 +17,6 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    mutter-triple-buffering-src = {
-      url = "gitlab:vanvugt/mutter?ref=triple-buffering-v4-47&host=gitlab.gnome.org";
-      flake = false;
-    };
-    gvdb-src = {
-      url = "gitlab:GNOME/gvdb?ref=main&host=gitlab.gnome.org";
-      flake = false;
-    };
   };
 
   outputs =
@@ -69,7 +60,12 @@
             home-manager.nixosModules.home-manager
             nix-index-database.nixosModules.nix-index
 
-            (if builtins.pathExists ./secrets/default.nix then ./secrets else pkgs.lib.warn "${user}: no secrets found!" { })
+            (
+              if builtins.pathExists ./secrets/default.nix then
+                ./secrets
+              else
+                pkgs.lib.warn "${user}: no secrets found!" { }
+            )
 
             {
               nix = {
