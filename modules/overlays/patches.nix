@@ -45,6 +45,10 @@
         patches = [ ./patches/ppd-use-cool-platform-profile.patch ] ++ (prevAttrs.patches or [ ]);
       });
 
+      rnote = prev.rnote.overrideAttrs (prevAttrs: {
+        patches = [ ./patches/rnote-move-pen-picker-to-top.patch ] ++ (prevAttrs.patches or [ ]);
+      });
+
       sound-theme-freedesktop = prev.sound-theme-freedesktop.overrideAttrs (prevAttrs: {
         postInstall =
           (prevAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/screen-capture.oga";

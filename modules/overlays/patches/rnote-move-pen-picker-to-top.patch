@@ -1,0 +1,27 @@
+From 11555d9b0e66901b15b3de01f57a0db5cb62372a Mon Sep 17 00:00:00 2001
+From: Excigma <git@excigma.xyz>
+Date: Fri, 25 Apr 2025 14:41:54 +1200
+Subject: [PATCH] chore: move pen picker to top
+
+---
+ crates/rnote-ui/data/ui/overlays.ui | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/crates/rnote-ui/data/ui/overlays.ui b/crates/rnote-ui/data/ui/overlays.ui
+index 350aca23..cfd7a9ff 100644
+--- a/crates/rnote-ui/data/ui/overlays.ui
++++ b/crates/rnote-ui/data/ui/overlays.ui
+@@ -26,8 +26,8 @@
+             <property name="hexpand">false</property>
+             <property name="vexpand">false</property>
+             <property name="halign">center</property>
+-            <property name="valign">end</property>
+-            <property name="margin-top">6</property>
++            <property name="valign">start</property>
++            <property name="margin-top">78</property>
+             <property name="margin-bottom">18</property>
+             <property name="margin-start">6</property>
+             <property name="margin-end">6</property>
+-- 
+2.49.0
+
