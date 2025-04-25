@@ -6,7 +6,7 @@
       colors = [ "blue" ];
       additionalInstallationTweaks = [
         "--opaque"
-        "--panel-default-size"
+        # "--panel-default-size"
       ];
     })
     gnomeExtensions.appindicator
