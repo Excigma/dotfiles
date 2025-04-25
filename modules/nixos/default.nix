@@ -66,6 +66,19 @@ in
       powerKey = "suspend";
       powerKeyLongPress = "poweroff";
     };
+    keyd = {
+      enable = true; # Turn on keyd daemon
+      keyboards.default = {
+        # Logitech M510
+        ids = [ "046d:4051" ];
+        settings = {
+          main = {
+            mouse1 = "C-M-left"; # Side button to Ctrl+Meta+Left
+            mouse2 = "C-M-right"; # Side button to Ctrl+Meta+Right
+          };
+        };
+      };
+    };
     pipewire = {
       enable = true;
       alsa.enable = true;
