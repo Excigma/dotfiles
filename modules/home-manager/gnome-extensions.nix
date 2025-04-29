@@ -54,6 +54,7 @@
           gnome-40-ui-improvements.extensionUuid
           just-perfection.extensionUuid
           launch-new-instance.extensionUuid
+          solaar-extension.extensionUuid
           middle-click-to-close-in-overview.extensionUuid
           night-theme-switcher.extensionUuid
           osd-volume-number.extensionUuid
