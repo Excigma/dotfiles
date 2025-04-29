@@ -465,6 +465,7 @@ in
           prismlauncher
           nautilus-python
           solaar
+          logitech-udev-rules
 
           zotero
         ]

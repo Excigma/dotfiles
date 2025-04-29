@@ -20,6 +20,7 @@
     gnomeExtensions.do-not-disturb-while-screen-sharing-or-recording
     gnomeExtensions.native-window-placement
     gnomeExtensions.launch-new-instance
+    gnomeExtensions.solaar-extension
     gnomeExtensions.gnome-40-ui-improvements
     gnomeExtensions.just-perfection
     gnomeExtensions.middle-click-to-close-in-overview
