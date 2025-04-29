@@ -215,7 +215,10 @@ in
 
   hardware = {
     sensor.iio.enable = true;
-    logitech.wireless.enable = true;
+    logitech.wireless = {
+      enableGraphical = true;
+      enable = true;
+    };
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
