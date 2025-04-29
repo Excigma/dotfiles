@@ -163,6 +163,9 @@ in
   users = {
     groups.libvirtd.members = [ user ];
     defaultUserShell = pkgs.zsh;
+    groups = {
+      plugdev = { };
+    };
     users.${user} = {
       isNormalUser = true;
       description = user;
