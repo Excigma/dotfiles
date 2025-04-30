@@ -124,6 +124,53 @@
             sha256 = "sha256-1NfcF1MoBXb+PPNJx993fzQNcGOZAZwf9QxzTvZcbxw=";
           };
         };
+
+      semantra = pkgs.python3Packages.buildPythonPackage {
+        pname = "semantra";
+        version = "0.1.12";
+        format = "pyproject";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "freedmand";
+          repo = "semantra";
+          rev = "1aed8fd0057f6b3eb7946e0f351f9c668842774d";
+          sha256 = "sha256-vz7P++DqxXlSuLH75lPXs+CYeGq+rbDE2Eeh1XozZDQ=";
+        };
+
+        nativeBuildInputs = with pkgs.python3Packages; [
+          setuptools
+          wheel
+        ];
+
+        postPatch = ''
+          substituteInPlace pyproject.toml \
+            --replace 'annoy_fixed>=1.16.3' 'annoy>=1.16.3'
+          substituteInPlace pyproject.toml \
+            --replace 'numpy<2' 'numpy'
+            
+        '';
+
+        propagatedBuildInputs = with pkgs.python3Packages; [
+          annoy
+          click
+          flask
+          openai
+          pillow
+          pypdfium2
+          python-dotenv
+          numpy
+          tiktoken
+          torch
+          tqdm
+          transformers
+        ];
+
+        meta = with pkgs.lib; {
+          description = "A semantic search CLI tool";
+          homepage = "https://github.com/freedmand/semantra";
+          license = licenses.mit;
+        };
+      };
     })
   ];
 }

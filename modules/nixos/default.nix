@@ -374,6 +374,7 @@ in
           spice
           spice-gtk
           spice-protocol
+          semantra
         ]
 
         # zsh
