@@ -119,7 +119,7 @@ in
         VISUAL = "${getExe pkgs.vscode} --wait";
         EDITOR = "${getExe pkgs.vscode} --wait";
         MOZ_USE_XINPUT2 = "1";
-        NIXOS_OZONE_WL = "1";
+        # NIXOS_OZONE_WL = "1";
       };
       shellAliases = {
         ".." = "cd ..";
