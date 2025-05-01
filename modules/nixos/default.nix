@@ -355,6 +355,7 @@ in
           tlrc
           intel-gpu-tools
           intel-undervolt
+          qmassa
           usbutils
           pciutils
         ]

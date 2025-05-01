@@ -171,6 +171,42 @@
           license = licenses.mit;
         };
       };
+
+      # https://github.com/ulissesf/qmassa
+      # use cargo to build
+      # The minimum requirements to compile & run qmassa are:
+
+      # Compile-time: Rust v1.74 or later, pkg-config and libudev development packages
+      # Runtime: Linux kernel v6.8 or later to report most usage stats
+      qmassa = pkgs.rustPlatform.buildRustPackage rec {
+        pname = "qmassa";
+        version = "0.7.0";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "ulissesf";
+          repo = pname;
+          rev = "v${version}";
+          sha256 = "sha256-k+oix860KwDIGBr1qaOvabkWdTQLrKRDXXFiW2qWx5I=";
+        };
+
+        nativeBuildInputs = with pkgs; [
+          pkg-config
+        ];
+        buildInputs = with pkgs; [
+          systemd
+        ];
+
+        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+          inherit pname version src;
+          hash = "sha256-AQAgNRkb0qTeA99uv95rg837INVC36iRgR7xyk7vlzo=";
+        };
+
+        meta = with pkgs.lib; {
+          description = "A command-line tool to monitor CPU and GPU usage";
+          homepage = "https://github.com/ulissesf/qmassa";
+          license = licenses.mit;
+        };
+      };
     })
   ];
 }
