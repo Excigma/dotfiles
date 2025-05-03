@@ -391,7 +391,6 @@ in
           android-studio
           dconf-editor
           rustup
-          lmstudio
           nixd
           nh
           python3
