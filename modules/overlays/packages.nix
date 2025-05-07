@@ -32,7 +32,7 @@
 
       iriunwebcam = pkgs.stdenvNoCC.mkDerivation rec {
         pname = "iriunwebcam";
-        version = "2.8.4";
+        version = "2.8.5";
         meta.mainProgram = pname;
         nativeBuildInputs = with pkgs; [
           autoPatchelfHook
@@ -44,7 +44,16 @@
           avahi
           libdrm
           libgcc
-          libusbmuxd
+          (libusbmuxd.overrideAttrs (oldAttrs: {
+            version = "2.0.2";
+
+            src = fetchFromGitHub {
+              owner = "libimobiledevice";
+              repo = "libusbmuxd";
+              rev = "2.0.2";
+              hash = "sha256-yd1pihlu1Kpk6J3kC3oF7UGQcWzgGhw8NZPNHq3+N40=";
+            };
+          }))
           libsForQt5.qt5.qtbase
         ];
         unpackPhase = "dpkg-deb -x $src .";
@@ -62,7 +71,7 @@
         '';
         src = pkgs.fetchurl {
           url = "http://iriun.gitlab.io/iriunwebcam-${version}.deb";
-          hash = "sha256-4Et+X10fRbyyQcPjzQcXTR4WlXf0rWQlvdGwQip1T1o=";
+          hash = "sha256-K9GItagaHVkMBV1Y3HsYD08yIf6lJZDi6GSLEQQo2pQ=";
         };
       };
 
