@@ -412,6 +412,7 @@ in
           iriunwebcam
           miniserve
           openfortivpn
+          rclone
           putty
           xpra
         ]
