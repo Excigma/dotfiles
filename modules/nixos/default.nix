@@ -469,7 +469,6 @@ in
 
           libsmbios
           smartmontools
-          ventoy
 
           prismlauncher
           nautilus-python
