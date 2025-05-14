@@ -172,6 +172,7 @@ in
       extraGroups = [
         "kvm"
         "adbusers"
+        "docker"
         "networkmanager"
         "wheel"
         "input"
@@ -206,9 +207,8 @@ in
         };
       };
     };
-    podman = {
+    docker = {
       enable = true;
-      dockerCompat = true;
     };
     spiceUSBRedirection.enable = true;
   };
