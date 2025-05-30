@@ -54,6 +54,7 @@ in
     printing.enable = true; # CUPS
     fwupd.enable = true; # firmware updates
     thermald.enable = true;
+    cloudflared.enable = true;
     # foldingathome = {
     #   enable = true;
     # };
