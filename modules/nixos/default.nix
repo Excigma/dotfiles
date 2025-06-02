@@ -427,6 +427,7 @@ in
 
         # media
         [
+          easyeffects
           blender
           cheese
           playerctl
