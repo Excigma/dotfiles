@@ -427,6 +427,7 @@ in
 
         # media
         [
+          obs-studio
           easyeffects
           blender
           cheese
@@ -442,6 +443,7 @@ in
           flameshot
           gimp
           inkscape
+          vmware-horizon-client
           pstoedit
         ]
 
