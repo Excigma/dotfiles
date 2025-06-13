@@ -341,6 +341,7 @@ in
           wget
           mamba-cpp
           arch-install-scripts
+          better-adb-sync
           eza
           fastfetch
           distrobox

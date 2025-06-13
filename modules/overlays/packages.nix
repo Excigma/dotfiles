@@ -216,6 +216,38 @@
           license = licenses.mit;
         };
       };
+      
+      # https://github.com/jb2170/better-adb-sync
+      better-adb-sync = pkgs.python3Packages.buildPythonApplication rec {
+        pname = "better-adb-sync";
+        version = "1.4.0"; # Please check for the latest version on PyPI
+        format = "pyproject"; # Specify that it uses pyproject.toml
+
+        src = pkgs.fetchPypi {
+          inherit version;
+          pname = "BetterADBSync"; # PyPI name might be case-sensitive
+          sha256 = "sha256-z6E8gayItFEpT9GIi7LAZ5xIptNyUH/IBj6mJffmzoI=";
+        };
+
+        nativeBuildInputs = with pkgs.python3Packages; [
+          setuptools # Use setuptools as the build backend
+        ];
+
+        propagatedBuildInputs = with pkgs.python3Packages; [
+          adb-shell
+          tqdm
+          pkgs.android-tools # adb CLI tool
+        ];
+
+        meta = with pkgs.lib; {
+          description = "A better adb-sync, based on adb-shell, with a progress bar";
+          homepage = "https://github.com/jb2170/better-adb-sync";
+          license = licenses.mit; # Check the actual license from the repo
+          maintainers = [ ]; # Add your handle here
+          platforms = platforms.linux; # Or platforms.all if applicable
+          mainProgram = "better-adb-sync";
+        };
+      };
     })
   ];
 }
