@@ -65,7 +65,7 @@ in
       lidSwitchDocked = "ignore";
       lidSwitchExternalPower = "suspend";
       powerKey = "suspend";
-      powerKeyLongPress = "poweroff";
+      powerKeyLongPress = "suspend";
     };
     pipewire = {
       enable = true;
