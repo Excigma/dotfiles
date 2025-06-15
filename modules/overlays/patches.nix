@@ -21,6 +21,7 @@
 
       rnote = prev.rnote.overrideAttrs (prevAttrs: {
         patches = [
+          ./patches/rnote-enlarge-selection-bounds.patch
           ./patches/rnote-move-pen-picker-to-top.patch
           ./patches/rnote-tap-to-select.patch
         ] ++ (prevAttrs.patches or [ ]);
