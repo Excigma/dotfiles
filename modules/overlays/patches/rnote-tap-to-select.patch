@@ -1,0 +1,35 @@
+From 463371e7bc39c75b21c0c156f4262b9e1f01b962 Mon Sep 17 00:00:00 2001
+From: Excigma <git@excigma.xyz>
+Date: Sun, 15 Jun 2025 12:23:55 +1200
+Subject: [PATCH] feat: use single-shot selection mode if pen is tapped in
+ other modes
+
+---
+ crates/rnote-engine/src/pens/selector/penevents.rs | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/crates/rnote-engine/src/pens/selector/penevents.rs b/crates/rnote-engine/src/pens/selector/penevents.rs
+index 096c962d..37cf01c0 100644
+--- a/crates/rnote-engine/src/pens/selector/penevents.rs
++++ b/crates/rnote-engine/src/pens/selector/penevents.rs
+@@ -426,8 +426,16 @@ impl Selector {
+             },
+             SelectorState::Selecting { path } => {
+                 let mut progress = PenProgress::Finished;
++                let mut selector_config_style = engine_view.pens_config.selector_config.style;
+ 
+-                let new_selection = match engine_view.pens_config.selector_config.style {
++                if path.len() < 10 {
++                    // If we have less than 10 points, consider it as a "tap" and use the single selector style.
++                    // A better heuristic would be better - however, this is a quick fix.
++                    // I just picked 10 as some random threshold and it seems to work well enough.
++                    selector_config_style = SelectorStyle::Single;
++                }
++
++                let new_selection = match selector_config_style {
+                     SelectorStyle::Polygon => {
+                         if path.len() >= 3 {
+                             engine_view
+-- 
+2.49.0
+
