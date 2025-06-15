@@ -366,6 +366,7 @@ in
         [
           xournalpp
           rnote
+          folio
           libreoffice-fresh
         ]
 
