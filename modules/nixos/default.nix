@@ -432,6 +432,7 @@ in
           obs-studio
           easyeffects
           blender
+          kdePackages.kdenlive
           cheese
           playerctl
           vlc
