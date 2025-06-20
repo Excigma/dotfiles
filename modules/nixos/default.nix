@@ -50,6 +50,7 @@ in
   };
 
   services = {
+    avahi.enable = true; # mDNS
     fstrim.enable = true;
     printing.enable = true; # CUPS
     fwupd.enable = true; # firmware updates
@@ -73,6 +74,23 @@ in
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
+
+      raopOpenFirewall = true;
+
+      extraConfig.pipewire = {
+        "10-airplay" = {
+          "context.modules" = [
+            {
+              name = "libpipewire-module-raop-discover";
+
+              # increase the buffer size if you get dropouts/glitches
+              # args = {
+              #   "raop.latency.ms" = 500;
+              # };
+            }
+          ];
+        };
+      };
 
       # From: https://github.com/TLATER/dotfiles/blob/19d3fecfff648c0fa7371f2cec14363a0da2e44f/nixos-config/default.nix#L166C1-L216C9
       # Disable the HFP bluetooth profile, because I always use external
