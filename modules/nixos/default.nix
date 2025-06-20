@@ -90,6 +90,18 @@ in
             }
           ];
         };
+        "92-latency-fix" = {
+          # The Intel CPU is slightly underpowered, so there is popping with default settings.
+          # We need to do the opposite of "low latency" as suggested by the NixOS wiki to avoid popping under load.
+          # Fixed quantum size to avoid popping when EasyEffects is running and a new channel is added.
+          "context.properties" = {
+            "default.clock.rate" = 48000;
+            "default.clock.allowed-rates" = [ 48000 ];
+            "default.clock.quantum" = 1024;
+            "default.clock.min-quantum" = 1024;
+            "default.clock.max-quantum" = 1024;
+          };
+        };
       };
 
       # From: https://github.com/TLATER/dotfiles/blob/19d3fecfff648c0fa7371f2cec14363a0da2e44f/nixos-config/default.nix#L166C1-L216C9
