@@ -31,6 +31,7 @@
     gnomeExtensions.tailscale-qs
     gnomeExtensions.toggle-workspace-span
     gnomeExtensions.user-themes
+    gnomeExtensions.unblank
     gnomeExtensions.vitals
   ];
 
@@ -62,6 +63,7 @@
           quick-touchpad-toggle.extensionUuid
           tailscale-qs.extensionUuid
           toggle-workspace-span.extensionUuid
+          unblank.extensionUuid
           user-themes.extensionUuid
           vitals.extensionUuid
         ];
