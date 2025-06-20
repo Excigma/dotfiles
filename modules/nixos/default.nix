@@ -448,6 +448,7 @@ in
           rclone
           putty
           xpra
+          deskflow
         ]
 
         # social
