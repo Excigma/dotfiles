@@ -390,6 +390,7 @@ in
           qmassa
           usbutils
           pciutils
+          wl-clipboard
         ]
 
         # text & notes
