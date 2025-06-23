@@ -50,6 +50,15 @@ in
   };
 
   services = {
+    openssh = {
+      enable = true;
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+        X11Forwarding = false;
+      };
+    };
+    fail2ban.enable = true;
     avahi.enable = true; # mDNS
     fstrim.enable = true;
     printing.enable = true; # CUPS
