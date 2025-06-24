@@ -284,7 +284,7 @@
           scheme = "oblivion";
         };
         "org/gnome/gnome-session" = {
-          logout-prompt = false;
+          logout-prompt = true;
         };
         "org/gnome/mutter" = {
           attach-modal-dialogs = false;
