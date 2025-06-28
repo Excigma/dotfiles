@@ -441,6 +441,7 @@ in
           nh
           python3
           nodejs
+          pnpm
           nixfmt-rfc-style
           vscode.fhs
 
