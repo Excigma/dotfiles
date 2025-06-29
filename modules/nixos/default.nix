@@ -167,7 +167,11 @@ in
       };
     };
     udev = {
-      packages = with pkgs; [ gnome-settings-daemon ];
+      packages = with pkgs; [
+        gnome-settings-daemon
+        openocd
+        platformio-core
+      ];
       extraRules = ''
         SUBSYSTEM!="usb_device", ACTION!="add", GOTO="rpi2_end"
         # Raspberry Pi Pico
