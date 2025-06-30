@@ -21,7 +21,7 @@ in
       };
       initExtraFirst = ''
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-        if [ -f ~/.p10k.zsh ]; then source ~/.p10k.zsh
+        if [ -f ~/.config/.p10k.zsh ]; then source ~/.config/.p10k.zsh
         else
           source /etc/powerlevel10k/.p10k.zsh
         fi
