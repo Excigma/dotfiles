@@ -100,7 +100,7 @@
           ];
         };
         "org/gnome/desktop/session" = {
-          idle-delay = mkUint32 300;
+          idle-delay = mkUint32 600;
         };
         "org/gnome/desktop/sound" = {
           allow-volume-above-100-percent = false;
