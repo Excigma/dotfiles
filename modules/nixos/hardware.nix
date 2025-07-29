@@ -28,7 +28,6 @@
       "snd-aloop"
     ];
     kernelParams = [
-      "i915.fastboot=1"
       "i915.force_probe=!a7a1"
       "xe.force_probe=a7a1"
     ];
