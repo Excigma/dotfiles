@@ -17,6 +17,8 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    i915-sriov.url = "github:strongtz/i915-sriov-dkms/master";
   };
 
   outputs =
@@ -25,6 +27,7 @@
       nixpkgs,
       nix-index-database,
       home-manager,
+      i915-sriov,
       ...
     }:
     let
@@ -59,6 +62,8 @@
 
             home-manager.nixosModules.home-manager
             nix-index-database.nixosModules.nix-index
+
+            i915-sriov.nixosModules.default
 
             (
               if builtins.pathExists ./secrets/default.nix then

@@ -20,7 +20,6 @@
       "sd_mod"
       "hid-sensor-hub"
     ];
-    initrd.kernelModules = [ "xe" ];
     kernelPackages = pkgs.unstable.linuxPackages;
     kernelModules = [
       "kvm-intel"
@@ -29,8 +28,12 @@
     ];
     kernelParams = [
       "i915.fastboot=1"
+      "intel_iommu=on"
+      "i915.enable_guc=3"
+      "i915.max_vfs=7"
+      "module_blacklist=xe"
     ];
-    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback pkgs.i915-sriov ];
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 devices=1 card_label="Iriun Webcam,Iriun Webcam #2,Iriun Webcam #3,Iriun Webcam #4"
       options snd-aloop index=0
