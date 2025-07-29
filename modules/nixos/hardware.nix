@@ -21,7 +21,7 @@
       "hid-sensor-hub"
     ];
     initrd.kernelModules = [ "xe" ];
-    kernelPackages = pkgs.unstable.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [
       "kvm-intel"
       "v4l2loopback"
