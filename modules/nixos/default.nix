@@ -33,7 +33,7 @@ in
 
   zramSwap = {
     enable = true;
-    memoryPercent = 75;
+    memoryPercent = 25;
   };
 
   networking = {
