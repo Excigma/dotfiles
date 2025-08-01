@@ -24,18 +24,18 @@
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [
       "kvm-intel"
-      "v4l2loopback"
+      # "v4l2loopback"
       "snd-aloop"
     ];
     kernelParams = [
       "i915.force_probe=!a7a1"
       "xe.force_probe=a7a1"
     ];
-    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-    extraModprobeConfig = ''
-      options v4l2loopback exclusive_caps=1 devices=1 card_label="Iriun Webcam"
-      options snd-aloop index=0
-    '';
+    # extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    # extraModprobeConfig = ''
+    #   options v4l2loopback exclusive_caps=1 devices=1 card_label="Iriun Webcam"
+    #   options snd-aloop index=0
+    # '';
   };
 
   fileSystems = {
