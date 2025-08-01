@@ -1,0 +1,25 @@
+From d83d5d0dfdfaddf7f8767364b4decad9a67bb960 Mon Sep 17 00:00:00 2001
+From: Excigma <git@excigma.xyz>
+Date: Sat, 2 Aug 2025 10:50:40 +1200
+Subject: [PATCH] chore: increase workspace selected indicator border width
+
+---
+ theme/gnome-shell/.css/overview.css | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/theme/gnome-shell/.css/overview.css b/theme/gnome-shell/.css/overview.css
+index dec85a3..6234260 100644
+--- a/theme/gnome-shell/.css/overview.css
++++ b/theme/gnome-shell/.css/overview.css
+@@ -52,7 +52,7 @@
+ .workspace-thumbnail-indicator {
+ 	background-color: ACCENT-OPACITY-COLOR;
+ 	border-color: TEXT-DISABLED-COLOR;
+-	border-width: 1px;
++	border-width: 3px;
+ 	border-radius: 3px;
+ }
+ 
+-- 
+2.49.0
+

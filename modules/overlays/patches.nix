@@ -6,6 +6,7 @@
         patches = [
           ./patches/marble-disable-taskbar-icon-background.patch
           ./patches/marble-fix-quick-settings-padding.patch
+          ./patches/marble-increase-workspace-border.patch
         ] ++ (prevAttrs.patches or [ ]);
       });
 
