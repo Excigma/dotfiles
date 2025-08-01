@@ -3,7 +3,4 @@
 SCRIPT_DIR="$(cd -- "$(dirname "${BASH_SOURCE[0]:-${(%):-%N}}")" && pwd)"
 SRC="${SRC:-$SCRIPT_DIR}"
 
-echo "Pinning repos to follow nixpkgs revision..."
-nix run github:spikespaz/allfollow -- prune -I
-
 nh os "$@" ".?submodules=1"

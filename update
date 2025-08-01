@@ -8,6 +8,8 @@ NEW_REV=$(nix flake metadata --json | jq -r '.locks.nodes.nixpkgs.locked.rev')
 
 if [ "$OLD_REV" != "$NEW_REV" ]; then
     echo "nixpkgs updated: $OLD_REV -> $NEW_REV"
+    echo "Pinning repos to follow nixpkgs revision..."
+    nix run github:spikespaz/allfollow -- prune -I
 
     ./rebuild switch --update && git commit -am "chore: update packages"
     echo "nixpkgs updated: $OLD_REV -> $NEW_REV"
