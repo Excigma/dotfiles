@@ -31,6 +31,9 @@
       "i915.force_probe=!a7a1"
       "xe.force_probe=a7a1"
     ];
+    kernel.sysctl = {
+      "vm.swappiness" = 15;
+    };
     # extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
     # extraModprobeConfig = ''
     #   options v4l2loopback exclusive_caps=1 devices=1 card_label="Iriun Webcam"
