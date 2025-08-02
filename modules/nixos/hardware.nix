@@ -11,6 +11,7 @@
   };
 
   boot = {
+    initrd.systemd.enable = true;
     initrd.availableKernelModules = [
       "xhci_pci"
       "thunderbolt"
@@ -20,7 +21,10 @@
       "sd_mod"
       "hid-sensor-hub"
     ];
-    initrd.kernelModules = [ "xe" ];
+    initrd.kernelModules = [
+      "xe"
+      "lz4"
+    ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [
       "kvm-intel"
@@ -30,6 +34,11 @@
     kernelParams = [
       "i915.force_probe=!a7a1"
       "xe.force_probe=a7a1"
+      "zswap.enabled=1"
+      "zswap.compressor=lz4"
+      "zswap.max_pool_percent=30"
+      "zswap.shrinker_enabled=1"
+      "zswap.zpool=zsmalloc"
     ];
     kernel.sysctl = {
       "vm.swappiness" = 15;
