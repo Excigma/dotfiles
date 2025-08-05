@@ -456,6 +456,7 @@ in
 
         # network
         [
+          linux-wifi-hotspot
           unstable.brave
           chromium
           cloudflared
