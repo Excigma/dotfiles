@@ -441,6 +441,7 @@ in
           arduino-ide
           android-studio
           dconf-editor
+          eclipses.eclipse-java
           rustup
           nixd
           nh
