@@ -2,6 +2,11 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
+      systemj-eclipse = pkgs.eclipses.eclipse-java.overrideAttrs (oldAttrs: {
+        pname = "eclipse-java";
+        jre = pkgs.jdk8;
+      });
+
       go-10mb-video = pkgs.buildGoModule {
         pname = "10mb.video";
         version = "e5cd1ed583d6fce1e2552a91d48959f3243d341f";
@@ -216,7 +221,7 @@
           license = licenses.mit;
         };
       };
-      
+
       # https://github.com/jb2170/better-adb-sync
       better-adb-sync = pkgs.python3Packages.buildPythonApplication rec {
         pname = "better-adb-sync";
