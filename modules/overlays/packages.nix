@@ -3,12 +3,20 @@
   nixpkgs.overlays = [
     (final: prev: {
       systemj-eclipse = pkgs.eclipses.eclipse-java.overrideAttrs (old: {
-        buildInputs = old.buildInputs ++ [ prev.jdk8 ];
-        buildCommand = pkgs.lib.replaceStrings [
-          ''--prefix PATH : ${pkgs.jdk}/bin''
-        ] [
-          ''--prefix PATH : "${prev.jdk}/bin" --prefix JAVA_HOME : "${prev.jdk8}/bin"''
-        ] old.buildCommand;
+        buildInputs = old.buildInputs ++ [
+          prev.gtk2 # Needed for JavaFX (?)
+          prev.gtk3 # Needed for JavaFX (?)
+          prev.jdk8
+        ];
+        buildCommand =
+          pkgs.lib.replaceStrings
+            [
+              ''--prefix PATH : ${pkgs.jdk}/bin''
+            ]
+            [
+              ''--prefix PATH : "${(prev.jdk.override { enableJavaFX = true; })}/bin" --prefix JAVA_HOME : "${prev.jdk8}/bin"''
+            ]
+            old.buildCommand;
       });
 
       go-10mb-video = pkgs.buildGoModule {
