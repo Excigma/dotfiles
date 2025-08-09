@@ -3,11 +3,11 @@
   nixpkgs.overlays = [
     (final: prev: {
       systemj-eclipse = pkgs.eclipses.eclipse-java.overrideAttrs (old: {
-        buildInputs = builtins.filter (p: p.pname != "openjdk") old.buildInputs ++ [ prev.jdk8 ];
+        buildInputs = old.buildInputs ++ [ prev.jdk8 ];
         buildCommand = pkgs.lib.replaceStrings [
           ''--prefix PATH : ${pkgs.jdk}/bin''
         ] [
-          ''--prefix PATH : ${prev.jdk8}/bin''
+          ''--prefix PATH : "${prev.jdk}/bin" --prefix JAVA_HOME : "${prev.jdk8}/bin"''
         ] old.buildCommand;
       });
 
