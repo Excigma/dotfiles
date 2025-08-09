@@ -2,9 +2,13 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
-      systemj-eclipse = pkgs.eclipses.eclipse-java.overrideAttrs (oldAttrs: {
-        pname = "eclipse-java";
-        jre = pkgs.jdk8;
+      systemj-eclipse = pkgs.eclipses.eclipse-java.overrideAttrs (old: {
+        buildInputs = builtins.filter (p: p.pname != "openjdk") old.buildInputs ++ [ prev.jdk8 ];
+        buildCommand = pkgs.lib.replaceStrings [
+          ''--prefix PATH : ${pkgs.jdk}/bin''
+        ] [
+          ''--prefix PATH : ${prev.jdk8}/bin''
+        ] old.buildCommand;
       });
 
       go-10mb-video = pkgs.buildGoModule {
