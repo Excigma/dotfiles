@@ -3,11 +3,14 @@
   nixpkgs.overlays = [
     (final: prev: {
       marble-shell-theme = prev.marble-shell-theme.overrideAttrs (prevAttrs: {
+        version = "48.0.1-patch-7";
         patches = [
+          ./patches/marble-hide-notification-message.patch
           ./patches/marble-disable-taskbar-icon-background.patch
           ./patches/marble-fix-quick-settings-padding.patch
           ./patches/marble-increase-workspace-border.patch
-        ] ++ (prevAttrs.patches or [ ]);
+        ]
+        ++ (prevAttrs.patches or [ ]);
       });
 
       nautilus-python = prev.nautilus-python.overrideAttrs (prevAttrs: {
@@ -25,7 +28,8 @@
           ./patches/rnote-enlarge-selection-bounds.patch
           ./patches/rnote-move-pen-picker-to-top.patch
           ./patches/rnote-tap-to-select.patch
-        ] ++ (prevAttrs.patches or [ ]);
+        ]
+        ++ (prevAttrs.patches or [ ]);
       });
 
       sound-theme-freedesktop = prev.sound-theme-freedesktop.overrideAttrs (prevAttrs: {
