@@ -485,6 +485,7 @@ in
           easyeffects
           blender
           kdePackages.kdenlive
+          krita
           cheese
           playerctl
           vlc
