@@ -22,7 +22,7 @@ index da15d77..6fe76e4 100644
 +	min-width: 0px !important;
 +	min-height: 0px !important;
 +	font-size: 0px !important;
-+	opacity: 0px !important;
++	opacity: 0 !important;
 +}
 +
  /* messages in menus */
