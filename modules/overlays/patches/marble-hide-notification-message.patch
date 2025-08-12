@@ -1,31 +1,35 @@
-From 30cd33b51c71cb7177a0454433b0f82f925347bf Mon Sep 17 00:00:00 2001
+From 665493d03445188b449f4ea11428061be3794646 Mon Sep 17 00:00:00 2001
 From: Excigma <git@excigma.xyz>
-Date: Tue, 12 Aug 2025 12:27:56 +1200
+Date: Wed, 13 Aug 2025 11:10:39 +1200
 Subject: [PATCH] feat: hide notification message
 
 ---
- theme/gnome-shell/.css/messages.css | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ theme/gnome-shell/.css/messages.css | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
 diff --git a/theme/gnome-shell/.css/messages.css b/theme/gnome-shell/.css/messages.css
-index da15d77..6e09ee5 100644
+index da15d77..5cc7153 100644
 --- a/theme/gnome-shell/.css/messages.css
 +++ b/theme/gnome-shell/.css/messages.css
-@@ -43,6 +43,22 @@
+@@ -43,6 +43,26 @@
  	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.07);
  }
  
 +/* hide message content in OSD */
 +.notification-banner .message-body {
-+	padding: 0;
-+	border-width: 0;
-+	min-width: 0;
-+	min-height: 0;
-+	font-size: 0;
-+	opacity: 0;
++	margin: 0px 0px 0px 0px !important;
++	padding: 0px 0px 0px 0px !important;
++	border-width: 0px 0px 0px 0px !important;
++	width: 0 !important;
++	height: 0 !important;
++	min-width: 0 !important;
++	min-height: 0 !important;
++	font-size: 0 !important;
++	icon-size: 0 !important;
++	opacity: 0 !important;
 +}
 +
-+.notification-banner .message-icon{
++.notification-banner .message-icon {
 +	min-width: 1.5em !important;
 +	max-width: 1.5em !important;
 +	icon-size: 1.5em !important;
