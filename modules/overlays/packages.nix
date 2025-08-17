@@ -265,6 +265,81 @@
           mainProgram = "better-adb-sync";
         };
       };
+
+      # snapx = pkgs.stdenv.mkDerivation rec {
+      #   pname = "snapx";
+      #   version = "0.3.0";
+
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "SnapXL";
+      #     repo = "SnapX";
+      #     rev = "v${version}";
+      #     hash = "sha256-n5nkpBT6XM3WPkR18pewoBwXrjbOZMVC2PWxXiHf6r8=";
+      #   };
+
+      #   nativeBuildInputs = with pkgs; [
+      #     dotnet-sdk_9 
+      #     clang
+      #     zlib
+      #     bash
+      #     pkg-config
+      #     fontconfig
+      #     freetype
+      #     openssl
+      #     icu
+      #     dbus
+      #     xorg.libXrandr
+      #     xorg.libxcb
+      #     xorg.libX11
+      #   ];
+
+      #   buildInputs = with pkgs; [
+      #     ffmpeg
+      #     xdg-utils
+      #     at
+      #     sudo
+      #   ];
+
+      #   postPatch = ''
+      #     substituteInPlace build.sh \
+      #       --replace '#!/usr/bin/env sh' '#!/usr/bin/env bash'
+      #     sed -i 's/\r$//' build.sh
+      #   '';
+
+      #   preBuild = ''
+      #     ls -a
+      #     echo "preBuild"
+      #     chmod +x ./build.sh
+      #     cat build.sh
+      #   '';
+
+      #   buildPhase = ''
+      #     runHook preBuild
+      #     export VERSION=${version}
+      #     export PKGTYPE=NIX
+      #     echo "buildPhase"
+      #     ls -a
+      #     bash ./build.sh --configuration Release
+      #     runHook postBuild
+      #   '';
+
+      #   installPhase = ''
+      #     runHook preInstall
+      #     echo "installPhase"
+      #     ls -a
+      #     bash ./build.sh install --prefix $out --dest-dir "" --assembly snapx --skip-compile
+      #     bash ./build.sh install --prefix $out --dest-dir "" --assembly snapx-ui --skip-compile
+      #     runHook postInstall
+      #   '';
+
+      #   meta = with pkgs.lib; {
+      #     description = "Screenshot tool that handles images, text, and video (fork of ShareX)";
+      #     homepage = "https://github.com/SnapXL/SnapX";
+      #     license = licenses.gpl3Only;
+      #     maintainers = [ ];
+      #     platforms = platforms.linux;
+      #   };
+      # };
     })
   ];
 }

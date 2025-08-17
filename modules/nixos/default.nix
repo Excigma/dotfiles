@@ -496,6 +496,7 @@ in
           fdk-aac-encoder
           openfreebuds
           flameshot
+          # snapx
           gimp
           inkscape
           vmware-horizon-client
