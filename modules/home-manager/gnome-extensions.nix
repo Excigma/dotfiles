@@ -14,6 +14,7 @@
     gnomeExtensions.app-icons-taskbar
     gnomeExtensions.battery-health-charging
     gnomeExtensions.bluetooth-battery-meter
+    gnomeExtensions.task-widget
     gnomeExtensions.caffeine
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.dim-completed-calendar-events
