@@ -48,6 +48,7 @@
           appindicator.extensionUuid
           alphabetical-app-grid.extensionUuid
           app-icons-taskbar.extensionUuid
+          task-widget.extensionUuid
           battery-health-charging.extensionUuid
           bluetooth-battery-meter.extensionUuid
           caffeine.extensionUuid
