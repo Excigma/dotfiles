@@ -14,7 +14,7 @@
     gnomeExtensions.app-icons-taskbar
     gnomeExtensions.battery-health-charging
     gnomeExtensions.bluetooth-battery-meter
-    gnomeExtensions.task-widget
+    gnomeExtensions.todotxt
     gnomeExtensions.caffeine
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.dim-completed-calendar-events
@@ -48,7 +48,7 @@
           appindicator.extensionUuid
           alphabetical-app-grid.extensionUuid
           app-icons-taskbar.extensionUuid
-          task-widget.extensionUuid
+          todotxt.extensionUuid
           battery-health-charging.extensionUuid
           bluetooth-battery-meter.extensionUuid
           caffeine.extensionUuid
