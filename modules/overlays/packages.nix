@@ -49,7 +49,7 @@
 
       iriunwebcam = pkgs.stdenvNoCC.mkDerivation rec {
         pname = "iriunwebcam";
-        version = "2.8.5";
+        version = "2.9";
         meta.mainProgram = pname;
         nativeBuildInputs = with pkgs; [
           autoPatchelfHook
@@ -88,7 +88,7 @@
         '';
         src = pkgs.fetchurl {
           url = "http://iriun.gitlab.io/iriunwebcam-${version}.deb";
-          hash = "sha256-K9GItagaHVkMBV1Y3HsYD08yIf6lJZDi6GSLEQQo2pQ=";
+          hash = "sha256-B0rvAv8n5e/IPnB6YUwMO/9MgRucan/U8rrkyiaahEs=";
         };
       };
 
