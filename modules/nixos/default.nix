@@ -444,7 +444,7 @@ in
           rustup
           nixd
           nh
-          python3
+          python310
           nodejs
           pnpm
           nixfmt-rfc-style
