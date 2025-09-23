@@ -449,10 +449,6 @@ in
           pnpm
           nixfmt-rfc-style
           vscode.fhs
-
-          # Needed for rpi pico for capstone
-          libusb1
-          thonny
         ]
 
         # network
