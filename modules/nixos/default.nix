@@ -440,6 +440,7 @@ in
           arduino-ide
           android-studio
           dconf-editor
+          # COMPSYS 704
           systemj-eclipse
           rustup
           nixd

@@ -2,6 +2,7 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
+      # COMPSYS 704
       systemj-eclipse = pkgs.eclipses.eclipse-java.overrideAttrs (old: {
         buildInputs = old.buildInputs ++ [
           prev.gtk2 # Needed for JavaFX (?)
@@ -47,6 +48,7 @@
         };
       };
 
+      # Currently broken
       iriunwebcam = pkgs.stdenvNoCC.mkDerivation rec {
         pname = "iriunwebcam";
         version = "2.9";
