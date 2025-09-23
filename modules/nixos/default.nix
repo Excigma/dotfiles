@@ -449,6 +449,9 @@ in
           pnpm
           nixfmt-rfc-style
           vscode.fhs
+
+          # Needed for numpy for COMPSYS 726
+          zlib
         ]
 
         # network
