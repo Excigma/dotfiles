@@ -23,6 +23,7 @@
     gnomeExtensions.launch-new-instance
     gnomeExtensions.solaar-extension
     gnomeExtensions.gnome-40-ui-improvements
+    gnomeExtensions.search-light
     gnomeExtensions.just-perfection
     gnomeExtensions.middle-click-to-close-in-overview
     gnomeExtensions.night-theme-switcher
@@ -58,6 +59,7 @@
           gnome-40-ui-improvements.extensionUuid
           just-perfection.extensionUuid
           launch-new-instance.extensionUuid
+          search-light.extensionUuid
           solaar-extension.extensionUuid
           middle-click-to-close-in-overview.extensionUuid
           night-theme-switcher.extensionUuid
@@ -229,6 +231,9 @@
         adapt-panel-menu = true;
         icon-position = "left";
         number-position = "right";
+      };
+      "org/gnome/shell/extensions/search-light" = {
+        shortcut-search = [ "<Super>space" ];
       };
       "org/gnome/shell/extensions/quick-settings-audio-panel" = {
         always-show-input-slider = true;
