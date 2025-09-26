@@ -22,6 +22,7 @@
     gnomeExtensions.native-window-placement
     gnomeExtensions.launch-new-instance
     gnomeExtensions.solaar-extension
+    gnomeExtensions.fly-pie
     gnomeExtensions.gnome-40-ui-improvements
     gnomeExtensions.search-light
     gnomeExtensions.just-perfection
@@ -57,6 +58,7 @@
           dim-completed-calendar-events.extensionUuid
           do-not-disturb-while-screen-sharing-or-recording.extensionUuid
           gnome-40-ui-improvements.extensionUuid
+          fly-pie.extensionUuid
           just-perfection.extensionUuid
           launch-new-instance.extensionUuid
           search-light.extensionUuid
