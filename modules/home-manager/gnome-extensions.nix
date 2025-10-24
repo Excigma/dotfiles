@@ -58,10 +58,10 @@
           dim-completed-calendar-events.extensionUuid
           do-not-disturb-while-screen-sharing-or-recording.extensionUuid
           gnome-40-ui-improvements.extensionUuid
-          fly-pie.extensionUuid
+          # fly-pie.extensionUuid
           just-perfection.extensionUuid
           launch-new-instance.extensionUuid
-          search-light.extensionUuid
+          # search-light.extensionUuid
           solaar-extension.extensionUuid
           middle-click-to-close-in-overview.extensionUuid
           night-theme-switcher.extensionUuid
@@ -235,7 +235,7 @@
         number-position = "right";
       };
       "org/gnome/shell/extensions/search-light" = {
-        shortcut-search = [ "<Super>space" ];
+        shortcut-search = [ "<Ctrl><Super>space" ];
       };
       "org/gnome/shell/extensions/quick-settings-audio-panel" = {
         always-show-input-slider = true;
