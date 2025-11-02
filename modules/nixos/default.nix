@@ -390,7 +390,6 @@ in
           better-adb-sync
           eza
           fastfetch
-          distrobox
           gh
           htop
           jq
@@ -425,7 +424,6 @@ in
           spice
           spice-gtk
           spice-protocol
-          semantra
         ]
 
         # zsh
@@ -437,15 +435,10 @@ in
 
         # dev
         [
-          arduino-ide
           android-studio
-          dconf-editor
-          # COMPSYS 704
-          systemj-eclipse
           rustup
           nixd
           nh
-          python310
           nodejs
           pnpm
           nixfmt-rfc-style
@@ -464,7 +457,6 @@ in
           gnirehtet
           iriunwebcam
           miniserve
-          openfortivpn
           rclone
           putty
           xpra
@@ -484,22 +476,17 @@ in
           easyeffects
           blender
           kdePackages.kdenlive
-          krita
-          cheese
           playerctl
           vlc
-          yt-dlp
           gpu-screen-recorder
           gpu-screen-recorder-gtk
           go-10mb-video
           ffmpeg
           fdk-aac-encoder
-          openfreebuds
           flameshot
           # snapx
           gimp
           inkscape
-          vmware-horizon-client
           pstoedit
         ]
 
