@@ -32,8 +32,9 @@ in
   };
 
   zramSwap = {
-    enable = false;
-    # memoryPercent = 25;
+    enable = true;
+    memoryPercent = 50;
+    algorithm = "zstd";
   };
 
   networking = {
