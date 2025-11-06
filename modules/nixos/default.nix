@@ -182,6 +182,12 @@ in
         ATTR{idVendor}=="2e8a", ATTRS{idProduct}=="0003", MODE="0666", GROUP="plugdev"
 
         LABEL="rpi2_end"
+
+        SUBSYSTEM!="usb_device", ACTION!="add", GOTO="leavers_end"
+        # ECSE Leaver's Dinner Invites
+        ATTR{idVendor}=="2e8a", ATTRS{idProduct}=="000a", MODE="0666", GROUP="plugdev"
+
+        LABEL="leavers_end"
       '';
     };
     tailscale = {
@@ -444,6 +450,7 @@ in
           nixd
           nh
           nodejs
+          python3
           pnpm
           nixfmt-rfc-style
           vscode.fhs
