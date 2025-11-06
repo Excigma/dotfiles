@@ -342,33 +342,6 @@
       #     platforms = platforms.linux;
       #   };
       # };
-
-      audio-enhancements = pkgs.stdenvNoCC.mkDerivation {
-        pname = "audio-enhancements";
-        version = "git";
-
-        src = ./source/audio-enhancements;
-
-        makeFlags = [
-          "DESTDIR=$(out)"
-          "DATA_DIR=share"
-        ];
-
-        fixupPhase = ''
-          runHook preFixup
-
-          for config_file in $(find $out -type f -not -name '*.wav' -not -name '*.irs') ; do
-              substituteInPlace "$config_file" --replace-warn "/usr" "$out"
-          done
-
-          runHook postFixup
-        '';
-
-        passthru = {
-          updateScript = pkgs.nix-update-script { };
-          requiredLv2Packages = [ pkgs.bankstown-lv2 pkgs.lsp-plugins pkgs.calf ];
-        };
-      };
     })
   ];
 }
