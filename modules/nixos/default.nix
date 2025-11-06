@@ -481,6 +481,7 @@ in
         # media
         [
           obs-studio
+          pavucontrol
           easyeffects
           blender
           kdePackages.kdenlive
