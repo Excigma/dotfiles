@@ -1,0 +1,533 @@
+From dc146f6e897142742cbdf3b292c74d4e069bf62a Mon Sep 17 00:00:00 2001
+From: Excigma <git@excigma.xyz>
+Date: Fri, 7 Nov 2025 12:22:09 +1300
+Subject: [PATCH] feat: swap calf bass enhancer with bankstown
+
+---
+ bankstown                                     |   1 +
+ ....wwmm.easyeffects.bassenhancer.gschema.xml |  36 ++--
+ data/ui/bass_enhancer.ui                      | 154 ++++++++++++------
+ include/tags_plugin_name.hpp                  |   2 +
+ src/bass_enhancer.cpp                         |  25 ++-
+ src/bass_enhancer_preset.cpp                  |  24 +--
+ src/bass_enhancer_ui.cpp                      |  23 ++-
+ 7 files changed, 166 insertions(+), 99 deletions(-)
+ create mode 160000 bankstown
+
+diff --git a/bankstown b/bankstown
+new file mode 160000
+index 000000000..e9829c9bc
+--- /dev/null
++++ b/bankstown
+@@ -0,0 +1 @@
++Subproject commit e9829c9bccf5ed73768135c0ddd506f5a6690f9e
+diff --git a/data/schemas/com.github.wwmm.easyeffects.bassenhancer.gschema.xml b/data/schemas/com.github.wwmm.easyeffects.bassenhancer.gschema.xml
+index 061595fda..9eae77c84 100644
+--- a/data/schemas/com.github.wwmm.easyeffects.bassenhancer.gschema.xml
++++ b/data/schemas/com.github.wwmm.easyeffects.bassenhancer.gschema.xml
+@@ -13,30 +13,32 @@
+             <default>0</default>
+         </key>
+         <key name="amount" type="d">
+-            <range min="-100" max="36" />
+-            <default>0</default>
++            <range min="0" max="15" />
++            <default>1.0</default>
+         </key>
+-        <key name="harmonics" type="d">
+-            <range min="0.1" max="10" />
+-            <default>8.5</default>
++        <key name="floor" type="d">
++            <range min="10" max="250" />
++            <default>20</default>
+         </key>
+-        <key name="scope" type="d">
++        <key name="ceiling" type="d">
+             <range min="10" max="250" />
+-            <default>100</default>
++            <default>200</default>
+         </key>
+-        <key name="floor" type="d">
+-            <range min="10" max="120" />
+-            <default>20</default>
++        <key name="final-hp" type="d">
++            <range min="10" max="250" />
++            <default>200</default>
+         </key>
+-        <key name="blend" type="d">
+-            <range min="-10" max="10" />
+-            <default>0</default>
++        <key name="sat-second" type="d">
++            <range min="0" max="15" />
++            <default>1.0</default>
+         </key>
+-        <key name="floor-active" type="b">
+-            <default>false</default>
++        <key name="sat-third" type="d">
++            <range min="0" max="15" />
++            <default>1.0</default>
+         </key>
+-        <key name="listen" type="b">
+-            <default>false</default>
++        <key name="blend" type="d">
++            <range min="0" max="1" />
++            <default>0.5</default>
+         </key>
+     </schema>
+ </schemalist>
+\ No newline at end of file
+diff --git a/data/ui/bass_enhancer.ui b/data/ui/bass_enhancer.ui
+index 909ee1e14..b8c7fe2d9 100644
+--- a/data/ui/bass_enhancer.ui
++++ b/data/ui/bass_enhancer.ui
+@@ -18,20 +18,13 @@
+                     <object class="GtkBox">
+                         <property name="spacing">12</property>
+                         <property name="orientation">vertical</property>
+-                        <child>
+-                            <object class="GtkToggleButton" id="listen">
+-                                <property name="label" translatable="yes">Listen</property>
+-                                <property name="halign">center</property>
+-                            </object>
+-                        </child>
+-
+                         <child>
+                             <object class="GtkGrid">
+                                 <property name="halign">center</property>
+                                 <property name="row-spacing">2</property>
+                                 <child>
+                                     <object class="GtkLabel" id="blend_label">
+-                                        <property name="label" translatable="yes">Blend Harmonics</property>
++                                        <property name="label" translatable="yes">Harmonic Blend</property>
+                                         <layout>
+                                             <property name="column">0</property>
+                                             <property name="column-span">3</property>
+@@ -57,21 +50,21 @@
+                                         <property name="valign">center</property>
+                                         <property name="adjustment">
+                                             <object class="GtkAdjustment">
+-                                                <property name="lower">-10</property>
+-                                                <property name="upper">10</property>
+-                                                <property name="step-increment">1</property>
+-                                                <property name="page-increment">1</property>
++                                                <property name="lower">0</property>
++                                                <property name="upper">1</property>
++                                                <property name="step-increment">0.01</property>
++                                                <property name="page-increment">0.1</property>
+                                             </object>
+                                         </property>
+                                         <property name="draw-value">1</property>
+-                                        <property name="digits">0</property>
++                                        <property name="digits">2</property>
+                                         <property name="value-pos">top</property>
+                                         <marks>
+-                                            <mark value="-10" position="bottom"></mark>
+-                                            <mark value="-5" position="bottom"></mark>
+                                             <mark value="0" position="bottom"></mark>
+-                                            <mark value="5" position="bottom"></mark>
+-                                            <mark value="10" position="bottom"></mark>
++                                            <mark value="0.25" position="bottom"></mark>
++                                            <mark value="0.5" position="bottom"></mark>
++                                            <mark value="0.75" position="bottom"></mark>
++                                            <mark value="1" position="bottom"></mark>
+                                         </marks>
+                                         <layout>
+                                             <property name="column">1</property>
+@@ -119,13 +112,14 @@
+                                         <property name="width-chars">10</property>
+                                         <property name="adjustment">
+                                             <object class="GtkAdjustment">
+-                                                <property name="lower">-100</property>
+-                                                <property name="upper">36</property>
++                                                <property name="lower">0</property>
++                                                <property name="upper">15</property>
++                                                <property name="value">1.0</property>
+                                                 <property name="step-increment">0.1</property>
+                                                 <property name="page-increment">1</property>
+                                             </object>
+                                         </property>
+-                                        <property name="digits">1</property>
++                                        <property name="digits">2</property>
+                                         <layout>
+                                             <property name="column">0</property>
+                                             <property name="row">1</property>
+@@ -137,8 +131,8 @@
+                                 </child>
+ 
+                                 <child>
+-                                    <object class="GtkLabel" id="harmonics_spinbutton_label">
+-                                        <property name="label" translatable="yes">Harmonics</property>
++                                    <object class="GtkLabel" id="sat_second_label">
++                                        <property name="label" translatable="yes">2nd Harmonic Gain</property>
+                                         <layout>
+                                             <property name="column">1</property>
+                                             <property name="row">0</property>
+@@ -146,33 +140,33 @@
+                                     </object>
+                                 </child>
+                                 <child>
+-                                    <object class="GtkSpinButton" id="harmonics">
++                                    <object class="GtkSpinButton" id="sat_second">
+                                         <property name="halign">center</property>
+                                         <property name="orientation">vertical</property>
+                                         <property name="width-chars">10</property>
+                                         <property name="adjustment">
+                                             <object class="GtkAdjustment">
+-                                                <property name="lower">0.1</property>
+-                                                <property name="upper">10</property>
+-                                                <property name="value">8.5</property>
++                                                <property name="lower">0</property>
++                                                <property name="upper">15</property>
++                                                <property name="value">1.0</property>
+                                                 <property name="step-increment">0.1</property>
+                                                 <property name="page-increment">1</property>
+                                             </object>
+                                         </property>
+-                                        <property name="digits">1</property>
++                                        <property name="digits">2</property>
+                                         <layout>
+                                             <property name="column">1</property>
+                                             <property name="row">1</property>
+                                         </layout>
+                                         <accessibility>
+-                                            <relation name="labelled-by">harmonics_spinbutton_label</relation>
++                                            <relation name="labelled-by">sat_second_label</relation>
+                                         </accessibility>
+                                     </object>
+                                 </child>
+ 
+                                 <child>
+-                                    <object class="GtkLabel" id="scope_label">
+-                                        <property name="label" translatable="yes">Scope</property>
++                                    <object class="GtkLabel" id="sat_third_label">
++                                        <property name="label" translatable="yes">3rd Harmonic Gain</property>
+                                         <layout>
+                                             <property name="column">2</property>
+                                             <property name="row">0</property>
+@@ -180,7 +174,41 @@
+                                     </object>
+                                 </child>
+                                 <child>
+-                                    <object class="GtkSpinButton" id="scope">
++                                    <object class="GtkSpinButton" id="sat_third">
++                                        <property name="halign">center</property>
++                                        <property name="orientation">vertical</property>
++                                        <property name="width-chars">10</property>
++                                        <property name="adjustment">
++                                            <object class="GtkAdjustment">
++                                                <property name="lower">0</property>
++                                                <property name="upper">15</property>
++                                                <property name="value">1.0</property>
++                                                <property name="step-increment">0.1</property>
++                                                <property name="page-increment">1</property>
++                                            </object>
++                                        </property>
++                                        <property name="digits">2</property>
++                                        <layout>
++                                            <property name="column">2</property>
++                                            <property name="row">1</property>
++                                        </layout>
++                                        <accessibility>
++                                            <relation name="labelled-by">sat_third_label</relation>
++                                        </accessibility>
++                                    </object>
++                                </child>
++
++                                <child>
++                                    <object class="GtkLabel" id="floor_label">
++                                        <property name="label" translatable="yes">Floor Frequency</property>
++                                        <layout>
++                                            <property name="column">0</property>
++                                            <property name="row">2</property>
++                                        </layout>
++                                    </object>
++                                </child>
++                                <child>
++                                    <object class="GtkSpinButton" id="floor">
+                                         <property name="halign">center</property>
+                                         <property name="orientation">vertical</property>
+                                         <property name="width-chars">10</property>
+@@ -188,52 +216,86 @@
+                                             <object class="GtkAdjustment">
+                                                 <property name="lower">10</property>
+                                                 <property name="upper">250</property>
+-                                                <property name="value">100</property>
++                                                <property name="value">20</property>
+                                                 <property name="step-increment">1</property>
+                                                 <property name="page-increment">10</property>
+                                             </object>
+                                         </property>
++                                        <property name="digits">0</property>
+                                         <layout>
+-                                            <property name="column">2</property>
+-                                            <property name="row">1</property>
++                                            <property name="column">0</property>
++                                            <property name="row">3</property>
+                                         </layout>
+                                         <accessibility>
+-                                            <relation name="labelled-by">scope_label</relation>
++                                            <relation name="labelled-by">floor_label</relation>
+                                         </accessibility>
+                                     </object>
+                                 </child>
+ 
+                                 <child>
+-                                    <object class="GtkToggleButton" id="floor_active">
+-                                        <property name="label" translatable="yes">Floor</property>
++                                    <object class="GtkLabel" id="ceiling_label">
++                                        <property name="label" translatable="yes">Ceiling Frequency</property>
++                                        <layout>
++                                            <property name="column">1</property>
++                                            <property name="row">2</property>
++                                        </layout>
++                                    </object>
++                                </child>
++                                <child>
++                                    <object class="GtkSpinButton" id="ceiling">
+                                         <property name="halign">center</property>
++                                        <property name="orientation">vertical</property>
++                                        <property name="width-chars">10</property>
++                                        <property name="adjustment">
++                                            <object class="GtkAdjustment">
++                                                <property name="lower">10</property>
++                                                <property name="upper">250</property>
++                                                <property name="value">200</property>
++                                                <property name="step-increment">1</property>
++                                                <property name="page-increment">10</property>
++                                            </object>
++                                        </property>
++                                        <property name="digits">0</property>
+                                         <layout>
+-                                            <property name="column">3</property>
+-                                            <property name="row">0</property>
++                                            <property name="column">1</property>
++                                            <property name="row">3</property>
+                                         </layout>
++                                        <accessibility>
++                                            <relation name="labelled-by">ceiling_label</relation>
++                                        </accessibility>
+                                     </object>
+                                 </child>
++
+                                 <child>
+-                                    <object class="GtkSpinButton" id="floor">
++                                    <object class="GtkLabel" id="final_hp_label">
++                                        <property name="label" translatable="yes">Output HPF</property>
++                                        <layout>
++                                            <property name="column">2</property>
++                                            <property name="row">2</property>
++                                        </layout>
++                                    </object>
++                                </child>
++                                <child>
++                                    <object class="GtkSpinButton" id="final_hp">
+                                         <property name="halign">center</property>
+                                         <property name="orientation">vertical</property>
+                                         <property name="width-chars">10</property>
+-                                        <property name="sensitive" bind-source="floor_active" bind-property="active" bind-flags="sync-create" />
+                                         <property name="adjustment">
+                                             <object class="GtkAdjustment">
+                                                 <property name="lower">10</property>
+-                                                <property name="upper">120</property>
+-                                                <property name="value">20</property>
++                                                <property name="upper">250</property>
++                                                <property name="value">200</property>
+                                                 <property name="step-increment">1</property>
+                                                 <property name="page-increment">10</property>
+                                             </object>
+                                         </property>
++                                        <property name="digits">0</property>
+                                         <layout>
+-                                            <property name="column">3</property>
+-                                            <property name="row">1</property>
++                                            <property name="column">2</property>
++                                            <property name="row">3</property>
+                                         </layout>
+                                         <accessibility>
+-                                            <property name="label" translatable="yes">Floor Value</property>
++                                            <relation name="labelled-by">final_hp_label</relation>
+                                         </accessibility>
+                                     </object>
+                                 </child>
+diff --git a/include/tags_plugin_name.hpp b/include/tags_plugin_name.hpp
+index 5e1494be5..92b1af8fd 100644
+--- a/include/tags_plugin_name.hpp
++++ b/include/tags_plugin_name.hpp
+@@ -27,6 +27,8 @@
+ 
+ namespace tags::plugin_package {
+ 
++inline constexpr auto bankstown = "Bankstown";
++
+ inline constexpr auto bs2b = "bs2b";
+ 
+ inline constexpr auto calf = "Calf Studio Gear";
+diff --git a/src/bass_enhancer.cpp b/src/bass_enhancer.cpp
+index 443b68c60..308426044 100644
+--- a/src/bass_enhancer.cpp
++++ b/src/bass_enhancer.cpp
+@@ -35,32 +35,32 @@ BassEnhancer::BassEnhancer(const std::string& tag,
+                            PipelineType pipe_type)
+     : PluginBase(tag,
+                  tags::plugin_name::bass_enhancer,
+-                 tags::plugin_package::calf,
++                 tags::plugin_package::bankstown,
+                  schema,
+                  schema_path,
+                  pipe_manager,
+                  pipe_type) {
+-  lv2_wrapper = std::make_unique<lv2::Lv2Wrapper>("http://calf.sourceforge.net/plugins/BassEnhancer");
++  lv2_wrapper = std::make_unique<lv2::Lv2Wrapper>("https://chadmed.au/bankstown");
+ 
+   package_installed = lv2_wrapper->found_plugin;
+ 
+   if (!package_installed) {
+-    util::debug(log_tag + "http://calf.sourceforge.net/plugins/BassEnhancer is not installed");
++    util::debug(log_tag + "https://chadmed.au/bankstown is not installed");
+   }
+ 
+-  lv2_wrapper->bind_key_double_db<"amount", "amount">(settings);
++  lv2_wrapper->bind_key_double<"amt", "amount">(settings);
+ 
+-  lv2_wrapper->bind_key_double<"drive", "harmonics">(settings);
++  lv2_wrapper->bind_key_double<"floor", "floor">(settings);
+ 
+-  lv2_wrapper->bind_key_double<"freq", "scope">(settings);
++  lv2_wrapper->bind_key_double<"ceil", "ceiling">(settings);
+ 
+-  lv2_wrapper->bind_key_double<"floor", "floor">(settings);
++  lv2_wrapper->bind_key_double<"final_hp", "final-hp">(settings);
+ 
+-  lv2_wrapper->bind_key_double<"blend", "blend">(settings);
++  lv2_wrapper->bind_key_double<"sat_second", "sat-second">(settings);
+ 
+-  lv2_wrapper->bind_key_bool<"floor_active", "floor-active">(settings);
++  lv2_wrapper->bind_key_double<"sat_third", "sat-third">(settings);
+ 
+-  lv2_wrapper->bind_key_bool<"listen", "listen">(settings);
++  lv2_wrapper->bind_key_double<"blend", "blend">(settings);
+ 
+   setup_input_output_gain();
+ }
+@@ -111,9 +111,8 @@ void BassEnhancer::process(std::span<float>& left_in,
+     get_peaks(left_in, right_in, left_out, right_out);
+ 
+     if (send_notifications) {
+-      // harmonics needed as double for levelbar widget ui, so we convert it here
+-
+-      harmonics_port_value = static_cast<double>(lv2_wrapper->get_control_port_value("meter_drive"));
++      // Bankstown doesn't have a harmonics meter output, set to 0
++      harmonics_port_value = 0.0;
+ 
+       if (!post_messages) {
+         return;
+diff --git a/src/bass_enhancer_preset.cpp b/src/bass_enhancer_preset.cpp
+index e9b5e0e86..35a247ba2 100644
+--- a/src/bass_enhancer_preset.cpp
++++ b/src/bass_enhancer_preset.cpp
+@@ -44,15 +44,17 @@ void BassEnhancerPreset::save(nlohmann::json& json) {
+ 
+   json[section][instance_name]["amount"] = g_settings_get_double(settings, "amount");
+ 
+-  json[section][instance_name]["harmonics"] = g_settings_get_double(settings, "harmonics");
++  json[section][instance_name]["floor"] = g_settings_get_double(settings, "floor");
+ 
+-  json[section][instance_name]["scope"] = g_settings_get_double(settings, "scope");
++  json[section][instance_name]["ceiling"] = g_settings_get_double(settings, "ceiling");
+ 
+-  json[section][instance_name]["floor"] = g_settings_get_double(settings, "floor");
++  json[section][instance_name]["final-hp"] = g_settings_get_double(settings, "final-hp");
+ 
+-  json[section][instance_name]["blend"] = g_settings_get_double(settings, "blend");
++  json[section][instance_name]["sat-second"] = g_settings_get_double(settings, "sat-second");
+ 
+-  json[section][instance_name]["floor-active"] = g_settings_get_boolean(settings, "floor-active") != 0;
++  json[section][instance_name]["sat-third"] = g_settings_get_double(settings, "sat-third");
++
++  json[section][instance_name]["blend"] = g_settings_get_double(settings, "blend");
+ }
+ 
+ void BassEnhancerPreset::load(const nlohmann::json& json) {
+@@ -64,13 +66,15 @@ void BassEnhancerPreset::load(const nlohmann::json& json) {
+ 
+   update_key<double>(json.at(section).at(instance_name), settings, "amount", "amount");
+ 
+-  update_key<double>(json.at(section).at(instance_name), settings, "harmonics", "harmonics");
++  update_key<double>(json.at(section).at(instance_name), settings, "floor", "floor");
+ 
+-  update_key<double>(json.at(section).at(instance_name), settings, "scope", "scope");
++  update_key<double>(json.at(section).at(instance_name), settings, "ceiling", "ceiling");
+ 
+-  update_key<double>(json.at(section).at(instance_name), settings, "floor", "floor");
++  update_key<double>(json.at(section).at(instance_name), settings, "final-hp", "final-hp");
+ 
+-  update_key<double>(json.at(section).at(instance_name), settings, "blend", "blend");
++  update_key<double>(json.at(section).at(instance_name), settings, "sat-second", "sat-second");
+ 
+-  update_key<bool>(json.at(section).at(instance_name), settings, "floor-active", "floor-active");
++  update_key<double>(json.at(section).at(instance_name), settings, "sat-third", "sat-third");
++
++  update_key<double>(json.at(section).at(instance_name), settings, "blend", "blend");
+ }
+diff --git a/src/bass_enhancer_ui.cpp b/src/bass_enhancer_ui.cpp
+index c25daf3d2..496c5f676 100644
+--- a/src/bass_enhancer_ui.cpp
++++ b/src/bass_enhancer_ui.cpp
+@@ -72,12 +72,10 @@ struct _BassEnhancerBox {
+ 
+   GtkLabel* harmonics_levelbar_label;
+ 
+-  GtkSpinButton *floor, *amount, *harmonics, *scope;
++  GtkSpinButton *floor, *amount, *sat_second, *sat_third, *ceiling, *final_hp;
+ 
+   GtkScale* blend;
+ 
+-  GtkToggleButton *floor_active, *listen;
+-
+   GSettings* settings;
+ 
+   Data* data;
+@@ -158,9 +156,9 @@ void setup(BassEnhancerBox* self, std::shared_ptr<BassEnhancer> bass_enhancer, c
+ 
+   gsettings_bind_widgets<"input-gain", "output-gain">(self->settings, self->input_gain, self->output_gain);
+ 
+-  gsettings_bind_widgets<"amount", "harmonics", "scope", "floor", "blend", "listen", "floor-active">(
+-      self->settings, self->amount, self->harmonics, self->scope, self->floor, self->blend, self->listen,
+-      self->floor_active);
++  gsettings_bind_widgets<"amount", "floor", "ceiling", "final-hp", "sat-second", "sat-third", "blend">(
++      self->settings, self->amount, self->floor, self->ceiling, self->final_hp, self->sat_second, self->sat_third,
++      self->blend);
+ }
+ 
+ void dispose(GObject* object) {
+@@ -221,11 +219,11 @@ void bass_enhancer_box_class_init(BassEnhancerBoxClass* klass) {
+   gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, harmonics_levelbar);
+   gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, floor);
+   gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, amount);
+-  gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, harmonics);
+-  gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, scope);
++  gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, sat_second);
++  gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, sat_third);
++  gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, ceiling);
++  gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, final_hp);
+   gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, blend);
+-  gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, floor_active);
+-  gtk_widget_class_bind_template_child(widget_class, BassEnhancerBox, listen);
+ 
+   gtk_widget_class_bind_template_callback(widget_class, on_reset);
+ }
+@@ -235,9 +233,8 @@ void bass_enhancer_box_init(BassEnhancerBox* self) {
+ 
+   self->data = new Data();
+ 
+-  prepare_spinbuttons<"dB">(self->amount);
+-  prepare_spinbuttons<"Hz">(self->scope, self->floor);
+-  prepare_spinbuttons<"">(self->harmonics);
++  prepare_spinbuttons<"">(self->amount, self->sat_second, self->sat_third);
++  prepare_spinbuttons<"Hz">(self->floor, self->ceiling, self->final_hp);
+ 
+   prepare_scales<"">(self->blend);
+ 
+-- 
+2.50.1
+
