@@ -41,32 +41,6 @@
       sound-theme-freedesktop = prev.sound-theme-freedesktop.overrideAttrs (prevAttrs: {
         postInstall = (prevAttrs.postInstall or "") + "rm -f $out/share/sounds/freedesktop/stereo/screen-capture.oga";
       });
-
-      easyeffects = prev.easyeffects.overrideAttrs (prevAttrs: {
-        version = "test";
-        patches = [ ./patches/easyeffects-use-bankstown.patch ] ++ (prevAttrs.patches or [ ]);
-        preFixup =
-          let
-            lv2Plugins = [
-              prev.bankstown-lv2
-              prev.calf # compressor exciter, bass enhancer and others
-              prev.lsp-plugins # delay, limiter, multiband compressor
-              prev.mda_lv2 # loudness
-              prev.zam-plugins # maximizer
-            ];
-
-            ladspaPlugins = [
-              prev.deepfilternet # deep noise remover
-              prev.rubberband # pitch shifting
-            ];
-          in
-          ''
-            gappsWrapperArgs+=(
-              --set LV2_PATH "${prev.lib.makeSearchPath "lib/lv2" lv2Plugins}"
-              --set LADSPA_PATH "${prev.lib.makeSearchPath "lib/ladspa" ladspaPlugins}"
-            )
-          '';
-      });
     })
   ];
 }
