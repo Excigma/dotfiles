@@ -35,7 +35,6 @@
     gnomeExtensions.toggle-workspace-span
     gnomeExtensions.quick-web-search
     gnomeExtensions.user-themes
-    gnomeExtensions.unblank
     gnomeExtensions.vitals
   ];
 
@@ -71,7 +70,6 @@
           tailscale-qs.extensionUuid
           toggle-workspace-span.extensionUuid
           quick-web-search.extensionUuid
-          unblank.extensionUuid
           user-themes.extensionUuid
           vitals.extensionUuid
         ];
