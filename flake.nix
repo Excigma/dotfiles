@@ -5,6 +5,8 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +25,7 @@
     {
       self,
       nixpkgs,
+      determinate,
       nix-index-database,
       home-manager,
       ...
@@ -57,6 +60,7 @@
             ./modules/nixos
             ./modules/overlays
 
+            determinate.nixosModules.default
             home-manager.nixosModules.home-manager
             nix-index-database.nixosModules.nix-index
 
