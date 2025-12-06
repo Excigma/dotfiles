@@ -80,6 +80,7 @@
                 optimise.automatic = true;
                 registry.pkgs.flake = self;
                 settings = {
+                  eval-cores = 0;
                   auto-optimise-store = true;
                   experimental-features = [
                     "nix-command"
