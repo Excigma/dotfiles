@@ -12,7 +12,7 @@
       marble-shell-theme = prev.marble-shell-theme.overrideAttrs (prevAttrs: {
         patches = [
           # ./patches/marble-hide-notification-message.patch
-          # ./patches/marble-disable-taskbar-icon-background.patch
+          ./patches/marble-disable-taskbar-icon-background.patch
           # ./patches/marble-fix-quick-settings-padding.patch
           ./patches/marble-increase-workspace-border.patch
         ]
