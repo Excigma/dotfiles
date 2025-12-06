@@ -11,9 +11,9 @@
 
       marble-shell-theme = prev.marble-shell-theme.overrideAttrs (prevAttrs: {
         patches = [
-          ./patches/marble-hide-notification-message.patch
-          ./patches/marble-disable-taskbar-icon-background.patch
-          ./patches/marble-fix-quick-settings-padding.patch
+          # ./patches/marble-hide-notification-message.patch
+          # ./patches/marble-disable-taskbar-icon-background.patch
+          # ./patches/marble-fix-quick-settings-padding.patch
           ./patches/marble-increase-workspace-border.patch
         ]
         ++ (prevAttrs.patches or [ ]);
@@ -33,7 +33,7 @@
         patches = [
           ./patches/rnote-enlarge-selection-bounds.patch
           ./patches/rnote-move-pen-picker-to-top.patch
-          ./patches/rnote-tap-to-select.patch
+          # ./patches/rnote-tap-to-select.patch
         ]
         ++ (prevAttrs.patches or [ ]);
       });

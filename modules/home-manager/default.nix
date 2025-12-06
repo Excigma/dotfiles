@@ -154,8 +154,10 @@ in
     };
     git = {
       enable = true;
-      userName = "Excigma";
-      userEmail = "git@excigma.xyz";
+      settings.user = {
+        name = "Excigma";
+        email = "git@excigma.xyz";
+      };
     };
   };
 

@@ -19,15 +19,16 @@ in
         extended = false;
         share = true;
       };
-      initExtraFirst = ''
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-        if [ -f ~/.config/.p10k.zsh ]; then source ~/.config/.p10k.zsh
-        else
-          source /etc/powerlevel10k/.p10k.zsh
-        fi
-      '';
-      initExtra = ''
-        zstyle ':autocomplete:history-search-backward:*' list-lines 1000
+      initContent = lib.mkMerge [
+        (lib.mkBefore ''
+          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+          if [ -f ~/.config/.p10k.zsh ]; then source ~/.config/.p10k.zsh
+          else
+            source /etc/powerlevel10k/.p10k.zsh
+          fi
+        '')
+        ''
+          zstyle ':autocomplete:history-search-backward:*' list-lines 1000
 
         ZLE_RPROMPT_INDENT=0
         ZSH_AUTOSUGGEST_USE_ASYNC=true
@@ -74,7 +75,8 @@ in
           fi
           command sudo "$@"
         }
-      '';
+        ''
+      ];
       sessionVariables = {
         VISUAL = "${getExe pkgs.vscode} --wait";
         EDITOR = "${getExe pkgs.vscode} --wait";

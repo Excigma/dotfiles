@@ -71,12 +71,12 @@ in
     # };
     # openssh.enable = true;
     gvfs.enable = true;
-    logind = {
-      lidSwitch = "suspend";
-      lidSwitchDocked = "ignore";
-      lidSwitchExternalPower = "suspend";
-      powerKey = "suspend";
-      powerKeyLongPress = "suspend";
+    logind.settings.Login = {
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchDocked = "ignore";
+      HandleLidSwitchExternalPower = "suspend";
+      HandlePowerKey = "suspend";
+      HandlePowerKeyLongPress = "suspend";
     };
     pipewire = {
       enable = true;
@@ -198,13 +198,13 @@ in
     };
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
       xkb = {
         layout = "us";
         variant = "";
       };
     };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     gnome = {
       gnome-browser-connector.enable = true;
     };
