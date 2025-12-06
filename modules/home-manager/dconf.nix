@@ -73,6 +73,9 @@
         "org/gnome/desktop/notifications" = {
           show-in-lock-screen = false;
         };
+        "org/gnome/desktop/screensaver" = {
+          restart-enabled = true;
+        };
         "org/gnome/desktop/search-providers" = {
           disable-external = false;
           disabled = [
