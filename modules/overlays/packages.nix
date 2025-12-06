@@ -44,7 +44,7 @@
           license = licenses.mit;
           maintainers = [ ];
           platforms = platforms.all;
-          mainProgram = pname;
+          mainProgram = "10mb.video";
         };
       };
 

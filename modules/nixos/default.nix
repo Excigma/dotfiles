@@ -290,9 +290,9 @@ in
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       nerd-fonts.jetbrains-mono
-      vistafonts
+      vista-fonts
       corefonts
       inter
     ];
@@ -427,7 +427,6 @@ in
         # zsh
         [
           zsh-completions
-          zsh-history
           zoxide
         ]
 

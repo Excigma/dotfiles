@@ -32,7 +32,6 @@
     gnomeExtensions.quick-settings-audio-panel
     gnomeExtensions.quick-touchpad-toggle
     gnomeExtensions.tailscale-qs
-    gnomeExtensions.toggle-workspace-span
     gnomeExtensions.quick-web-search
     gnomeExtensions.user-themes
     gnomeExtensions.vitals
@@ -68,7 +67,6 @@
           quick-settings-audio-panel.extensionUuid
           quick-touchpad-toggle.extensionUuid
           tailscale-qs.extensionUuid
-          toggle-workspace-span.extensionUuid
           quick-web-search.extensionUuid
           user-themes.extensionUuid
           vitals.extensionUuid
