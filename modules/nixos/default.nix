@@ -474,6 +474,7 @@ in
           ffmpeg
           fdk-aac-encoder
           flameshot
+          spotify
           # snapx
           gimp
           inkscape
