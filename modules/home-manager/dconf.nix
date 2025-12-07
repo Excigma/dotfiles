@@ -200,7 +200,6 @@
         "org/gnome/settings-daemon/plugins/media-keys" = {
           control-center = [ "<Super>i" ];
           custom-keybindings = [
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
@@ -223,11 +222,6 @@
           volume-step = 2;
           volume-up = [ "AudioRaiseVolume" ];
           www = [ ];
-        };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-          binding = "<Super>b";
-          command = "gtk-launch brave-browser.desktop";
-          name = "Open Browser";
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
           binding = "<Super>Return";
