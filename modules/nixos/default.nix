@@ -370,122 +370,142 @@ in
     systemPackages =
       with pkgs;
       flatten [
-        # cli
+        # shell & terminal
         [
-          android-tools
-          wget
-          mamba-cpp
-          arch-install-scripts
-          better-adb-sync
           eza
           fastfetch
-          gh
           htop
           jq
-          scrcpy
           libnotify
+          mosh
           nano
           rsync
           stress
-          mosh
           tlrc
-          intel-gpu-tools
-          intel-undervolt
-          qmassa
-          usbutils
-          pciutils
+          wget
           wl-clipboard
-        ]
-
-        # text & notes
-        [
-          xournalpp
-          rnote
-          folio
-          libreoffice-fresh
-        ]
-
-        # qemu
-        [
-          virt-manager
-          virt-viewer
-          virtiofsd
-          spice
-          spice-gtk
-          spice-protocol
-        ]
-
-        # zsh
-        [
-          zsh-completions
           zoxide
+          zsh-completions
         ]
 
-        # dev
+        # development
         [
           android-studio
-          rustup
-          nixd
+          gh
           nh
-          nodejs
-          python3
-          pnpm
+          nixd
           nixfmt-rfc-style
+          nodejs
+          pnpm
+          python3
+          rustup
           vscode.fhs
-
-          # Needed for numpy for COMPSYS 726
-          zlib
+          zlib # Needed for numpy for COMPSYS 726
         ]
 
-        # network
+        # android
         [
-          linux-wifi-hotspot
-          unstable.brave
-          chromium
-          cloudflared
+          android-tools
+          better-adb-sync
           gnirehtet
-          iriunwebcam
-          miniserve
-          rclone
-          putty
-          xpra
-          deskflow
+          scrcpy
         ]
 
-        # social
+        # browsers
+        [
+          chromium
+        ]
+
+        # communication
         [
           discord
-          slack
           signal-desktop-bin
+          slack
         ]
 
-        # media
+        # productivity & documents
         [
-          obs-studio
-          pavucontrol
+          folio
+          libreoffice-fresh
+          rnote
+          xournalpp
+          zotero
+        ]
+
+        # media - audio
+        [
           easyeffects
-          blender
-          kdePackages.kdenlive
+          pavucontrol
           playerctl
-          vlc
+          spotify
+        ]
+
+        # media - video & recording
+        [
+          fdk-aac-encoder
+          ffmpeg
+          flameshot
+          go-10mb-video
           gpu-screen-recorder
           gpu-screen-recorder-gtk
-          go-10mb-video
-          ffmpeg
-          fdk-aac-encoder
-          flameshot
-          spotify
+          kdePackages.kdenlive
+          obs-studio
+          vlc
           # snapx
+        ]
+
+        # media - graphics & design
+        [
+          blender
           gimp
           inkscape
           pstoedit
         ]
 
-        # printing
+        # virtualization
         [
-          foomatic-db-ppds-withNonfreeDb
-          foomatic-db-engine
-          gutenprint
+          spice
+          spice-gtk
+          spice-protocol
+          virt-manager
+          virt-viewer
+          virtiofsd
+        ]
+
+        # networking & remote access
+        [
+          cloudflared
+          deskflow
+          iriunwebcam
+          linux-wifi-hotspot
+          miniserve
+          putty
+          rclone
+          xpra
+        ]
+
+        # hardware utilities
+        [
+          intel-gpu-tools
+          intel-undervolt
+          libsmbios
+          logitech-udev-rules
+          pciutils
+          qmassa
+          smartmontools
+          solaar
+          usbutils
+        ]
+
+        # gnome & desktop
+        [
+          eyedropper
+          ghostty
+          gnome-power-manager
+          gnome-tweaks
+          helvum
+          nautilus-python
+          resources
         ]
 
         # theming
@@ -494,26 +514,19 @@ in
           (tela-circle-icon-theme.override { colorVariants = [ "blue" ]; })
         ]
 
-        # other
+        # printing
         [
-          eyedropper
-          gnome-power-manager
-          gnome-tweaks
-          ghostty
-          helvum
-          resources
+          foomatic-db-engine
+          foomatic-db-ppds-withNonfreeDb
+          gutenprint
+        ]
 
+        # system & misc
+        [
+          arch-install-scripts
           fahclient
-
-          libsmbios
-          smartmontools
-
+          mamba-cpp
           prismlauncher
-          nautilus-python
-          solaar
-          logitech-udev-rules
-
-          zotero
         ]
       ];
   };
