@@ -13,6 +13,7 @@ in
     (final: prev: {
       unstable = import nixpkgs-unstable { inherit (prev) config system; };
       stable = import nixpkgs-stable { inherit (prev) config system; };
+      oldstable = import nixpkgs-oldstable { inherit (prev) config system; };
     })
   ];
 }
