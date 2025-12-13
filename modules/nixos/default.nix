@@ -434,7 +434,7 @@ in
 
         # media - audio
         [
-          easyeffects
+          oldstable.easyeffects
           pavucontrol
           playerctl
           spotify
