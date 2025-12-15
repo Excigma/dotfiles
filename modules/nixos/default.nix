@@ -434,6 +434,7 @@ in
 
         # media - audio
         [
+          alsa-tools
           oldstable.easyeffects
           pavucontrol
           playerctl
