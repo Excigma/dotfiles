@@ -29,6 +29,9 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    extraModprobeConfig = ''
+      options snd-hda-intel patch=hda-jack-retask.fw
+    '';
   };
 
   zramSwap = {
@@ -250,6 +253,11 @@ in
   };
 
   hardware = {
+    firmware = [
+      (pkgs.writeTextDir "/lib/firmware/hda-jack-retask.fw" (
+        builtins.readFile "${self}/etc/firmware/hda-jack-retask.fw"
+      ))
+    ];
     sensor.iio.enable = true;
     logitech.wireless = {
       enableGraphical = true;
