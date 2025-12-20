@@ -443,7 +443,7 @@ in
         # media - audio
         [
           alsa-tools
-          oldstable.easyeffects
+          easyeffects
           pavucontrol
           playerctl
           spotify
