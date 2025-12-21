@@ -19,6 +19,7 @@
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.dim-completed-calendar-events
     gnomeExtensions.do-not-disturb-while-screen-sharing-or-recording
+    gnomeExtensions.frequency-boost-switch
     gnomeExtensions.native-window-placement
     gnomeExtensions.launch-new-instance
     gnomeExtensions.solaar-extension
@@ -60,6 +61,7 @@
           just-perfection.extensionUuid
           launch-new-instance.extensionUuid
           # search-light.extensionUuid
+          frequency-boost-switch.extensionUuid
           solaar-extension.extensionUuid
           middle-click-to-close-in-overview.extensionUuid
           night-theme-switcher.extensionUuid
