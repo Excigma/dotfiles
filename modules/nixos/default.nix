@@ -29,6 +29,12 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    kernelPatches = [
+      {
+        name = "alc289-latitude-7440-dual-spk";
+        patch = ../overlays/patches/alc289-latitude-7440-dual-spk.patch;
+      }
+    ];
   };
 
   zramSwap = {
