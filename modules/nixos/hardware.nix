@@ -57,6 +57,11 @@
         "dmask=0077"
       ];
     };
+    "/media" = {
+      device = "/dev/disk/by-uuid/3af7cc7f-1ac0-4d87-bcbc-0f4c459bafdb";
+      fsType = "btrfs";
+      options = [ "noatime" ];
+    };
   };
 
   swapDevices = [ ];
