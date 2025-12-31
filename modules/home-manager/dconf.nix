@@ -230,8 +230,8 @@
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
           binding = "<Shift><Super>s";
-          command = ''script --command "flameshot gui" /dev/null'';
-          name = "Flameshot";
+          command = "gradia --screenshot=INTERACTIVE";
+          name = "Screenshot with Annotations";
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
           binding = "<Super>n";

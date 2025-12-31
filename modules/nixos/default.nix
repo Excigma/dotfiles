@@ -451,7 +451,7 @@ in
         [
           fdk-aac-encoder
           ffmpeg
-          flameshot
+          gradia
           go-10mb-video
           gpu-screen-recorder
           gpu-screen-recorder-gtk
