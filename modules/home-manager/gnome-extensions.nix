@@ -23,6 +23,7 @@
     gnomeExtensions.native-window-placement
     gnomeExtensions.launch-new-instance
     gnomeExtensions.solaar-extension
+    gnomeExtensions.draw-on-gnome
     gnomeExtensions.fly-pie
     gnomeExtensions.gnome-40-ui-improvements
     gnomeExtensions.search-light
@@ -53,6 +54,7 @@
           battery-health-charging.extensionUuid
           bluetooth-battery-meter.extensionUuid
           caffeine.extensionUuid
+          draw-on-gnome.extensionUuid
           clipboard-indicator.extensionUuid
           dim-completed-calendar-events.extensionUuid
           do-not-disturb-while-screen-sharing-or-recording.extensionUuid
