@@ -254,9 +254,7 @@ in
 
   hardware = {
     firmware = [
-      (pkgs.writeTextDir "/lib/firmware/hda-jack-retask.fw" (
-        builtins.readFile "${self}/etc/firmware/hda-jack-retask.fw"
-      ))
+      (pkgs.writeTextDir "/lib/firmware/hda-jack-retask.fw" (builtins.readFile "${self}/etc/firmware/hda-jack-retask.fw"))
     ];
     sensor.iio.enable = true;
     logitech.wireless = {
