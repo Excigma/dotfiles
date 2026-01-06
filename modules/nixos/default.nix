@@ -342,6 +342,10 @@ in
     NetworkManager-wait-online.enable = false;
   };
 
+  systemd.tmpfiles.rules = [
+    "L+ /etc/xdg/monitors.xml - - - - /home/${user}/.config/monitors.xml"
+  ];
+
   environment = {
     gnome.excludePackages = with pkgs; [
       geary
