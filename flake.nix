@@ -6,10 +6,6 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +20,6 @@
     {
       self,
       nixpkgs,
-      nix-index-database,
       home-manager,
       ...
     }:
@@ -59,7 +54,6 @@
             ./modules/overlays
 
             home-manager.nixosModules.home-manager
-            nix-index-database.nixosModules.nix-index
 
             (
               if builtins.pathExists ./secrets/default.nix then
