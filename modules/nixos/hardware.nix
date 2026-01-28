@@ -32,8 +32,8 @@
       "snd-aloop"
     ];
     kernelParams = [
-      "i915.force_probe=!a7a1"
-      "xe.force_probe=a7a1"
+      #"i915.force_probe=!a7a1"
+      # "xe.force_probe=a7a1"
       "zswap.enabled=0"
     ];
     # extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
