@@ -431,7 +431,7 @@ in
           discord
           signal-desktop-bin
           slack
-          telegram-desktop
+          # telegram-desktop
         ]
 
         # productivity & documents
