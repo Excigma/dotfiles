@@ -89,7 +89,7 @@ in
       enableZshIntegration = true;
       settings = {
         theme = "dark:dark-theme,light:light-theme";
-        term = "xterm-256color";
+        # term = "xterm-256color";
         confirm-close-surface = false;
         shell-integration-features = true;
         keybind = [
