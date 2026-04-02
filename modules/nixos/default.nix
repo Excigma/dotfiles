@@ -400,7 +400,7 @@ in
 
         # development
         [
-          android-studio
+          unstable.android-studio-dev
           gh
           nh
           nixd
