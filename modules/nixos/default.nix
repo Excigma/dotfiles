@@ -400,7 +400,6 @@ in
 
         # development
         [
-          unstable.android-studio-dev
           gh
           nh
           nixd
@@ -415,6 +414,7 @@ in
 
         # android
         [
+          unstable.androidStudioPackages.dev
           android-tools
           better-adb-sync
           gnirehtet
