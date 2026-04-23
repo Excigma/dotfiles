@@ -292,6 +292,8 @@ in
       vista-fonts
       corefonts
       inter
+      dotcolon-fonts
+      newcomputermodern
     ];
   };
 
