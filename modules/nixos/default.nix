@@ -294,6 +294,7 @@ in
       inter
       dotcolon-fonts
       newcomputermodern
+      Iosevka-bin
     ];
   };
 
