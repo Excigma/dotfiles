@@ -5,7 +5,7 @@
     (marble-shell-theme.override {
       colors = [ "blue" ];
       additionalInstallationTweaks = [
-        "--opaque"
+        # "--opaque"
         # "--panel-default-size"
       ];
     })
