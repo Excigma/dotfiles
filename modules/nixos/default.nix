@@ -261,10 +261,6 @@ in
       enableGraphical = true;
       enable = true;
     };
-    opengl = {
-      enable = true;
-      driSupport32Bit = true;
-    };
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
