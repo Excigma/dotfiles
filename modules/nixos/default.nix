@@ -261,12 +261,9 @@ in
       enableGraphical = true;
       enable = true;
     };
-    opengl = {
-      enable = true;
-      driSupport32Bit = true;
-    };
     graphics = {
       enable = true;
+      driSupport32Bit = true;
       extraPackages = with pkgs; [
         intel-ocl
         intel-compute-runtime
