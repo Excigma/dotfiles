@@ -517,6 +517,7 @@ in
           eyedropper
           ghostty
           gnome-power-manager
+          gnome-terminal
           gnome-tweaks
           helvum
           nautilus-python
