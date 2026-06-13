@@ -299,7 +299,6 @@ in
   };
 
   programs = {
-    adb.enable = true;
     command-not-found.enable = false;
     dconf.enable = true;
     nix-ld.enable = true;
@@ -417,7 +416,6 @@ in
 
         # android
         [
-          unstable.androidStudioPackages.dev
           android-tools
           better-adb-sync
           gnirehtet
@@ -432,7 +430,7 @@ in
         # communication
         [
           discord
-          signal-desktop-bin
+          signal-desktop
           slack
           # telegram-desktop
         ]
@@ -519,7 +517,7 @@ in
           gnome-power-manager
           gnome-terminal
           gnome-tweaks
-          helvum
+          crosspipe
           nautilus-python
           resources
         ]
