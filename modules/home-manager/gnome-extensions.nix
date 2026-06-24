@@ -293,7 +293,7 @@
         hide-icons = false;
         hot-sensors = [
           "_fan_dell_ddv_cpu fan_"
-          "_battery_rate_"
+          "_battery_power_rate_"
           "_processor_usage_"
         ];
         icon-style = 1;
