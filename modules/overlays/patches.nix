@@ -2,13 +2,6 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
-      tailscale = prev.tailscale.overrideAttrs (old: {
-        checkFlags = builtins.map (
-          flag:
-          if prev.lib.hasPrefix "-skip=" flag then flag + "|^TestGetList$|^TestIgnoreLocallyBoundPorts$|^TestPoller$" else flag
-        ) old.checkFlags;
-      });
-
       marble-shell-theme = prev.marble-shell-theme.overrideAttrs (prevAttrs: {
         patches = [
           # ./patches/marble-hide-notification-message.patch
