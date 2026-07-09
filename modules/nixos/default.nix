@@ -405,7 +405,7 @@ in
           gh
           nh
           nixd
-          nixfmt-rfc-style
+          nixfmt
           nodejs
           pnpm
           python3
