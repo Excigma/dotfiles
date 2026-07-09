@@ -36,7 +36,7 @@
       specialArgs = { inherit self user; };
     in
     {
-      formatter.${system} = pkgs.nixfmt-rfc-style;
+      formatter.${system} = pkgs.nixfmt;
       # Exposes repl accessible with `nix develop`
       devShells.${system} = with pkgs; rec {
         default = repl;
@@ -53,7 +53,7 @@
       nixosConfigurations = rec {
         default = latitude-nixos;
         latitude-nixos = nixpkgs.lib.nixosSystem {
-          inherit system specialArgs;
+          inherit specialArgs;
           modules = [
             ./modules/nixos
             ./modules/overlays
