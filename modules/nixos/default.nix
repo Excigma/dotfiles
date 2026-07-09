@@ -411,7 +411,6 @@ in
           python3
           rustup
           vscode.fhs
-          zlib # Needed for numpy for COMPSYS 726
         ]
 
         # android
@@ -430,18 +429,18 @@ in
         # communication
         [
           discord
-          signal-desktop
+          # signal-desktop
           slack
           # telegram-desktop
         ]
 
         # productivity & documents
         [
-          folio
+          # folio
           libreoffice-fresh
           rnote
           xournalpp
-          zotero
+          # zotero
         ]
 
         # media - audio
@@ -461,7 +460,7 @@ in
           go-10mb-video
           gpu-screen-recorder
           gpu-screen-recorder-gtk
-          kdePackages.kdenlive
+          # kdePackages.kdenlive
           obs-studio
           vlc
           # snapx
@@ -472,29 +471,29 @@ in
           blender
           gimp
           inkscape
-          pstoedit
+          # pstoedit
         ]
 
         # virtualization
         [
-          spice
-          spice-gtk
-          spice-protocol
-          virt-manager
-          virt-viewer
-          virtiofsd
+          # spice
+          # spice-gtk
+          # spice-protocol
+          # virt-manager
+          # virt-viewer
+          # virtiofsd
         ]
 
         # networking & remote access
         [
-          cloudflared
-          deskflow
+          # cloudflared
+          # deskflow
           iriunwebcam
           linux-wifi-hotspot
           miniserve
-          putty
+          # putty
           rclone
-          xpra
+          # xpra
         ]
 
         # hardware utilities
@@ -517,7 +516,7 @@ in
           gnome-power-manager
           gnome-terminal
           gnome-tweaks
-          crosspipe
+          # crosspipe
           nautilus-python
           resources
         ]
@@ -530,16 +529,16 @@ in
 
         # printing
         [
-          foomatic-db-engine
-          foomatic-db-ppds-withNonfreeDb
-          gutenprint
+          # foomatic-db-engine
+          # foomatic-db-ppds-withNonfreeDb
+          # gutenprint
         ]
 
         # system & misc
         [
           arch-install-scripts
-          fahclient
-          mamba-cpp
+          # fahclient
+          # mamba-cpp
           prismlauncher
         ]
       ];
