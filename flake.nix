@@ -33,7 +33,14 @@
       config.allowUnfree = true;
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit config system; };
-      specialArgs = { inherit self user; };
+      specialArgs = {
+        inherit
+          self
+          user
+          home-manager
+          nix-index-database
+          ;
+      };
     in
     {
       formatter.${system} = pkgs.nixfmt;
@@ -50,61 +57,92 @@
           '';
         };
       };
+
       nixosConfigurations = rec {
         default = latitude-nixos;
+
+        # Dell Latitude Daily Driver
         latitude-nixos = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
-            ./modules/nixos
+            ./hosts/latitude
             ./modules/overlays
+          ];
+        };
 
-            home-manager.nixosModules.home-manager
-            nix-index-database.nixosModules.nix-index
+        # Fujitsu Desktop (Akl)
+        akl-fujitsu-nixos = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            ./hosts/akl-fujitsu-nixos
+            ./modules/overlays
+          ];
+        };
 
-            (
-              if builtins.pathExists ./secrets/default.nix then
-                ./secrets
-              else
-                pkgs.lib.warn "${user}: no secrets found!" { }
-            )
+        # Orange Pi Zero 2W (Akl)
+        akl-opi-zero-2w = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            ./hosts/akl-opi-zero-2w
+            ./modules/overlays
+          ];
+        };
 
-            {
-              nix = {
-                gc = {
-                  automatic = true;
-                  options = "--delete-older-than 7d";
-                };
-                optimise.automatic = true;
-                registry.pkgs.flake = self;
-                settings = {
-                  auto-optimise-store = true;
-                  experimental-features = [
-                    "nix-command"
-                    "flakes"
-                  ];
-                  nix-path = "nixpkgs=/etc/nix/inputs/nixpkgs";
-                  trusted-users = [ user ];
-                };
-              };
-              nixpkgs = {
-                inherit config;
-                hostPlatform = system;
-              };
-              home-manager = {
-                extraSpecialArgs = specialArgs;
-                useGlobalPkgs = true;
-                users.${user} = import ./modules/home-manager/default.nix;
-                useUserPackages = true;
-              };
-            }
+        # Sydney ARM Server
+        syd-arm = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            ./hosts/syd-arm
+            ./modules/overlays
+          ];
+        };
+
+        # Sydney AMD Server
+        syd-amd = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            ./hosts/syd-amd
+            ./modules/overlays
           ];
         };
       };
 
-      homeConfigurations."${user}@latitude-nixos" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = specialArgs;
-        modules = [ ./modules/home-manager/default.nix ];
-        inherit pkgs;
+      homeConfigurations = {
+        "${user}@latitude-nixos" = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = specialArgs;
+          modules = [ ./profiles/home-manager/daily-driver.nix ];
+          inherit pkgs;
+        };
+
+        "${user}@akl-fujitsu-nixos" = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = specialArgs;
+          modules = [ ./profiles/home-manager/desktop.nix ];
+          inherit pkgs;
+        };
+
+        "${user}@akl-opi-zero-2w" = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = specialArgs;
+          modules = [ ./profiles/home-manager/base.nix ];
+          pkgs = import nixpkgs {
+            inherit config;
+            system = "aarch64-linux";
+          };
+        };
+
+        "${user}@syd-arm" = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = specialArgs;
+          modules = [ ./profiles/home-manager/base.nix ];
+          pkgs = import nixpkgs {
+            inherit config;
+            system = "aarch64-linux";
+          };
+        };
+
+        "${user}@syd-amd" = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = specialArgs;
+          modules = [ ./profiles/home-manager/base.nix ];
+          inherit pkgs;
+        };
       };
     };
 }
