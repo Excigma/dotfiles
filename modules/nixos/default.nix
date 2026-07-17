@@ -217,7 +217,6 @@ in
       extraGroups = [
         "kvm"
         "adbusers"
-        "docker"
         "networkmanager"
         "wheel"
         "input"
@@ -245,9 +244,6 @@ in
         runAsRoot = true;
         swtpm.enable = true;
       };
-    };
-    docker = {
-      enable = true;
     };
     spiceUSBRedirection.enable = true;
   };
