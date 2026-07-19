@@ -74,12 +74,12 @@
     scrcpy
 
     # productivity & documents
-    libreoffice-fresh
+    libreoffice
     rnote
     xournalpp
 
     # media creators - video & graphics
-    blender
+    # blender
     fdk-aac-encoder
     gimp
     gradia
@@ -87,11 +87,16 @@
     gpu-screen-recorder
     gpu-screen-recorder-gtk
     inkscape
-    obs-studio
+    # obs-studio
     iriunwebcam
 
     # gaming
-    prismlauncher
+    (prismlauncher.override {
+      # Only play on the latest version
+      jdks = [
+        jdk25
+      ];
+    })
 
     # system
     arch-install-scripts

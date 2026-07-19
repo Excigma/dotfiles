@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   services = {
+    # Don't need to run speech-dispatcher, can save some disk space
+    speechd.enable = lib.mkForce false;
     xserver = {
       enable = true;
       xkb = {
