@@ -22,13 +22,13 @@
 
       go-10mb-video = pkgs.buildGoModule {
         pname = "10mb.video";
-        version = "e5cd1ed583d6fce1e2552a91d48959f3243d341f";
+        version = "cc4b693ad5946d8775f3bfe48de2de3255eb697f";
 
         src = pkgs.fetchFromGitHub {
-          owner = "ugjka";
+          owner = "Excigma";
           repo = "10mb.video";
-          rev = "e5cd1ed583d6fce1e2552a91d48959f3243d341f";
-          sha256 = "sha256-vYId1/sKz8DWjxbP5VmyzCEoBkSIxodgdfAsbUSdbKk=";
+          rev = "cc4b693ad5946d8775f3bfe48de2de3255eb697f";
+          sha256 = "sha256-69pcpiBlYdD9/7jOFb0c/O+C6e5e2iOJ+lnT0zaamVY=";
         };
 
         vendorHash = null;
@@ -40,7 +40,7 @@
 
         meta = with pkgs.lib; {
           description = "Fit a video into a 10mb file (Discord nitro pls?)";
-          homepage = "https://github.com/ugjka/10mb.video";
+          homepage = "https://github.com/Excigma/10mb.video";
           license = licenses.mit;
           maintainers = [ ];
           platforms = platforms.all;
