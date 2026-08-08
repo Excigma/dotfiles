@@ -55,6 +55,10 @@
         "org/gnome/desktop/calendar" = {
           show-weekdate = false;
         };
+        "org/gnome/desktop/default-applications/terminal" = {
+          exec = "gnome-terminal";
+          exec-arg = "-x";
+        };
         "org/gnome/desktop/interface" = {
           accent-color = "blue";
           clock-format = "24h";
@@ -225,7 +229,7 @@
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
           binding = "<Super>Return";
-          command = "ghostty";
+          command = "gnome-terminal";
           name = "Open Terminal";
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
