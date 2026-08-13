@@ -1,8 +1,22 @@
-{ self, ... }:
+{ self, pkgs, ... }:
 {
   imports = [
     ./minimal.nix
     ../../modules/home-manager/zsh.nix
+  ];
+
+  # Shared CLI package list, used on every host (laptop, servers, and Termux alike).
+  home.packages = with pkgs; [
+    eza
+    bat
+    fd
+    ripgrep
+    fastfetch
+    fzf
+    zsh-powerlevel10k
+    nix-tree
+    nixfmt
+    neovim
   ];
 
   programs = {

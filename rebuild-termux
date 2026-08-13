@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+SCRIPT_DIR="$(cd -- "$(dirname "${BASH_SOURCE[0]:-${(%):-%N}}")" && pwd)"
+SRC="${SRC:-$SCRIPT_DIR}"
+
+nh home switch "$@" -- ".?submodules=1#excigma@termux"

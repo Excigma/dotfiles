@@ -37,8 +37,10 @@
     shellAliases = {
       ls = null;
     };
-    enableGlobalCompInit = true;
-    syntaxHighlighting.enable = true;
+    # zsh-autocomplete runs its own compinit; keep /etc/zshrc from running one.
+    enableGlobalCompInit = false;
+    # fast-syntax-highlighting (loaded from home-manager) replaces the stock one.
+    syntaxHighlighting.enable = false;
     shellInit = ''
       if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"

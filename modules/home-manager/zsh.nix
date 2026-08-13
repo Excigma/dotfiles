@@ -3,6 +3,10 @@ let
   inherit (lib) getExe;
 in
 {
+  home.packages = [
+    pkgs.zsh-autocomplete
+    pkgs.zsh-fast-syntax-highlighting
+  ];
   programs = {
     zoxide = {
       enable = true;
@@ -11,6 +15,10 @@ in
     };
     zsh = {
       enable = true;
+      # zsh-autocomplete handles completion init itself.
+      enableCompletion = false;
+      # Typing a directory name cd's into it (mirrors the phone's `setopt AUTO_CD`).
+      autocd = true;
       defaultKeymap = "emacs";
       history = {
         size = 10000;
@@ -27,54 +35,89 @@ in
             source /etc/powerlevel10k/.p10k.zsh
           fi
         '')
+        # fast-syntax-highlighting: load before zsh-autocomplete so its
+        # widgets don't trip fsh's unhandled-widget check (matches the phone).
+        (lib.mkOrder 550 ''
+          source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+        '')
+        # Live completion menu: real-time type-ahead completion with a
+        # selectable menu, plus Ctrl+R history search. Sourced before
+        # compinit/aliases per the plugin's requirements.
+        (lib.mkOrder 560 ''
+          source ${pkgs.zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+          bindkey              '^I' menu-select
+          bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
+        '')
         ''
-          zstyle ':autocomplete:history-search-backward:*' list-lines 1000
+            zstyle ':autocomplete:history-search-backward:*' list-lines 1000
 
-        ZLE_RPROMPT_INDENT=0
-        ZSH_AUTOSUGGEST_USE_ASYNC=true
-        ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
+          # zsh-autocomplete's async engine needs # to be treated as a comment
+          # (marlonrichert/zsh-autocomplete#724), otherwise its compadd calls
+          # fail with "parse error in command substitution" and no menu shows.
+          setopt interactivecomments
 
-        # Ctrl + Backspace/Delete to delete word
-        bindkey '^H' backward-kill-word
-        bindkey "^[[3;5~" kill-word
+          ZLE_RPROMPT_INDENT=0
+          ZSH_AUTOSUGGEST_USE_ASYNC=true
+          ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+          ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
 
-        # Delete to delete
-        bindkey "^[[3~" delete-char
+          # Insert the grey suggestion with Ctrl+Space
+          bindkey '^ ' autosuggest-accept
 
-        # Ctrl + ArrowLeft / ArrowRight to move cursor
-        bindkey "^[[1;5C" forward-word
-        bindkey "^[[1;5D" backward-word
+          # Expand history references like `!!` / `!$` when pressing space
+          bindkey ' ' magic-space
 
-        # Home/End keys
-        bindkey '^[[H' beginning-of-line
-        bindkey '^[[F' end-of-line
+          # Ctrl + Backspace/Delete to delete word
+          bindkey '^H' backward-kill-word
+          bindkey "^[[3;5~" kill-word
 
-        zstyle ':autocomplete:*' min-input 3
-        zstyle ':autocomplete:*' delay 0.1
+          # Delete to delete
+          bindkey "^[[3~" delete-char
 
-        function ls() {
-          if command -v eza >/dev/null 2>&1; then
-              eza --all --git --icons "$@"
-          else
-              command ls --color=auto "$@"
-          fi
-        }
+          # Ctrl + ArrowLeft / ArrowRight to move cursor
+          bindkey "^[[1;5C" forward-word
+          bindkey "^[[1;5D" backward-word
 
-        function cd() {
-          if command -v zoxide >/dev/null 2>&1; then
-              __zoxide_z "$@"
-          else
-              command cd "$@"
-          fi
-        }
+          # Home/End keys
+          bindkey '^[[H' beginning-of-line
+          bindkey '^[[F' end-of-line
 
-        sudo() {
-          if [[ "$1" == "-s" && -z "$2" ]]; then
-              echo ""
-          fi
-          command sudo "$@"
-        }
+          function _pip_completion() {
+            local words cword
+            read -Ac words
+            read -cn cword
+            reply=(
+              $(
+                COMP_WORDS="$words[*]"
+                COMP_CWORD=$(( cword-1 ))
+                PIP_AUTO_COMPLETE=1 $words 2>/dev/null
+              )
+            )
+          }
+          compctl -K _pip_completion pip pip3
+
+          function ls() {
+            if command -v eza >/dev/null 2>&1; then
+                eza --all --git --icons "$@"
+            else
+                command ls --color=auto "$@"
+            fi
+          }
+
+          function cd() {
+            if command -v zoxide >/dev/null 2>&1; then
+                __zoxide_z "$@"
+            else
+                command cd "$@"
+            fi
+          }
+
+          sudo() {
+            if [[ "$1" == "-s" && -z "$2" ]]; then
+                echo ""
+            fi
+            command sudo "$@"
+          }
         ''
       ];
       sessionVariables = {

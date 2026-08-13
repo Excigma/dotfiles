@@ -143,6 +143,16 @@
           modules = [ ./profiles/home-manager/base.nix ];
           inherit pkgs;
         };
+
+        # Termux (Nix-in-Termux, aarch64) - CLI only
+        "${user}@termux" = home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = specialArgs;
+          modules = [ ./profiles/home-manager/termux-cli.nix ];
+          pkgs = import nixpkgs {
+            inherit config;
+            system = "aarch64-linux";
+          };
+        };
       };
     };
 }
