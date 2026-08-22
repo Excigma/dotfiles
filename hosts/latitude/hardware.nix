@@ -102,22 +102,8 @@
     };
   };
 
-  # Route bass speaker pin (0x17) onto amplified DAC (0x03);
-  systemd = {
-    services.hda-dac-fix = {
-      description = "Route bass speaker pin to amplified DAC";
-      after = [ "sound.target" ];
-      wantedBy = [ "sound.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.alsaTools}/bin/hda-verb /dev/snd/hwC1D0 0x17 0x701 1";
-      };
-    };
-  };
-
   # Hardware utilities
   environment.systemPackages = with pkgs; [
-    alsaTools
     intel-gpu-tools
     intel-undervolt
     libsmbios
