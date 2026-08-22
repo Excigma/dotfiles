@@ -11,7 +11,6 @@ in
     zoxide = {
       enable = true;
       enableZshIntegration = true;
-      options = [ "--no-cmd" ];
     };
     zsh = {
       enable = true;
@@ -29,20 +28,38 @@ in
       };
       initContent = lib.mkMerge [
         (lib.mkBefore ''
-          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-          if [ -f ~/.config/.p10k.zsh ]; then source ~/.config/.p10k.zsh
-          else
-            source /etc/powerlevel10k/.p10k.zsh
+          # zsh-autocomplete completes asynchronously by spawning a throwaway
+          # interactive zsh in a pty (`.autocomplete:async:pty`) for every
+          # completion. That shell re-sources `~/.zshrc`; its process tree is
+          # `main-zsh -> async subshell (zsh) -> async pty (zsh)`, i.e. both its
+          # parent and grandparent are `zsh`. A real terminal launches zsh from a
+          # terminal emulator (ghostty, kitty, ...), so that pattern uniquely
+          # identifies the async pty. We use it to skip the heavy prompt/highlight
+          # stack there -- it only needs the completion plugin.
+          # This drops each async completion from ~150ms to ~30ms.
+          if [[ ''${$(ps -o comm= -p $PPID):-} == zsh &&
+                ''${$(ps -o comm= -p ''${$(ps -o ppid= -p $PPID):-}):-} == zsh ]]; then
+            typeset -g __za_async_pty=1
+          fi
+          if [[ -z $__za_async_pty ]]; then
+            source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+            if [ -f ~/.config/.p10k.zsh ]; then source ~/.config/.p10k.zsh
+            else
+              source /etc/powerlevel10k/.p10k.zsh
+            fi
           fi
         '')
         # fast-syntax-highlighting: load before zsh-autocomplete so its
         # widgets don't trip fsh's unhandled-widget check (matches the phone).
         (lib.mkOrder 550 ''
-          source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+          if [[ -z $__za_async_pty ]]; then
+            source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+          fi
         '')
         # Live completion menu: real-time type-ahead completion with a
         # selectable menu, plus Ctrl+R history search. Sourced before
-        # compinit/aliases per the plugin's requirements.
+        # compinit/aliases per the plugin's requirements. Loaded in the async
+        # pty too, since that engine is what computes the candidates.
         (lib.mkOrder 560 ''
           source ${pkgs.zsh-autocomplete}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
           bindkey              '^I' menu-select
@@ -51,10 +68,13 @@ in
         ''
             zstyle ':autocomplete:history-search-backward:*' list-lines 1000
 
-          # zsh-autocomplete's async engine needs # to be treated as a comment
+          # zsh-autocomplete needs # to be treated as a comment
           # (marlonrichert/zsh-autocomplete#724), otherwise its compadd calls
           # fail with "parse error in command substitution" and no menu shows.
+          # (=autocomplete's async pty shell sources this too.)
           setopt interactivecomments
+
+          if [[ -z $__za_async_pty ]]; then
 
           ZLE_RPROMPT_INDENT=0
           ZSH_AUTOSUGGEST_USE_ASYNC=true
@@ -118,6 +138,8 @@ in
             fi
             command sudo "$@"
           }
+
+          fi  # [[ -z $__za_async_pty ]]
         ''
       ];
       sessionVariables = {
