@@ -66,6 +66,7 @@
     pnpm
     python3
     rustup
+    zed-editor-fhs
 
     # android tools
     android-tools
