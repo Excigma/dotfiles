@@ -1,4 +1,9 @@
-{ pkgs, user, ... }:
+{
+  pkgs,
+  user,
+  unstable,
+  ...
+}:
 {
   imports = [
     ./base.nix
@@ -37,6 +42,7 @@
 
     # audio
     easyeffects
+    unstable.helvum
     pavucontrol
     playerctl
     spotify

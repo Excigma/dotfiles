@@ -24,6 +24,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       nix-index-database,
       home-manager,
       ...
@@ -33,12 +34,14 @@
       config.allowUnfree = true;
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit config system; };
+      unstable = import nixpkgs-unstable { inherit config system; };
       specialArgs = {
         inherit
           self
           user
           home-manager
           nix-index-database
+          unstable
           ;
       };
     in
