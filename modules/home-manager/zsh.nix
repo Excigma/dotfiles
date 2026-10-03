@@ -141,6 +141,14 @@ in
 
           fi  # [[ -z $__za_async_pty ]]
         ''
+        (lib.mkOrder 900 ''
+          if [[ ":$PATH:" != *":$HOME/.npm-global/bin:"* ]]; then
+            export PATH="$HOME/.npm-global/bin:$PATH"
+          fi
+          if [[ -z "''${NPM_CONFIG_PREFIX-}" ]]; then
+            export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+          fi
+        '')
       ];
       sessionVariables = {
         VISUAL = "${getExe pkgs.vscode} --wait";

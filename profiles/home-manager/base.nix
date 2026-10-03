@@ -1,9 +1,17 @@
-{ self, pkgs, ... }:
+{
+  self,
+  pkgs,
+  config,
+  ...
+}:
 {
   imports = [
     ./minimal.nix
     ../../modules/home-manager/zsh.nix
   ];
+
+  home.sessionVariables.NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.npm-global";
+  home.sessionPath = [ "${config.home.homeDirectory}/.npm-global/bin" ];
 
   # Shared CLI package list, used on every host (laptop, servers, and Termux alike).
   home.packages = with pkgs; [
@@ -25,6 +33,17 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
+    };
+    bash = {
+      enable = true;
+      initExtra = ''
+        if [[ ":$PATH:" != *":$HOME/.npm-global/bin:"* ]]; then
+          export PATH="$HOME/.npm-global/bin:$PATH"
+        fi
+        if [[ -z "''${NPM_CONFIG_PREFIX-}" ]]; then
+          export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+        fi
+      '';
     };
     git = {
       enable = true;
