@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  self,
   ...
 }:
 {
@@ -25,10 +24,6 @@
         vpl-gpu-rt
       ];
     };
-
-    firmware = [
-      (pkgs.writeTextDir "/lib/firmware/hda-jack-retask.fw" (builtins.readFile "${self}/etc/firmware/hda-jack-retask.fw"))
-    ];
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -63,7 +58,7 @@
       "zswap.enabled=0"
     ];
     extraModprobeConfig = ''
-      options snd-hda-intel patch=hda-jack-retask.fw
+      options snd-hda-intel model=1028:0a61
     '';
   };
 
