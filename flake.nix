@@ -5,6 +5,10 @@
     nixpkgs-oldstable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    codex-cli-nix = {
+      url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -25,6 +29,7 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
+      codex-cli-nix,
       nix-index-database,
       home-manager,
       ...
@@ -42,6 +47,7 @@
           home-manager
           nix-index-database
           unstable
+          codex-cli-nix
           ;
       };
     in
